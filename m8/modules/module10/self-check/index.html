@@ -1,0 +1,1698 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Docker 컨테이너 기초 실습 가이드">
+      
+      
+      
+        <link rel="canonical" href="https://skilleat-labs.github.io/docker-k8s-labs/m8/modules/module10/self-check/">
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>모듈 10 — 스스로 해보기 - Docker K8s Labs — 모듈 8</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pretendard:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Pretendard";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#10" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Docker K8s Labs — 모듈 8" class="md-header__button md-logo" aria-label="Docker K8s Labs — 모듈 8" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docker K8s Labs — 모듈 8
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              모듈 10 — 스스로 해보기
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../index-m8/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  홈
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../module8/overview/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  개요
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../module8/curriculum/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  커리큘럼
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../module8/1-1/" class="md-tabs__link">
+          
+  
+  
+  단원 1. VM과 컨테이너
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Docker K8s Labs — 모듈 8" class="md-nav__button md-logo" aria-label="Docker K8s Labs — 모듈 8" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Docker K8s Labs — 모듈 8
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index-m8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    단원 1. VM과 컨테이너
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    단원 1. VM과 컨테이너
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1-2. Docker 설치 및 첫 실행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-1-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1-3. 이미지는 불변하다
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-2. Docker 기본 명령어와 동작 원리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-3. Docker Hub와 이미지 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-4. 컨테이너 볼륨 (Volume) 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-5. Dockerfile 최적화 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-6. 도커 네트워크 (Docker Network) 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../module8/1-7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-7. Docker Compose 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1-kubectl" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 1. kubectl 클러스터 탐색
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pod-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 2. Pod &amp; Deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 2. Pod &amp; Deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 1 — Deployment 배포 및 버전 관리
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-replicaset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 2 — ReplicaSet 자동 복구 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 3 — 스케일 조정
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 3. Service
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 3. Service">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-clusterip-dns" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 4 — ClusterIP + DNS 통신
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-nodeport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 5 — NodePort 외부 노출
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-configmap-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 4. ConfigMap &amp; Secret
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 4. ConfigMap &amp; Secret">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#6-configmap-secret" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 6 — ConfigMap + Secret 주입
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#7-configmap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 7 — ConfigMap 변경 반영 차이
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-ingress" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 5. Ingress
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 5. Ingress">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 8 — 경로 기반 라우팅
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-persistentvolume-pvc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 6. PersistentVolume / PVC
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 6. PersistentVolume / PVC">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#9" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 9 — 데이터 영속성 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 7. Probe
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 7. Probe">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#10-readiness-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 10 — Readiness Probe로 트래픽 차단
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#11-liveness-probe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 11 — Liveness Probe 자동 재시작
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-resource-requestslimits-qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 8. Resource requests/limits &amp; QoS
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 8. Resource requests/limits &amp; QoS">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#12-qos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 12 — QoS 클래스 판별
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-hpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        주제 9. HPA
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="주제 9. HPA">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#13-hpa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        미션 13 — HPA 자동 확장 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        종합 미션 — 미니 서비스 단독 배포
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        정답 체크리스트
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="10">모듈 10 — 스스로 해보기<a class="headerlink" href="#10" title="Permanent link">&para;</a></h1>
+<p>가이드 없이 혼자서 요구사항을 읽고 YAML을 작성하고, 동작을 확인하는 최종 점검입니다.
+명령어 힌트는 최소화했습니다. 막히면 힌트를 펼쳐보세요.</p>
+<hr />
+<h2 id="1-kubectl">주제 1. kubectl 클러스터 탐색<a class="headerlink" href="#1-kubectl" title="Permanent link">&para;</a></h2>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>클러스터에 노드가 몇 개인지, 각 노드의 OS와 컨테이너 런타임을 한 번에 확인하세요.</li>
+<li>Control Plane 컴포넌트(kube-apiserver, etcd, kube-scheduler 등)가 실행 중인 네임스페이스와 Pod 목록을 출력하세요.</li>
+<li><code>kube-apiserver</code> Pod를 describe하여 어떤 포트를 사용하는지 확인하세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a># 노드 OS·런타임 포함 출력 예시
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>NAME             STATUS   ROLES           VERSION   INTERNAL-IP   OS-IMAGE         CONTAINER-RUNTIME
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker-desktop   Ready    control-plane   v1.29.x   ...           Docker Desktop   docker://...
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a># Control Plane Pod 목록 확인
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>NAME                                     READY   STATUS    NAMESPACE
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>kube-apiserver-docker-desktop            1/1     Running   kube-system
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>etcd-docker-desktop                      1/1     Running   kube-system
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>...
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `-o wide` 옵션을 사용하면 OS와 런타임 정보가 추가됩니다.
+- `-n kube-system` 옵션으로 네임스페이스를 지정합니다.
+- `kubectl describe pod <이름> -n kube-system` 으로 상세 정보를 확인합니다.
+
+</details>
+
+<hr />
+<h2 id="2-pod-deployment">주제 2. Pod &amp; Deployment<a class="headerlink" href="#2-pod-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="1-deployment">미션 1 — Deployment 배포 및 버전 관리<a class="headerlink" href="#1-deployment" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 조건으로 Deployment를 YAML 파일로 작성하고 배포하세요.</li>
+<li>이름: <code>my-deploy</code></li>
+<li>이미지: <code>skilleat/rollout-demo:v1.0.0</code></li>
+<li>replicas: 3</li>
+<li>label: <code>app: my-deploy</code></li>
+<li><code>port-forward</code>로 <code>http://localhost:8080</code>에 접속해 파란색 페이지가 뜨는지 확인하세요.</li>
+<li>이미지를 <code>skilleat/rollout-demo:v2.0.0</code>으로 롤링 업데이트하세요.</li>
+<li>업데이트 후 초록색 페이지가 뜨는지 확인하세요.</li>
+<li>직전 버전(v1.0.0)으로 롤백하세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># 롤백 후 이미지 확인</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>deployment<span class="w"> </span>my-deploy<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>Image
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="c1"># Image: skilleat/rollout-demo:v1.0.0</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `kubectl set image deployment/<이름> <컨테이너명>=<이미지>:<태그>`
+- `kubectl rollout undo deployment/<이름>`
+- `kubectl rollout history deployment/<이름>` 으로 히스토리 확인
+
+</details>
+
+<hr />
+<h3 id="2-replicaset">미션 2 — ReplicaSet 자동 복구 확인<a class="headerlink" href="#2-replicaset" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li><code>my-deploy</code>의 Pod 중 하나를 직접 삭제하세요.</li>
+<li>Pod가 자동으로 복구되어 다시 3개가 되는지 실시간으로 확인하세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>my-deploy
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="c1"># Pod 3개가 Running 상태</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `kubectl delete pod <pod이름>`
+- `kubectl get pods -l app=my-deploy -w` 로 실시간 감시
+
+</details>
+
+<hr />
+<h3 id="3">미션 3 — 스케일 조정<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li><code>my-deploy</code>를 replicas 5로 늘리세요.</li>
+<li>확인 후 다시 2로 줄이세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>my-deploy
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1"># 조정된 수만큼 Pod가 Running</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `kubectl scale deployment <이름> --replicas=<수>`
+
+</details>
+
+<hr />
+<h2 id="3-service">주제 3. Service<a class="headerlink" href="#3-service" title="Permanent link">&para;</a></h2>
+<h3 id="4-clusterip-dns">미션 4 — ClusterIP + DNS 통신<a class="headerlink" href="#4-clusterip-dns" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li><code>my-deploy</code>를 가리키는 ClusterIP Service(<code>my-svc</code>, port 80 → targetPort 80)를 YAML로 작성하세요.</li>
+<li>임시 curl Pod를 실행해 <strong>Service 이름(DNS)</strong> 으로 통신이 되는지 확인하세요.</li>
+<li><code>kubectl get endpoints my-svc</code>로 Pod IP 목록을 확인하고, <code>kubectl get pods -o wide</code>의 Pod IP와 비교하세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>curl-test<span class="w"> </span>--image<span class="o">=</span>curlimages/curl:latest<span class="w"> </span>--restart<span class="o">=</span>Never<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span>--<span class="w"> </span>curl<span class="w"> </span>http://my-svc
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1"># HTTP 200 응답</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- Service YAML의 `spec.selector`가 Deployment의 Pod label과 일치해야 합니다.
+- ClusterIP는 클러스터 내부 Pod에서만 접근 가능합니다.
+
+</details>
+
+<hr />
+<h3 id="5-nodeport">미션 5 — NodePort 외부 노출<a class="headerlink" href="#5-nodeport" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li><code>my-deploy</code>를 NodePort로 외부에 노출하는 Service(<code>my-nodeport</code>, nodePort: 30090)를 작성하세요.</li>
+<li>로컬 터미널에서 <code>curl http://localhost:30090</code>으로 응답을 받으세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>curl<span class="w"> </span>http://localhost:30090
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1"># HTML 응답</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `spec.type: NodePort`
+- `ports` 아래에 `nodePort: 30090` 추가
+
+</details>
+
+<hr />
+<h2 id="4-configmap-secret">주제 4. ConfigMap &amp; Secret<a class="headerlink" href="#4-configmap-secret" title="Permanent link">&para;</a></h2>
+<h3 id="6-configmap-secret">미션 6 — ConfigMap + Secret 주입<a class="headerlink" href="#6-configmap-secret" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 값을 담은 ConfigMap <code>my-config</code>를 YAML로 작성하세요.</li>
+<li><code>APP_ENV: staging</code></li>
+<li><code>DB_HOST: postgres-svc</code></li>
+<li>
+<p><code>DB_PORT: "5432"</code></p>
+</li>
+<li>
+<p>아래 값을 담은 Secret <code>my-secret</code>을 작성하세요 (<code>stringData</code> 사용).</p>
+</li>
+<li>
+<p><code>DB_PASSWORD: mypassword456</code></p>
+</li>
+<li>
+<p>아래 Pod를 작성하고 배포하세요.</p>
+</li>
+<li>이름: <code>config-pod</code></li>
+<li>이미지: <code>busybox:1.36</code></li>
+<li>command: <code>sh -c "echo APP=$APP_ENV DB=$DB_HOST PASS=$DB_PASSWORD &amp;&amp; sleep 3600"</code></li>
+<li>ConfigMap 전체를 <code>envFrom</code>으로 주입</li>
+<li>Secret에서 <code>DB_PASSWORD</code>만 <code>env.valueFrom</code>으로 주입</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>config-pod
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="c1"># APP=staging DB=postgres-svc PASS=mypassword456</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `envFrom.configMapRef.name: my-config`
+- `env[].valueFrom.secretKeyRef.name: my-secret`, `key: DB_PASSWORD`
+
+</details>
+
+<hr />
+<h3 id="7-configmap">미션 7 — ConfigMap 변경 반영 차이<a class="headerlink" href="#7-configmap" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li><code>my-config</code>의 <code>APP_ENV</code> 값을 <code>production</code>으로 변경하세요.</li>
+<li><code>config-pod</code>에서 환경변수가 즉시 바뀌는지 확인하세요.</li>
+<li>볼륨 마운트 방식과 환경변수 방식의 갱신 차이를 한 문장으로 설명해보세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<ul>
+<li>환경변수 방식: Pod 재시작 전에는 <code>APP_ENV=staging</code> 유지 확인</li>
+<li>볼륨 마운트 방식: 약 1분 후 자동 갱신 확인 (이미 아는 경우 설명으로 대체 가능)</li>
+</ul>
+<details>
+<summary>힌트 보기</summary>
+
+- `kubectl edit configmap my-config`
+- 환경변수 방식은 Pod 시작 시점에 한 번만 읽습니다.
+- 볼륨 마운트 방식은 kubelet이 주기적으로 파일을 갱신합니다.
+
+</details>
+
+<hr />
+<h2 id="5-ingress">주제 5. Ingress<a class="headerlink" href="#5-ingress" title="Permanent link">&para;</a></h2>
+<h3 id="8">미션 8 — 경로 기반 라우팅<a class="headerlink" href="#8" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 두 앱을 배포하세요.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>Deployment</th>
+<th>응답 메시지</th>
+<th>Service</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>coffee-app</code></td>
+<td><code>Hello from Coffee</code></td>
+<td><code>coffee-svc</code> (port 80 → 5678)</td>
+</tr>
+<tr>
+<td><code>tea-app</code></td>
+<td><code>Hello from Tea</code></td>
+<td><code>tea-svc</code> (port 80 → 5678)</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>이미지: <code>hashicorp/http-echo:latest</code></li>
+<li>
+<p>args: <code>-text=&lt;메시지&gt;</code>, <code>-listen=:5678</code></p>
+</li>
+<li>
+<p>Nginx Ingress Controller가 설치되어 있다고 가정하고, 아래 라우팅 규칙을 가진 Ingress를 작성하세요.</p>
+</li>
+<li>host: <code>cafe.local</code></li>
+<li><code>/coffee</code> → <code>coffee-svc</code></li>
+<li><code>/tea</code> → <code>tea-svc</code></li>
+<li>
+<p>annotation: <code>nginx.ingress.kubernetes.io/rewrite-target: /</code></p>
+</li>
+<li>
+<p><code>/etc/hosts</code>에 <code>127.0.0.1 cafe.local</code>을 등록하세요.</p>
+</li>
+</ul>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>http://cafe.local/coffee
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1"># Hello from Coffee</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>curl<span class="w"> </span>http://cafe.local/tea
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1"># Hello from Tea</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `spec.ingressClassName: nginx`
+- `rules[0].host: cafe.local`
+- paths 아래에 `/coffee`, `/tea` 각각 지정
+
+</details>
+
+<hr />
+<h2 id="6-persistentvolume-pvc">주제 6. PersistentVolume / PVC<a class="headerlink" href="#6-persistentvolume-pvc" title="Permanent link">&para;</a></h2>
+<h3 id="9">미션 9 — 데이터 영속성 확인<a class="headerlink" href="#9" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>StorageClass <code>manual</code>을 사용하는 PV(<code>my-pv</code>, 1Gi, hostPath: <code>/tmp/my-lab-data</code>)를 작성하세요.</li>
+<li><code>my-pv</code>를 사용하는 PVC(<code>my-pvc</code>, 500Mi)를 작성하세요.</li>
+<li><code>my-pvc</code>를 <code>/data</code>에 마운트하는 Pod를 배포하고, <code>/data/message.txt</code>에 <code>"K8s storage test"</code> 문자열을 저장하세요.</li>
+<li>Pod를 삭제하고 새 Pod를 만들어 같은 PVC를 마운트한 뒤, <code>/data/message.txt</code> 파일이 그대로 남아있는지 확인하세요.</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>&lt;새<span class="w"> </span>pod<span class="w"> </span>이름&gt;
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># K8s storage test</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- PV와 PVC의 `storageClassName`이 동일해야 바인딩됩니다.
+- `volumes[].persistentVolumeClaim.claimName: my-pvc`
+
+</details>
+
+<hr />
+<h2 id="7-probe">주제 7. Probe<a class="headerlink" href="#7-probe" title="Permanent link">&para;</a></h2>
+<h3 id="10-readiness-probe">미션 10 — Readiness Probe로 트래픽 차단<a class="headerlink" href="#10-readiness-probe" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 조건으로 Deployment를 작성하세요.</li>
+<li>이름: <code>probe-app</code>, 이미지: <code>nginx:1.25</code>, replicas: 2</li>
+<li>Readiness Probe: HTTP GET <code>/</code>, port 80, <code>initialDelaySeconds: 5</code>, <code>periodSeconds: 5</code></li>
+<li>
+<p>연결하는 Service: <code>probe-svc</code> (ClusterIP, port 80)</p>
+</li>
+<li>
+<p>배포 후 <code>kubectl get endpoints probe-svc</code>로 Pod 2개가 Endpoints에 등록되는지 확인하세요.</p>
+</li>
+<li>
+<p>Pod 하나에 접속해 Nginx를 중지하세요.
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>&lt;pod이름&gt;<span class="w"> </span>--<span class="w"> </span>nginx<span class="w"> </span>-s<span class="w"> </span>stop
+</span></code></pre></div></p>
+</li>
+<li>
+<p>해당 Pod가 Endpoints에서 제거되는지 확인하세요.</p>
+</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>probe-app
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># 한 Pod: READY 0/1, 다른 Pod: READY 1/1</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>endpoints<span class="w"> </span>probe-svc
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># Endpoint가 1개로 줄어있음</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- `readinessProbe.httpGet.path: /`, `readinessProbe.httpGet.port: 80`
+- Pod가 `Running`이더라도 READY=0/1이면 Service Endpoint에서 제외됩니다.
+
+</details>
+
+<hr />
+<h3 id="11-liveness-probe">미션 11 — Liveness Probe 자동 재시작<a class="headerlink" href="#11-liveness-probe" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 Pod를 작성하세요.</li>
+<li>이름: <code>liveness-test</code></li>
+<li>이미지: <code>busybox:1.36</code></li>
+<li>command: <code>sh -c "touch /tmp/alive &amp;&amp; sleep 20 &amp;&amp; rm /tmp/alive &amp;&amp; sleep 3600"</code></li>
+<li>
+<p>Liveness Probe: <code>cat /tmp/alive</code>, <code>initialDelaySeconds: 5</code>, <code>periodSeconds: 5</code>, <code>failureThreshold: 3</code></p>
+</li>
+<li>
+<p>배포 후 <code>kubectl get pod liveness-test -w</code>로 감시하면서 30~60초 후 <code>RESTARTS</code>가 증가하는지 확인하세요.</p>
+</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>liveness-test
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1"># RESTARTS가 1 이상</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- 20초 후 `/tmp/alive` 파일이 삭제되면 Probe가 실패합니다.
+- `failureThreshold: 3` × `periodSeconds: 5` = 15초 후 재시작됩니다.
+
+</details>
+
+<hr />
+<h2 id="8-resource-requestslimits-qos">주제 8. Resource requests/limits &amp; QoS<a class="headerlink" href="#8-resource-requestslimits-qos" title="Permanent link">&para;</a></h2>
+<h3 id="12-qos">미션 12 — QoS 클래스 판별<a class="headerlink" href="#12-qos" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<p>아래 3개 Pod를 배포하고 각각의 QoS 클래스를 확인하세요.</p>
+<table>
+<thead>
+<tr>
+<th>Pod 이름</th>
+<th>requests</th>
+<th>limits</th>
+<th>예상 QoS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pod-a</code></td>
+<td>없음</td>
+<td>없음</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>pod-b</code></td>
+<td>cpu: 100m, memory: 128Mi</td>
+<td>cpu: 300m, memory: 256Mi</td>
+<td>?</td>
+</tr>
+<tr>
+<td><code>pod-c</code></td>
+<td>cpu: 200m, memory: 256Mi</td>
+<td>cpu: 200m, memory: 256Mi</td>
+<td>?</td>
+</tr>
+</tbody>
+</table>
+<p>이미지는 모두 <code>nginx:1.25</code></p>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>pod-a<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>qosClass
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="c1"># qosClass: BestEffort</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>pod-b<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>qosClass
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1"># qosClass: Burstable</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pod<span class="w"> </span>pod-c<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>qosClass
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="c1"># qosClass: Guaranteed</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- requests, limits 모두 없으면 → **BestEffort**
+- requests < limits (또는 일부만 설정) → **Burstable**
+- requests == limits (CPU, Memory 모두) → **Guaranteed**
+
+</details>
+
+<hr />
+<h2 id="9-hpa">주제 9. HPA<a class="headerlink" href="#9-hpa" title="Permanent link">&para;</a></h2>
+<h3 id="13-hpa">미션 13 — HPA 자동 확장 설정<a class="headerlink" href="#13-hpa" title="Permanent link">&para;</a></h3>
+<p><strong>요구사항</strong></p>
+<ol>
+<li>아래 조건으로 Deployment를 배포하세요.</li>
+<li>이름: <code>my-hpa-app</code>, 이미지: <code>k8s.gcr.io/hpa-example</code>, replicas: 1</li>
+<li><code>resources.requests.cpu: 100m</code>, <code>limits.cpu: 500m</code></li>
+<li>
+<p>Service: <code>my-hpa-svc</code> (ClusterIP, port 80)</p>
+</li>
+<li>
+<p>CPU 사용률 50% 기준으로 min 1, max 8 HPA를 YAML로 작성하여 배포하세요.</p>
+</li>
+<li>
+<p>부하 Pod를 실행하여 자동 확장을 확인하세요.
+   <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>load<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span>--image<span class="o">=</span>busybox:1.36<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span>--restart<span class="o">=</span>Never<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span>--<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;while true; do wget -q -O- http://my-hpa-svc; done&quot;</span>
+</span></code></pre></div></p>
+</li>
+<li>
+<p>REPLICAS가 늘어나는 것을 확인하고, 부하 Pod를 삭제한 뒤 다시 1로 축소되는지 확인하세요.</p>
+</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w"> </span>my-hpa-app
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="c1"># REPLICAS가 부하 시 증가, 부하 제거 후 1로 복귀</span>
+</span></code></pre></div>
+<details>
+<summary>힌트 보기</summary>
+
+- HPA YAML에서 `scaleTargetRef.name`이 Deployment 이름과 일치해야 합니다.
+- `averageUtilization: 50`
+- Metrics Server가 설치되어 있어야 합니다 (`kubectl top nodes` 동작 확인).
+
+</details>
+
+<hr />
+<h2 id="_1">종합 미션 — 미니 서비스 단독 배포<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>지금까지 배운 내용을 모두 활용해 하나의 서비스를 처음부터 끝까지 혼자서 만들어봅니다.</p>
+</blockquote>
+<p><strong>요구사항</strong></p>
+<p>아래 조건을 만족하는 K8s 리소스를 모두 작성하고 배포하세요.</p>
+<ol>
+<li><strong>Namespace</strong>: <code>final-lab</code></li>
+<li><strong>ConfigMap</strong> (<code>final-config</code>): <code>APP_NAME=FinalApp</code>, <code>APP_PORT="8080"</code></li>
+<li><strong>Secret</strong> (<code>final-secret</code>): <code>APP_SECRET_KEY=supersecret</code> (<code>stringData</code> 사용)</li>
+<li><strong>Deployment</strong> (<code>final-app</code>):</li>
+<li>이미지: <code>hashicorp/http-echo:latest</code></li>
+<li>args: <code>-text=Hello Final App</code>, <code>-listen=:5678</code></li>
+<li>replicas: 2</li>
+<li>ConfigMap 전체를 <code>envFrom</code>으로 주입</li>
+<li>Secret에서 <code>APP_SECRET_KEY</code>를 <code>env.valueFrom</code>으로 주입</li>
+<li>Readiness Probe: TCP port 5678, <code>periodSeconds: 5</code></li>
+<li><code>resources.requests.cpu: 50m</code>, <code>requests.memory: 64Mi</code></li>
+<li><strong>Service</strong> (<code>final-svc</code>): NodePort, port 80 → targetPort 5678, nodePort: 30099</li>
+<li><strong>HPA</strong> (<code>final-hpa</code>): CPU 60% 기준, min 2, max 6</li>
+</ol>
+<p><strong>성공 조건</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># 접속 확인</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>curl<span class="w"> </span>http://localhost:30099
+</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># Hello Final App</span>
+</span><span id="__span-15-4"><a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+</span><span id="__span-15-5"><a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="c1"># HPA 확인</span>
+</span><span id="__span-15-6"><a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w"> </span>final-hpa<span class="w"> </span>-n<span class="w"> </span>final-lab
+</span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="c1"># NAME         REFERENCE              TARGETS   MINPODS   MAXPODS   REPLICAS</span>
+</span><span id="__span-15-8"><a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1"># final-hpa    Deployment/final-app   ...       2         6         2</span>
+</span><span id="__span-15-9"><a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+</span><span id="__span-15-10"><a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="c1"># 환경변수 확인</span>
+</span><span id="__span-15-11"><a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>kubectl<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-n<span class="w"> </span>final-lab<span class="w"> </span>deployment/final-app<span class="w"> </span>--<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;APP_NAME|APP_SECRET&quot;</span>
+</span><span id="__span-15-12"><a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="c1"># APP_NAME=FinalApp</span>
+</span><span id="__span-15-13"><a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="c1"># APP_SECRET_KEY=supersecret</span>
+</span></code></pre></div>
+<p><strong>완료 후 정리</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>namespace<span class="w"> </span>final-lab
+</span></code></pre></div>
+<hr />
+<h2 id="_2">정답 체크리스트<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>주제</th>
+<th>미션</th>
+<th>완료</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>kubectl 탐색</td>
+<td>노드·Control Plane 확인</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>배포·업데이트·롤백</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>ReplicaSet 자동 복구</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Deployment</td>
+<td>스케일 조정</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>ClusterIP + DNS</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Service</td>
+<td>NodePort</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>ConfigMap/Secret</td>
+<td>환경변수 주입</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>ConfigMap/Secret</td>
+<td>변경 반영 차이 이해</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Ingress</td>
+<td>경로 기반 라우팅</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>PVC</td>
+<td>데이터 영속성 확인</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Probe</td>
+<td>Readiness 트래픽 차단</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>Probe</td>
+<td>Liveness 자동 재시작</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>QoS</td>
+<td>클래스 판별</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>HPA</td>
+<td>자동 확장·축소</td>
+<td>☐</td>
+</tr>
+<tr>
+<td>종합</td>
+<td>단독 배포</td>
+<td>☐</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>

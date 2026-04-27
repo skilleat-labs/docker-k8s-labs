@@ -1,0 +1,1851 @@
+
+<!doctype html>
+<html lang="ko" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Docker 컨테이너 기초 실습 가이드">
+      
+      
+      
+        <link rel="canonical" href="https://skilleat-labs.github.io/docker-k8s-labs/m8/modules/module8/1-3/">
+      
+      
+        <link rel="prev" href="../1-2/">
+      
+      
+        <link rel="next" href="../1-4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>1-3. Docker Hub와 이미지 실습 - Docker K8s Labs — 모듈 8</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Pretendard:300,300i,400,400i,700,700i%7CJetBrains+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Pretendard";--md-code-font:"JetBrains Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#1-3-docker-hub" class="md-skip">
+          콘텐츠로 이동
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="상단/헤더">
+    <a href="../../.." title="Docker K8s Labs — 모듈 8" class="md-header__button md-logo" aria-label="Docker K8s Labs — 모듈 8" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Docker K8s Labs — 모듈 8
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              1-3. Docker Hub와 이미지 실습
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="다크 모드로 전환"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="다크 모드로 전환" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="라이트 모드로 전환"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="라이트 모드로 전환" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="검색" placeholder="검색" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="검색">
+        
+        <button type="reset" class="md-search__icon md-icon" title="지우기" aria-label="지우기" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            검색 초기화
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="탭" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../index-m8/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  홈
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../overview/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  개요
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../curriculum/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  커리큘럼
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1-1/" class="md-tabs__link">
+          
+  
+  
+  단원 1. VM과 컨테이너
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="네비게이션" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Docker K8s Labs — 모듈 8" class="md-nav__button md-logo" aria-label="Docker K8s Labs — 모듈 8" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Docker K8s Labs — 모듈 8
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../index-m8/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    홈
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    개요
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    커리큘럼
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    단원 1. VM과 컨테이너
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    단원 1. VM과 컨테이너
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1-2. Docker 설치 및 첫 실행
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-1-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-1-3. 이미지는 불변하다
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-2. Docker 기본 명령어와 동작 원리
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-3. Docker Hub와 이미지 실습
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-3. Docker Hub와 이미지 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실습 목표
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        예상 소요 시간 (약 30분)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Docker Hub에서 이미지 찾기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) 이미지 pull 실습
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 이미지로 컨테이너 실행 실습
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) 이미지로 컨테이너 실행 실습">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. Nginx 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-apachehttpd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. Apache(httpd) 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. Redis 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-4-alpine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-4. Alpine 실행 (짧은 테스트용)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 컨테이너는 "프로세스"라는 점 이해하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) 컨테이너는 &#34;프로세스&#34;라는 점 이해하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-1. 바로 종료되는 컨테이너 보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-2-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-2. 살아있게 유지하기 (sleep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-3. 종료/재시작으로 동작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-4. 무한 유지 패턴도 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 캐시(레이어 재사용) 체감 실습
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) 캐시(레이어 재사용) 체감 실습">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-1-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-1. 같은 이미지를 다시 pull
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-2. 같은 이미지로 새 컨테이너 추가 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-3. 캐시가 깨지는 경우 이해하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) 정리: 캐시된다는 뜻
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) 실습 정리(삭제)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-azure-container-registry-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Azure Container Registry (ACR)로 이미지 push하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Azure Container Registry (ACR)로 이미지 push하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8-1-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-1. Azure 계정 준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-2-azure-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-2. Azure CLI 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-3-azure-container-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-3. Azure Container Registry에 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-4. 로컬 이미지에 태그 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-5-azure-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-5. Azure ACR로 push
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-6-azure-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-6. Azure ACR에 저장된 이미지 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-7-azure-acr-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-7. Azure ACR에서 pull 및 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-8. 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스스로 해보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-4. 컨테이너 볼륨 (Volume) 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-5. Dockerfile 최적화 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-6. 도커 네트워크 (Docker Network) 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-7/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-7. Docker Compose 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실습 목표
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        예상 소요 시간 (약 30분)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사전 조건
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Docker Hub에서 이미지 찾기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) 이미지 pull 실습
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 이미지로 컨테이너 실행 실습
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) 이미지로 컨테이너 실행 실습">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. Nginx 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-apachehttpd" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. Apache(httpd) 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. Redis 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-4-alpine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-4. Alpine 실행 (짧은 테스트용)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 컨테이너는 "프로세스"라는 점 이해하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) 컨테이너는 &#34;프로세스&#34;라는 점 이해하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-1. 바로 종료되는 컨테이너 보기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-2-sleep" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-2. 살아있게 유지하기 (sleep)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-3. 종료/재시작으로 동작 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-4. 무한 유지 패턴도 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 캐시(레이어 재사용) 체감 실습
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5) 캐시(레이어 재사용) 체감 실습">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#5-1-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-1. 같은 이미지를 다시 pull
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-2. 같은 이미지로 새 컨테이너 추가 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-3. 캐시가 깨지는 경우 이해하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6) 정리: 캐시된다는 뜻
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) 실습 정리(삭제)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-azure-container-registry-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) Azure Container Registry (ACR)로 이미지 push하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8) Azure Container Registry (ACR)로 이미지 push하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#8-1-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-1. Azure 계정 준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-2-azure-cli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-2. Azure CLI 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-3-azure-container-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-3. Azure Container Registry에 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-4. 로컬 이미지에 태그 추가
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-5-azure-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-5. Azure ACR로 push
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-6-azure-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-6. Azure ACR에 저장된 이미지 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-7-azure-acr-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-7. Azure ACR에서 pull 및 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#8-8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8-8. 정리
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스스로 해보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="1-3-docker-hub">1-3. Docker Hub와 이미지 실습<a class="headerlink" href="#1-3-docker-hub" title="Permanent link">&para;</a></h1>
+<h2 id="_1">실습 목표<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker Hub에서 다양한 이미지를 직접 가져오기</li>
+<li>가져온 이미지를 컨테이너로 실행해보기</li>
+<li>이미지 캐시(레이어 재사용)가 무엇인지 실습으로 이해하기</li>
+</ul>
+<h2 id="30">예상 소요 시간 (약 30분)<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
+<ul>
+<li>0~8분: Docker Hub 이미지 탐색 및 pull</li>
+<li>8~20분: 이미지별 컨테이너 실행</li>
+<li>20~28분: 캐시/레이어 재사용 체감 실습</li>
+<li>28~30분: 정리</li>
+</ul>
+<h2 id="_2">사전 조건<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Docker 설치 완료</li>
+<li>인터넷 연결 가능</li>
+</ul>
+<p>확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>--version
+</span></code></pre></div>
+<h2 id="1-docker-hub">1) Docker Hub에서 이미지 찾기<a class="headerlink" href="#1-docker-hub" title="Permanent link">&para;</a></h2>
+<p>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+<p>터미널 검색 예시:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>search<span class="w"> </span>nginx
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker<span class="w"> </span>search<span class="w"> </span>redis
+</span></code></pre></div>
+<p>포인트:</p>
+<ul>
+<li><code>OFFICIAL</code> 표시가 있으면 공식 이미지</li>
+<li><code>TAG</code>를 명시하면 버전 고정 가능</li>
+</ul>
+<h2 id="2-pull">2) 이미지 pull 실습<a class="headerlink" href="#2-pull" title="Permanent link">&para;</a></h2>
+<p>먼저 4개 이미지를 가져옵니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nginx:latest
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>httpd:latest
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docker<span class="w"> </span>pull<span class="w"> </span>redis:latest
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>alpine:latest
+</span></code></pre></div>
+<p>목록 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>images
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li>이미지마다 <code>IMAGE ID</code>, <code>SIZE</code>가 다름</li>
+<li>동일 계열 이미지끼리는 레이어를 공유할 수 있음</li>
+</ul>
+<h2 id="3">3) 이미지로 컨테이너 실행 실습<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
+<h3 id="3-1-nginx">3-1. Nginx 실행<a class="headerlink" href="#3-1-nginx" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>nginx:latest
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8081
+</span></code></pre></div>
+<h3 id="3-2-apachehttpd">3-2. Apache(httpd) 실행<a class="headerlink" href="#3-2-apachehttpd" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>httpd-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8082</span>:80<span class="w"> </span>httpd:latest
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8082
+</span></code></pre></div>
+<h3 id="3-3-redis">3-3. Redis 실행<a class="headerlink" href="#3-3-redis" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>redis-db<span class="w"> </span>-p<span class="w"> </span><span class="m">6379</span>:6379<span class="w"> </span>redis:latest
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>redis-db<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span></code></pre></div>
+<h3 id="3-4-alpine">3-4. Alpine 실행 (짧은 테스트용)<a class="headerlink" href="#3-4-alpine" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>alpine-test<span class="w"> </span>alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello from alpine&quot;</span>
+</span></code></pre></div>
+<p>상태 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>ps
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
+</span></code></pre></div>
+<h2 id="4">4) 컨테이너는 "프로세스"라는 점 이해하기<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>핵심: 컨테이너는 내부의 메인 프로세스(PID 1)가 끝나면 같이 종료됩니다.</p>
+<h3 id="4-1">4-1. 바로 종료되는 컨테이너 보기<a class="headerlink" href="#4-1" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>exit-now<span class="w"> </span>alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;bye&quot;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>exit-now
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>echo</code> 명령은 바로 끝남</li>
+<li>메인 프로세스가 끝났기 때문에 컨테이너 상태가 <code>Exited</code>로 바뀜</li>
+</ul>
+<h3 id="4-2-sleep">4-2. 살아있게 유지하기 (<code>sleep</code>)<a class="headerlink" href="#4-2-sleep" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-alive<span class="w"> </span>alpine:latest<span class="w"> </span>sleep<span class="w"> </span><span class="m">600</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>sleep 600</code> 프로세스가 600초 동안 실행됨</li>
+<li>그동안 컨테이너도 <code>Up</code> 상태로 유지됨</li>
+</ul>
+<h3 id="4-3">4-3. 종료/재시작으로 동작 확인<a class="headerlink" href="#4-3" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>keep-alive
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>docker<span class="w"> </span>start<span class="w"> </span>keep-alive
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span></code></pre></div>
+<h3 id="4-4">4-4. 무한 유지 패턴도 확인<a class="headerlink" href="#4-4" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-forever<span class="w"> </span>alpine:latest<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;while true; do sleep 60; done&quot;</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-forever
+</span></code></pre></div>
+<p>정리:</p>
+<ul>
+<li>컨테이너는 VM처럼 "항상 켜져 있는 OS"가 아님</li>
+<li>메인 프로세스를 무엇으로 주느냐에 따라 바로 종료되거나 계속 실행됨</li>
+</ul>
+<h2 id="5">5) 캐시(레이어 재사용) 체감 실습<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h3 id="5-1-pull">5-1. 같은 이미지를 다시 pull<a class="headerlink" href="#5-1-pull" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nginx:latest
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li>이미 로컬에 최신 레이어가 있으면 대부분 <code>Image is up to date</code> 또는 <code>Already exists</code>가 표시됨</li>
+<li>즉, 다시 전부 다운로드하지 않음</li>
+</ul>
+<h3 id="5-2">5-2. 같은 이미지로 새 컨테이너 추가 실행<a class="headerlink" href="#5-2" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web-2<span class="w"> </span>-p<span class="w"> </span><span class="m">8083</span>:80<span class="w"> </span>nginx:latest
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>docker<span class="w"> </span>ps
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>nginx:latest</code> 이미지는 한 번 받아두면 재사용됨</li>
+<li>새 컨테이너는 "이미지를 복제 다운로드"하는 게 아니라 기존 로컬 이미지 레이어를 기반으로 빠르게 생성됨</li>
+</ul>
+<h3 id="5-3">5-3. 캐시가 깨지는 경우 이해하기<a class="headerlink" href="#5-3" title="Permanent link">&para;</a></h3>
+<p>아래 중 하나면 새 다운로드가 발생할 수 있습니다.</p>
+<ul>
+<li>태그가 다른 이미지 pull (<code>nginx:1.27</code> 등)</li>
+<li>로컬 이미지 삭제 후 다시 pull</li>
+<li>원격 이미지가 업데이트되어 digest가 바뀐 경우</li>
+</ul>
+<p>간단 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nginx:1.27
+</span></code></pre></div>
+<h2 id="6">6) 정리: 캐시된다는 뜻<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<p>"이미지가 캐시된다"는 뜻은 아래와 같습니다.</p>
+<ul>
+<li>레이어 단위로 로컬 디스크에 저장됨</li>
+<li>동일 레이어는 재다운로드하지 않음</li>
+<li>같은 이미지를 여러 컨테이너가 공유 기반으로 사용 가능</li>
+<li>결과적으로 pull/실행 속도와 네트워크 사용량이 개선됨</li>
+</ul>
+<h2 id="7">7) 실습 정리(삭제)<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>nginx-web<span class="w"> </span>nginx-web-2<span class="w"> </span>httpd-web<span class="w"> </span>redis-db<span class="w"> </span>alpine-test<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>exit-now<span class="w"> </span>keep-alive<span class="w"> </span>keep-forever<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<p>이미지까지 지우고 싶다면:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>rmi<span class="w"> </span>nginx:latest<span class="w"> </span>httpd:latest<span class="w"> </span>redis:latest<span class="w"> </span>alpine:latest
+</span></code></pre></div>
+<hr />
+<h2 id="8-azure-container-registry-acr-push">8) Azure Container Registry (ACR)로 이미지 push하기<a class="headerlink" href="#8-azure-container-registry-acr-push" title="Permanent link">&para;</a></h2>
+<h3 id="8-1-azure">8-1. Azure 계정 준비<a class="headerlink" href="#8-1-azure" title="Permanent link">&para;</a></h3>
+<p>각 팀별 계정 정보:</p>
+<table>
+<thead>
+<tr>
+<th>팀</th>
+<th>이메일</th>
+<th>비밀번호</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Team 01</td>
+<td><code>test01@nrkim0615outlook.onmicrosoft.com</code></td>
+<td>강사 제공</td>
+</tr>
+<tr>
+<td>Team 02</td>
+<td><code>test02@nrkim0615outlook.onmicrosoft.com</code></td>
+<td>강사 제공</td>
+</tr>
+<tr>
+<td>Team 03</td>
+<td><code>test03@nrkim0615outlook.onmicrosoft.com</code></td>
+<td>강사 제공</td>
+</tr>
+</tbody>
+</table>
+<h3 id="8-2-azure-cli">8-2. Azure CLI 로그인<a class="headerlink" href="#8-2-azure-cli" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>az<span class="w"> </span>login
+</span></code></pre></div>
+<p>이메일과 비밀번호를 입력하여 로그인합니다.</p>
+<p>로그인 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>az<span class="w"> </span>account<span class="w"> </span>show
+</span></code></pre></div>
+<h3 id="8-3-azure-container-registry">8-3. Azure Container Registry에 로그인<a class="headerlink" href="#8-3-azure-container-registry" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>--name<span class="w"> </span>skillitacr
+</span></code></pre></div>
+<p>확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>login<span class="w"> </span>skillitacr.azurecr.io
+</span></code></pre></div>
+<h3 id="8-4">8-4. 로컬 이미지에 태그 추가<a class="headerlink" href="#8-4" title="Permanent link">&para;</a></h3>
+<p>로컬의 <code>nginx:latest</code> 이미지를 Azure ACR로 push하기 위해 태그를 변경합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 현재 로컬 이미지 확인</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nginx
+</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="c1"># ACR 레지스트리 주소로 태그 변경</span>
+</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>docker<span class="w"> </span>tag<span class="w"> </span>nginx:latest<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
+</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="c1"># 태그 확인</span>
+</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>skillitacr
+</span></code></pre></div>
+<p>포인트:</p>
+<ul>
+<li><code>skillitacr.azurecr.io</code>: Azure Container Registry 주소</li>
+<li><code>myteam</code>: 저장소(repository) 이름 (팀 이름으로 변경 가능)</li>
+<li><code>v1.0</code>: 버전 태그</li>
+</ul>
+<h3 id="8-5-azure-acr-push">8-5. Azure ACR로 push<a class="headerlink" href="#8-5-azure-acr-push" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>docker<span class="w"> </span>push<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li>로컬 이미지의 레이어를 ACR로 업로드</li>
+<li>처음 push는 시간이 걸릴 수 있음</li>
+<li>완료 후 "Pushed" 메시지 확인</li>
+</ul>
+<h3 id="8-6-azure-acr">8-6. Azure ACR에 저장된 이미지 확인<a class="headerlink" href="#8-6-azure-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span>skillitacr<span class="w"> </span>--output<span class="w"> </span>table
+</span></code></pre></div>
+<p>특정 저장소의 이미지 태그 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span>skillitacr<span class="w"> </span>--repository<span class="w"> </span>myteam/nginx
+</span></code></pre></div>
+<h3 id="8-7-azure-acr-pull">8-7. Azure ACR에서 pull 및 실행<a class="headerlink" href="#8-7-azure-acr-pull" title="Permanent link">&para;</a></h3>
+<p>다른 환경이나 팀원 컴퓨터에서 ACR의 이미지를 받아와 실행할 수 있습니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>acr-nginx<span class="w"> </span>-p<span class="w"> </span><span class="m">8084</span>:80<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8084
+</span></code></pre></div>
+<h3 id="8-8">8-8. 정리<a class="headerlink" href="#8-8" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>acr-nginx<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<p><strong>핵심 학습:</strong></p>
+<ul>
+<li>Docker Hub는 공개 레지스트리, Azure ACR은 비공개/기업용 레지스트리</li>
+<li>이미지에 태그를 추가하여 다양한 레지스트리로 push/pull 가능</li>
+<li>팀 전체가 같은 ACR을 사용하면 이미지 공유가 용이함</li>
+</ul>
+<hr />
+<h2 id="_3">스스로 해보기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Docker Hub에서 <code>mariadb</code> 공식 이미지를 찾아 <code>latest</code>를 pull하세요.</li>
+<li><code>docker images</code>에서 <code>mariadb</code> 이미지가 추가됐는지 확인하세요.</li>
+<li>같은 이미지를 2번 연속 pull하고, 두 번째 결과 메시지를 기록하세요.</li>
+<li><code>alpine</code> 이미지로 <code>date</code> 명령을 실행하는 일회성 컨테이너를 만들어보세요.</li>
+<li><code>sleep 300</code>으로 5분 유지되는 컨테이너를 만들고, <code>ps</code>에서 <code>Up</code> 상태를 확인하세요.</li>
+<li>실습 종료 후 내가 만든 컨테이너를 정리하세요.</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  맨위로
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.tracking", "search.suggest", "search.highlight", "content.code.copy", "content.code.annotate", "toc.follow"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\ud074\ub9bd\ubcf4\ub4dc\uc5d0 \ubcf5\uc0ac\ub428", "clipboard.copy": "\ud074\ub9bd\ubcf4\ub4dc\ub85c \ubcf5\uc0ac", "search.result.more.one": "\uc774 \ubb38\uc11c\uc5d0\uc11c 1\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.more.other": "\uc774 \ubb38\uc11c\uc5d0\uc11c #\uac1c\uc758 \uac80\uc0c9 \uacb0\uacfc \ub354 \ubcf4\uae30", "search.result.none": "\uac80\uc0c9\uc5b4\uc640 \uc77c\uce58\ud558\ub294 \ubb38\uc11c\uac00 \uc5c6\uc2b5\ub2c8\ub2e4", "search.result.one": "1\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.other": "#\uac1c\uc758 \uc77c\uce58\ud558\ub294 \ubb38\uc11c", "search.result.placeholder": "\uac80\uc0c9\uc5b4\ub97c \uc785\ub825\ud558\uc138\uc694", "search.result.term.missing": "\ud3ec\ud568\ub418\uc9c0 \uc54a\uc740 \uac80\uc0c9\uc5b4", "select.version": "\ubc84\uc804 \uc120\ud0dd"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
