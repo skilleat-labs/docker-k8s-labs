@@ -1,0 +1,41 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: pip install mkdocs-material
+
+      # 전체 사이트 빌드 → /
+      - name: Build main site
+        run: mkdocs build -f mkdocs.yml -d site
+
+      # 모듈 8 빌드 → /m8/
+      - name: Build Module 8
+        run: mkdocs build -f mkdocs-m8.yml -d site/m8
+
+      # 모듈 10 빌드 → /m10/
+      - name: Build Module 10
+        run: mkdocs build -f mkdocs-m10.yml -d site/m10
+
+      # gh-pages 브랜치에 배포
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./site
