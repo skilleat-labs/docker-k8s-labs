@@ -2006,16 +2006,22 @@
 <hr />
 <h2 id="4">4) 포트 바인딩 완전 실습<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <h3 id="4-1-p">4-1. -p 옵션 문법 이해<a class="headerlink" href="#4-1-p" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># 기본 포트 바인딩</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>port-test1<span class="w"> </span>-p<span class="w"> </span><span class="m">8083</span>:80<span class="w"> </span>nginx:alpine
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># VM IP 확인 (이후 curl 테스트에 사용)</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>hostname<span class="w"> </span>-I<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $1}&#39;</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 특정 IP 바인딩 (localhost만)</span>
-</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>port-test2<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8084:80<span class="w"> </span>nginx:alpine
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="c1"># 기본 포트 바인딩 (0.0.0.0 — 모든 인터페이스)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>port-test1<span class="w"> </span>-p<span class="w"> </span><span class="m">8083</span>:80<span class="w"> </span>nginx:alpine
 </span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># 확인</span>
-</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>curl<span class="w"> </span>http://localhost:8083<span class="w">  </span><span class="c1"># 성공</span>
-</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>curl<span class="w"> </span>http://localhost:8084<span class="w">  </span><span class="c1"># 성공</span>
-</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>curl<span class="w"> </span>http://192.168.1.100:8084<span class="w">  </span><span class="c1"># 실패 (localhost만 바인딩)</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1"># 특정 IP 바인딩 (localhost만)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>port-test2<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8084:80<span class="w"> </span>nginx:alpine
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a><span class="c1"># port-test1 확인 — localhost, VM IP 둘 다 성공 (0.0.0.0 바인딩)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>curl<span class="w"> </span>http://localhost:8083<span class="w">        </span><span class="c1"># 성공</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>curl<span class="w"> </span>http://&lt;VM_IP&gt;:8083<span class="w">          </span><span class="c1"># 성공 (외부에서도 접근 가능)</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="c1"># port-test2 확인 — localhost 성공, VM IP 실패 (127.0.0.1만 바인딩)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>curl<span class="w"> </span>http://localhost:8084<span class="w">        </span><span class="c1"># 성공</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>curl<span class="w"> </span>http://&lt;VM_IP&gt;:8084<span class="w">          </span><span class="c1"># 실패 (VM 외부에서 접근 불가)</span>
 </span></code></pre></div>
 <h3 id="4-2-p">4-2. -P 옵션 (자동 포트 할당)<a class="headerlink" href="#4-2-p" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># EXPOSE된 모든 포트를 자동 바인딩</span>
