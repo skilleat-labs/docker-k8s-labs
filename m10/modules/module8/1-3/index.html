@@ -23,7 +23,7 @@
     
     
       
-        <title>1-3. Docker Hub와 이미지 실습 - Docker K8s Labs — 모듈 10</title>
+        <title>1-3. 레지스트리와 이미지 실습 - Docker K8s Labs — 모듈 10</title>
       
     
     
@@ -76,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-3-docker-hub" class="md-skip">
+        <a href="#1-3" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -110,7 +110,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1-3. Docker Hub와 이미지 실습
+              1-3. 레지스트리와 이미지 실습
             
           </span>
         </div>
@@ -1074,10 +1074,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#30" class="md-nav__link">
+  <a href="#35" class="md-nav__link">
     <span class="md-ellipsis">
       
-        예상 소요 시간 (약 30분)
+        예상 소요 시간 (약 35분)
       
     </span>
   </a>
@@ -1096,44 +1096,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-docker-hub" class="md-nav__link">
+  <a href="#1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1) Docker Hub에서 이미지 찾기
+        1) 레지스트리란?
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-pull" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) 이미지 pull 실습
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) 이미지로 컨테이너 실행 실습
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3) 이미지로 컨테이너 실행 실습">
+    <nav class="md-nav" aria-label="1) 레지스트리란?">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#3-1-nginx" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-1. Nginx 실행
+        레지스트리 종류 비교
       
     </span>
   </a>
@@ -1141,32 +1119,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-2-apachehttpd" class="md-nav__link">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3-2. Apache(httpd) 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-3-redis" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-3. Redis 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-4-alpine" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3-4. Alpine 실행 (짧은 테스트용)
+        주소 형식 비교
       
     </span>
   </a>
@@ -1179,22 +1135,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4" class="md-nav__link">
+  <a href="#2-acr-pull" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4) 컨테이너는 "프로세스"라는 점 이해하기
+        2) ACR 로그인 및 이미지 pull
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4) 컨테이너는 &#34;프로세스&#34;라는 점 이해하기">
+    <nav class="md-nav" aria-label="2) ACR 로그인 및 이미지 pull">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#4-1" class="md-nav__link">
+  <a href="#2-1-azure" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-1. 바로 종료되는 컨테이너 보기
+        2-1. 팀 계정으로 Azure 로그인
       
     </span>
   </a>
@@ -1202,10 +1158,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-2-sleep" class="md-nav__link">
+  <a href="#2-2-acr" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-2. 살아있게 유지하기 (sleep)
+        2-2. ACR 로그인
       
     </span>
   </a>
@@ -1213,10 +1169,49 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-3" class="md-nav__link">
+  <a href="#2-3-acr-pull" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-3. 종료/재시작으로 동작 확인
+        2-3. ACR에서 이미지 pull
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-docker-hub" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) Docker Hub에서 이미지 찾기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 이미지로 컨테이너 실행 실습
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4) 이미지로 컨테이너 실행 실습">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#4-1-nginx" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-1. Nginx 실행
       
     </span>
   </a>
@@ -1224,10 +1219,32 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#4-4" class="md-nav__link">
+  <a href="#4-2-apachehttpd" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4-4. 무한 유지 패턴도 확인
+        4-2. Apache(httpd) 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-3-redis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-3. Redis 실행
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#4-4-alpine" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4-4. Alpine 실행 (짧은 테스트용)
       
     </span>
   </a>
@@ -1243,19 +1260,19 @@
   <a href="#5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5) 캐시(레이어 재사용) 체감 실습
+        5) 컨테이너는 "프로세스"라는 점 이해하기
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="5) 캐시(레이어 재사용) 체감 실습">
+    <nav class="md-nav" aria-label="5) 컨테이너는 &#34;프로세스&#34;라는 점 이해하기">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#5-1-pull" class="md-nav__link">
+  <a href="#5-1" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-1. 같은 이미지를 다시 pull
+        5-1. 바로 종료되는 컨테이너 보기
       
     </span>
   </a>
@@ -1263,10 +1280,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5-2" class="md-nav__link">
+  <a href="#5-2-sleep" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-2. 레이어 재사용을 직접 눈으로 확인하기
+        5-2. 살아있게 유지하기 (sleep)
       
     </span>
   </a>
@@ -1277,7 +1294,7 @@
   <a href="#5-3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-3. 같은 이미지로 새 컨테이너 추가 실행
+        5-3. 종료/재시작으로 동작 확인
       
     </span>
   </a>
@@ -1288,7 +1305,7 @@
   <a href="#5-4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5-4. 캐시가 깨지는 경우
+        5-4. 무한 유지 패턴도 확인
       
     </span>
   </a>
@@ -1304,41 +1321,19 @@
   <a href="#6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6) 정리: 캐시된다는 뜻
+        6) 캐시(레이어 재사용) 체감 실습
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) 실습 정리(삭제)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-azure-container-registry-acr-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8) Azure Container Registry (ACR)로 이미지 push하기
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="8) Azure Container Registry (ACR)로 이미지 push하기">
+    <nav class="md-nav" aria-label="6) 캐시(레이어 재사용) 체감 실습">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#8-1-azure" class="md-nav__link">
+  <a href="#6-1-pull" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8-1. Azure 계정 준비
+        6-1. 같은 이미지를 다시 pull
       
     </span>
   </a>
@@ -1346,10 +1341,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#8-2-azure-cli" class="md-nav__link">
+  <a href="#6-2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8-2. Azure CLI 로그인
+        6-2. 레이어 재사용을 직접 눈으로 확인하기
       
     </span>
   </a>
@@ -1357,10 +1352,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#8-3-azure-container-registry" class="md-nav__link">
+  <a href="#6-3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8-3. Azure Container Registry에 로그인
+        6-3. 같은 이미지로 새 컨테이너 추가 실행
       
     </span>
   </a>
@@ -1368,54 +1363,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#8-4" class="md-nav__link">
+  <a href="#6-4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8-4. 로컬 이미지에 태그 추가
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-5-azure-acr-push" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8-5. Azure ACR로 push
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-6-azure-acr" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8-6. Azure ACR에 저장된 이미지 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-7-azure-acr-pull" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8-7. Azure ACR에서 pull 및 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#8-8" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8-8. 정리
+        6-4. 캐시가 깨지는 경우
       
     </span>
   </a>
@@ -1428,7 +1379,29 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
+  <a href="#7" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7) 정리: 캐시된다는 뜻
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8) 실습 정리(삭제)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         스스로 해보기
@@ -1455,215 +1428,73 @@
 
 
 
-<h1 id="1-3-docker-hub">1-3. Docker Hub와 이미지 실습<a class="headerlink" href="#1-3-docker-hub" title="Permanent link">&para;</a></h1>
+<h1 id="1-3">1-3. 레지스트리와 이미지 실습<a class="headerlink" href="#1-3" title="Permanent link">&para;</a></h1>
 <h2 id="_1">실습 목표<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Docker Hub에서 다양한 이미지를 직접 가져오기</li>
-<li>가져온 이미지를 컨테이너로 실행해보기</li>
+<li>공개 레지스트리(Docker Hub)와 프라이빗 레지스트리(ACR)의 차이를 이해하기</li>
+<li>ACR에서 직접 이미지를 pull하며 주소 형식 체험하기</li>
 <li>이미지 캐시(레이어 재사용)가 무엇인지 실습으로 이해하기</li>
 </ul>
-<h2 id="30">예상 소요 시간 (약 30분)<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
+<h2 id="35">예상 소요 시간 (약 35분)<a class="headerlink" href="#35" title="Permanent link">&para;</a></h2>
 <ul>
-<li>0~8분: Docker Hub 이미지 탐색 및 pull</li>
-<li>8~20분: 이미지별 컨테이너 실행</li>
-<li>20~28분: 캐시/레이어 재사용 체감 실습</li>
-<li>28~30분: 정리</li>
+<li>0~5분: 레지스트리 개념 이해</li>
+<li>5~15분: ACR 로그인 및 이미지 pull</li>
+<li>15~25분: 이미지로 컨테이너 실행</li>
+<li>25~33분: 캐시/레이어 재사용 체감 실습</li>
+<li>33~35분: 정리</li>
 </ul>
 <h2 id="_2">사전 조건<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Docker 설치 완료</li>
-<li>인터넷 연결 가능</li>
+<li>Azure CLI 설치 완료</li>
+<li>강사로부터 팀 계정 정보 수령</li>
 </ul>
 <p>확인:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>--version
-</span></code></pre></div>
-<h2 id="1-docker-hub">1) Docker Hub에서 이미지 찾기<a class="headerlink" href="#1-docker-hub" title="Permanent link">&para;</a></h2>
-<p>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
-<p>터미널 검색 예시:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>search<span class="w"> </span>nginx
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker<span class="w"> </span>search<span class="w"> </span>redis
-</span></code></pre></div>
-<p>포인트:</p>
-<ul>
-<li><code>OFFICIAL</code> 표시가 있으면 공식 이미지</li>
-<li><code>TAG</code>를 명시하면 버전 고정 가능</li>
-</ul>
-<h2 id="2-pull">2) 이미지 pull 실습<a class="headerlink" href="#2-pull" title="Permanent link">&para;</a></h2>
-<p>먼저 6개 이미지를 가져옵니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nginx:latest
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>httpd:latest
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docker<span class="w"> </span>pull<span class="w"> </span>redis:latest
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>alpine:latest
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.11-slim
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.12-slim
-</span></code></pre></div>
-<p>목록 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>images
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li>이미지마다 <code>IMAGE ID</code>, <code>SIZE</code>가 다름</li>
-<li>동일 계열 이미지끼리는 레이어를 공유할 수 있음</li>
-</ul>
-<h2 id="3">3) 이미지로 컨테이너 실행 실습<a class="headerlink" href="#3" title="Permanent link">&para;</a></h2>
-<h3 id="3-1-nginx">3-1. Nginx 실행<a class="headerlink" href="#3-1-nginx" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>nginx:latest
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8081
-</span></code></pre></div>
-<h3 id="3-2-apachehttpd">3-2. Apache(httpd) 실행<a class="headerlink" href="#3-2-apachehttpd" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>httpd-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8082</span>:80<span class="w"> </span>httpd:latest
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8082
-</span></code></pre></div>
-<h3 id="3-3-redis">3-3. Redis 실행<a class="headerlink" href="#3-3-redis" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>redis-db<span class="w"> </span>-p<span class="w"> </span><span class="m">6379</span>:6379<span class="w"> </span>redis:latest
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>redis-db<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
-</span></code></pre></div>
-<h3 id="3-4-alpine">3-4. Alpine 실행 (짧은 테스트용)<a class="headerlink" href="#3-4-alpine" title="Permanent link">&para;</a></h3>
-<blockquote>
-<p><strong>Alpine이란?</strong>
-Alpine Linux는 약 5MB짜리 초경량 리눅스 OS 이미지입니다.
-nginx처럼 특정 서비스가 내장된 것도 아니고, bash만 달랑 있는 것도 아닙니다.
-기본 shell(<code>sh</code>)과 핵심 유틸리티만 담긴 <strong>최소한의 리눅스 환경</strong>으로,
-간단한 명령 실행 테스트나 다른 이미지의 베이스로 자주 사용됩니다.</p>
-</blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>alpine-test<span class="w"> </span>alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello from alpine&quot;</span>
-</span></code></pre></div>
-<p>상태 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>ps
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
-</span></code></pre></div>
-<h2 id="4">4) 컨테이너는 "프로세스"라는 점 이해하기<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
-<p>핵심: 컨테이너는 내부의 메인 프로세스(PID 1)가 끝나면 같이 종료됩니다.</p>
-<h3 id="4-1">4-1. 바로 종료되는 컨테이너 보기<a class="headerlink" href="#4-1" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>exit-now<span class="w"> </span>alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;bye&quot;</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>exit-now
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li><code>echo</code> 명령은 바로 끝남</li>
-<li>메인 프로세스가 끝났기 때문에 컨테이너 상태가 <code>Exited</code>로 바뀜</li>
-</ul>
-<h3 id="4-2-sleep">4-2. 살아있게 유지하기 (<code>sleep</code>)<a class="headerlink" href="#4-2-sleep" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-alive<span class="w"> </span>alpine:latest<span class="w"> </span>sleep<span class="w"> </span><span class="m">600</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li><code>sleep 600</code> 프로세스가 600초 동안 실행됨</li>
-<li>그동안 컨테이너도 <code>Up</code> 상태로 유지됨</li>
-</ul>
-<h3 id="4-3">4-3. 종료/재시작으로 동작 확인<a class="headerlink" href="#4-3" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>keep-alive
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>docker<span class="w"> </span>start<span class="w"> </span>keep-alive
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
-</span></code></pre></div>
-<h3 id="4-4">4-4. 무한 유지 패턴도 확인<a class="headerlink" href="#4-4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-forever<span class="w"> </span>alpine:latest<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;while true; do sleep 60; done&quot;</span>
-</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-forever
-</span></code></pre></div>
-<p>정리:</p>
-<ul>
-<li>컨테이너는 VM처럼 "항상 켜져 있는 OS"가 아님</li>
-<li>메인 프로세스를 무엇으로 주느냐에 따라 바로 종료되거나 계속 실행됨</li>
-</ul>
-<h2 id="5">5) 캐시(레이어 재사용) 체감 실습<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<blockquote>
-<p><strong>참고: Docker 버전에 따라 출력이 다릅니다</strong></p>
-<p>Docker Engine v29(2025년 11월) 이후 신규 설치, Docker Desktop 4.34(2024년 8월) 이후 신규 설치는
-기본 이미지 저장소가 <strong>containerd image store</strong>로 바뀌었습니다.</p>
-<p>이전 방식(graphdriver)에서는 이미 로컬에 있는 레이어가 <code>Already exists</code>로 표시됐지만,
-새 방식(containerd)에서는 <strong>해당 레이어 라인이 출력에서 아예 사라집니다.</strong>
-레이어 재사용은 동일하게 일어나지만, 눈에 보이는 출력이 달라진 것입니다.</p>
-<p>내 환경 확인:
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Storage Driver&quot;</span>
-</span></code></pre></div>
-- <code>overlay2</code> → graphdriver (이전 방식, <code>Already exists</code> 보임)
-- <code>overlayfs</code> → containerd image store (새 방식, 라인 자체가 사라짐)</p>
-</blockquote>
-<h3 id="5-1-pull">5-1. 같은 이미지를 다시 pull<a class="headerlink" href="#5-1-pull" title="Permanent link">&para;</a></h3>
-<p>이미 받은 이미지를 다시 pull하면 레이어를 재다운로드하지 않습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>nginx:latest
-</span></code></pre></div>
-<p><strong>예상 출력 (이미 로컬에 있을 때):</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>latest: Pulling from library/nginx
-</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>Digest: sha256:...
-</span><span id="__span-15-3"><a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>Status: Image is up to date for nginx:latest
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li><code>Image is up to date</code> → 레이어를 전혀 다운로드하지 않음</li>
-<li>네트워크 트래픽 없이 즉시 완료됨</li>
-</ul>
-<h3 id="5-2">5-2. 레이어 재사용을 직접 눈으로 확인하기<a class="headerlink" href="#5-2" title="Permanent link">&para;</a></h3>
-<p>pull 출력만으로는 재사용 여부가 잘 안 보이므로, <code>docker image inspect</code>로 레이어 해시를 직접 비교합니다.</p>
-<p>같은 Debian 베이스를 쓰는 두 Python 이미지를 받습니다:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.11-slim
-</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.12-slim
-</span></code></pre></div>
-<p>레이어 목록 비교:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>python:3.11-slim<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].RootFS.Layers&#39;</span>
-</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>python:3.12-slim<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].RootFS.Layers&#39;</span>
-</span></code></pre></div>
-<p><strong>예상 출력:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>// python:3.11-slim
-</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>[
-</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>  &quot;sha256:e6133723...&quot;,   ← Debian 베이스 레이어 (3.12와 동일)
-</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>  &quot;sha256:384ef01e...&quot;,   ← Python 3.11 전용
-</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>  &quot;sha256:2eeb7784...&quot;,   ← Python 3.11 전용
-</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>  &quot;sha256:1f339219...&quot;    ← Python 3.11 전용
-</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>]
-</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
-</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>// python:3.12-slim
-</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>[
-</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>  &quot;sha256:e6133723...&quot;,   ← Debian 베이스 레이어 (3.11과 동일) ← 이 부분!
-</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>  &quot;sha256:c24d0821...&quot;,   ← Python 3.12 전용
-</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>  &quot;sha256:8d5257b6...&quot;,   ← Python 3.12 전용
-</span><span id="__span-18-14"><a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>  &quot;sha256:e85497ba...&quot;    ← Python 3.12 전용
-</span><span id="__span-18-15"><a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>]
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li>첫 번째 해시(<code>e6133723...</code>)가 <strong>두 이미지에서 완전히 동일</strong> → Debian OS 베이스 레이어를 공유</li>
-<li>나머지 3개는 Python 버전마다 다름 → 언어 런타임이 달라지는 부분</li>
-<li>즉, <strong>두 이미지를 받아도 공유 레이어는 디스크에 한 번만 저장됨</strong></li>
-<li>pull 출력에서는 이 공유 여부가 보이지 않지만, inspect로 실제 레이어 해시를 보면 증명됨</li>
-</ul>
-<h3 id="5-3">5-3. 같은 이미지로 새 컨테이너 추가 실행<a class="headerlink" href="#5-3" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web-2<span class="w"> </span>-p<span class="w"> </span><span class="m">8083</span>:80<span class="w"> </span>nginx:latest
-</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>docker<span class="w"> </span>ps
-</span></code></pre></div>
-<p>관찰 포인트:</p>
-<ul>
-<li><code>nginx:latest</code> 이미지는 한 번 받아두면 재사용됨</li>
-<li>새 컨테이너는 이미지를 복제 다운로드하는 게 아니라 기존 로컬 이미지 레이어를 기반으로 빠르게 생성됨</li>
-</ul>
-<h3 id="5-4">5-4. 캐시가 깨지는 경우<a class="headerlink" href="#5-4" title="Permanent link">&para;</a></h3>
-<p>아래 중 하나면 모든 레이어를 새로 다운로드합니다.</p>
-<ul>
-<li>로컬 이미지와 레이어를 모두 삭제한 경우 (<code>docker system prune</code>)</li>
-<li>원격 이미지가 업데이트되어 digest(내용)가 바뀐 경우</li>
-<li>전혀 다른 계열의 이미지 pull (예: <code>redis:latest</code>)</li>
-</ul>
-<h2 id="6">6) 정리: 캐시된다는 뜻<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
-<p>"이미지가 캐시된다"는 뜻은 아래와 같습니다.</p>
-<ul>
-<li>레이어 단위로 로컬 디스크에 저장됨</li>
-<li>동일 레이어는 재다운로드하지 않음</li>
-<li>같은 이미지를 여러 컨테이너가 공유 기반으로 사용 가능</li>
-<li>결과적으로 pull/실행 속도와 네트워크 사용량이 개선됨</li>
-</ul>
-<h2 id="7">7) 실습 정리(삭제)<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>nginx-web<span class="w"> </span>nginx-web-2<span class="w"> </span>httpd-web<span class="w"> </span>redis-db<span class="w"> </span>alpine-test<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>exit-now<span class="w"> </span>keep-alive<span class="w"> </span>keep-forever<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span></code></pre></div>
-<p>이미지까지 지우고 싶다면:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>rmi<span class="w"> </span>nginx:latest<span class="w"> </span>httpd:latest<span class="w"> </span>redis:latest<span class="w"> </span>alpine:latest
-</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>python:3.11-slim<span class="w"> </span>python:3.12-slim
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>az<span class="w"> </span>version
 </span></code></pre></div>
 <hr />
-<h2 id="8-azure-container-registry-acr-push">8) Azure Container Registry (ACR)로 이미지 push하기<a class="headerlink" href="#8-azure-container-registry-acr-push" title="Permanent link">&para;</a></h2>
-<h3 id="8-1-azure">8-1. Azure 계정 준비<a class="headerlink" href="#8-1-azure" title="Permanent link">&para;</a></h3>
+<h2 id="1">1) 레지스트리란?<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
+<p>1-1, 1-2에서는 <code>docker run nginx:latest</code>처럼 이미지 이름만 쓰면 자동으로 <strong>Docker Hub</strong>에서 이미지를 가져왔습니다.</p>
+<p>하지만 실제 기업 환경에서는 보안, 속도, 접근 제어 등의 이유로 <strong>프라이빗 레지스트리</strong>를 사용합니다.</p>
+<h3 id="_3">레지스트리 종류 비교<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>종류</th>
+<th>예시</th>
+<th>특징</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>공개 레지스트리</td>
+<td>Docker Hub (<code>docker.io</code>)</td>
+<td>누구나 접근 가능, 공식 이미지 제공</td>
+</tr>
+<tr>
+<td>프라이빗 레지스트리</td>
+<td>Azure ACR, AWS ECR, GitHub GHCR</td>
+<td>인증 필요, 기업 내부 이미지 관리</td>
+</tr>
+</tbody>
+</table>
+<h3 id="_4">주소 형식 비교<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a># Docker Hub (레지스트리 주소 생략 가능)
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>nginx:latest
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docker.io/library/nginx:latest   ← 전체 주소
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a># 프라이빗 레지스트리 (주소 명시 필수)
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>skilleatlab.azurecr.io/lab/nginx:latest
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>│                        │   │
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>│                        │   └── 태그
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>│                        └────── 이미지 경로
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>└─────────────────────────────── 레지스트리 주소
+</span></code></pre></div>
+<p><strong>핵심 포인트:</strong> 프라이빗 레지스트리에서 이미지를 가져오려면 레지스트리 주소를 앞에 붙여야 합니다.</p>
+<hr />
+<h2 id="2-acr-pull">2) ACR 로그인 및 이미지 pull<a class="headerlink" href="#2-acr-pull" title="Permanent link">&para;</a></h2>
+<h3 id="2-1-azure">2-1. 팀 계정으로 Azure 로그인<a class="headerlink" href="#2-1-azure" title="Permanent link">&para;</a></h3>
 <p>각 팀별 계정 정보:</p>
 <table>
 <thead>
@@ -1691,76 +1522,216 @@ nginx처럼 특정 서비스가 내장된 것도 아니고, bash만 달랑 있�
 </tr>
 </tbody>
 </table>
-<h3 id="8-2-azure-cli">8-2. Azure CLI 로그인<a class="headerlink" href="#8-2-azure-cli" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>az<span class="w"> </span>login
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>az<span class="w"> </span>login
 </span></code></pre></div>
-<p>이메일과 비밀번호를 입력하여 로그인합니다.</p>
 <p>로그인 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>az<span class="w"> </span>account<span class="w"> </span>show
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>az<span class="w"> </span>account<span class="w"> </span>show
 </span></code></pre></div>
-<h3 id="8-3-azure-container-registry">8-3. Azure Container Registry에 로그인<a class="headerlink" href="#8-3-azure-container-registry" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>--name<span class="w"> </span>skillitacr
+<h3 id="2-2-acr">2-2. ACR 로그인<a class="headerlink" href="#2-2-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>--name<span class="w"> </span>skilleatlab
 </span></code></pre></div>
-<p>확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>docker<span class="w"> </span>login<span class="w"> </span>skillitacr.azurecr.io
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Login Succeeded
 </span></code></pre></div>
-<h3 id="8-4">8-4. 로컬 이미지에 태그 추가<a class="headerlink" href="#8-4" title="Permanent link">&para;</a></h3>
-<p>로컬의 <code>nginx:latest</code> 이미지를 Azure ACR로 push하기 위해 태그를 변경합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 현재 로컬 이미지 확인</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>nginx
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># ACR 레지스트리 주소로 태그 변경</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>docker<span class="w"> </span>tag<span class="w"> </span>nginx:latest<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="c1"># 태그 확인</span>
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>skillitacr
+<h3 id="2-3-acr-pull">2-3. ACR에서 이미지 pull<a class="headerlink" href="#2-3-acr-pull" title="Permanent link">&para;</a></h3>
+<p>Docker Hub와 주소 형식이 다른 것에 주목하세요:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>skilleatlab.azurecr.io/lab/nginx:latest
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>skilleatlab.azurecr.io/lab/httpd:latest
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>docker<span class="w"> </span>pull<span class="w"> </span>skilleatlab.azurecr.io/lab/redis:latest
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docker<span class="w"> </span>pull<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest
 </span></code></pre></div>
-<p>포인트:</p>
-<ul>
-<li><code>skillitacr.azurecr.io</code>: Azure Container Registry 주소</li>
-<li><code>myteam</code>: 저장소(repository) 이름 (팀 이름으로 변경 가능)</li>
-<li><code>v1.0</code>: 버전 태그</li>
-</ul>
-<h3 id="8-5-azure-acr-push">8-5. Azure ACR로 push<a class="headerlink" href="#8-5-azure-acr-push" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>docker<span class="w"> </span>push<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
+<p>목록 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>images
 </span></code></pre></div>
 <p>관찰 포인트:</p>
 <ul>
-<li>로컬 이미지의 레이어를 ACR로 업로드</li>
-<li>처음 push는 시간이 걸릴 수 있음</li>
-<li>완료 후 "Pushed" 메시지 확인</li>
-</ul>
-<h3 id="8-6-azure-acr">8-6. Azure ACR에 저장된 이미지 확인<a class="headerlink" href="#8-6-azure-acr" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span>skillitacr<span class="w"> </span>--output<span class="w"> </span>table
-</span></code></pre></div>
-<p>특정 저장소의 이미지 태그 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span>skillitacr<span class="w"> </span>--repository<span class="w"> </span>myteam/nginx
-</span></code></pre></div>
-<h3 id="8-7-azure-acr-pull">8-7. Azure ACR에서 pull 및 실행<a class="headerlink" href="#8-7-azure-acr-pull" title="Permanent link">&para;</a></h3>
-<p>다른 환경이나 팀원 컴퓨터에서 ACR의 이미지를 받아와 실행할 수 있습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>acr-nginx<span class="w"> </span>-p<span class="w"> </span><span class="m">8084</span>:80<span class="w"> </span>skillitacr.azurecr.io/myteam/nginx:v1.0
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8084
-</span></code></pre></div>
-<h3 id="8-8">8-8. 정리<a class="headerlink" href="#8-8" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>acr-nginx<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span></code></pre></div>
-<p><strong>핵심 학습:</strong></p>
-<ul>
-<li>Docker Hub는 공개 레지스트리, Azure ACR은 비공개/기업용 레지스트리</li>
-<li>이미지에 태그를 추가하여 다양한 레지스트리로 push/pull 가능</li>
-<li>팀 전체가 같은 ACR을 사용하면 이미지 공유가 용이함</li>
+<li><code>REPOSITORY</code> 컬럼에 <code>skilleatlab.azurecr.io/...</code>로 시작하는 이미지가 보임</li>
+<li>Docker Hub 이미지(<code>nginx:latest</code>)와 ACR 이미지(<code>skilleatlab.azurecr.io/lab/nginx:latest</code>)가 <strong>별개</strong>로 관리됨</li>
+<li>내용은 같아도 주소(출처)가 다르면 다른 이미지로 취급</li>
 </ul>
 <hr />
-<h2 id="_3">스스로 해보기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="3-docker-hub">3) Docker Hub에서 이미지 찾기<a class="headerlink" href="#3-docker-hub" title="Permanent link">&para;</a></h2>
+<p>Docker Hub: <a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+<p>터미널에서도 검색할 수 있습니다:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>search<span class="w"> </span>nginx
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>search<span class="w"> </span>redis
+</span></code></pre></div>
+<p>포인트:</p>
+<ul>
+<li><code>OFFICIAL</code> 표시가 있으면 공식 이미지</li>
+<li><code>TAG</code>를 명시하면 버전 고정 가능 (예: <code>nginx:1.27</code>)</li>
+</ul>
+<hr />
+<h2 id="4">4) 이미지로 컨테이너 실행 실습<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
+<p>ACR에서 받은 이미지로 컨테이너를 실행합니다.</p>
+<h3 id="4-1-nginx">4-1. Nginx 실행<a class="headerlink" href="#4-1-nginx" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8081</span>:80<span class="w"> </span>skilleatlab.azurecr.io/lab/nginx:latest
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8081
+</span></code></pre></div>
+<h3 id="4-2-apachehttpd">4-2. Apache(httpd) 실행<a class="headerlink" href="#4-2-apachehttpd" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>httpd-web<span class="w"> </span>-p<span class="w"> </span><span class="m">8082</span>:80<span class="w"> </span>skilleatlab.azurecr.io/lab/httpd:latest
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost:8082
+</span></code></pre></div>
+<h3 id="4-3-redis">4-3. Redis 실행<a class="headerlink" href="#4-3-redis" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>redis-db<span class="w"> </span>-p<span class="w"> </span><span class="m">6379</span>:6379<span class="w"> </span>skilleatlab.azurecr.io/lab/redis:latest
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>logs<span class="w"> </span>redis-db<span class="w"> </span><span class="p">|</span><span class="w"> </span>head
+</span></code></pre></div>
+<h3 id="4-4-alpine">4-4. Alpine 실행 (짧은 테스트용)<a class="headerlink" href="#4-4-alpine" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>Alpine이란?</strong>
+Alpine Linux는 약 5MB짜리 초경량 리눅스 OS 이미지입니다.
+nginx처럼 특정 서비스가 내장된 것도 아니고, bash만 달랑 있는 것도 아닙니다.
+기본 shell(<code>sh</code>)과 핵심 유틸리티만 담긴 <strong>최소한의 리눅스 환경</strong>으로,
+간단한 명령 실행 테스트나 다른 이미지의 베이스로 자주 사용됩니다.</p>
+</blockquote>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>alpine-test<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;hello from alpine&quot;</span>
+</span></code></pre></div>
+<p>상태 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>ps
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
+</span></code></pre></div>
+<h2 id="5">5) 컨테이너는 "프로세스"라는 점 이해하기<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<p>핵심: 컨테이너는 내부의 메인 프로세스(PID 1)가 끝나면 같이 종료됩니다.</p>
+<h3 id="5-1">5-1. 바로 종료되는 컨테이너 보기<a class="headerlink" href="#5-1" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>exit-now<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;bye&quot;</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>exit-now
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>echo</code> 명령은 바로 끝남</li>
+<li>메인 프로세스가 끝났기 때문에 컨테이너 상태가 <code>Exited</code>로 바뀜</li>
+</ul>
+<h3 id="5-2-sleep">5-2. 살아있게 유지하기 (<code>sleep</code>)<a class="headerlink" href="#5-2-sleep" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-alive<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest<span class="w"> </span>sleep<span class="w"> </span><span class="m">600</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>sleep 600</code> 프로세스가 600초 동안 실행됨</li>
+<li>그동안 컨테이너도 <code>Up</code> 상태로 유지됨</li>
+</ul>
+<h3 id="5-3">5-3. 종료/재시작으로 동작 확인<a class="headerlink" href="#5-3" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>keep-alive
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>docker<span class="w"> </span>start<span class="w"> </span>keep-alive
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-alive
+</span></code></pre></div>
+<h3 id="5-4">5-4. 무한 유지 패턴도 확인<a class="headerlink" href="#5-4" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>keep-forever<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;while true; do sleep 60; done&quot;</span>
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>docker<span class="w"> </span>ps<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>keep-forever
+</span></code></pre></div>
+<p>정리:</p>
+<ul>
+<li>컨테이너는 VM처럼 "항상 켜져 있는 OS"가 아님</li>
+<li>메인 프로세스를 무엇으로 주느냐에 따라 바로 종료되거나 계속 실행됨</li>
+</ul>
+<hr />
+<h2 id="6">6) 캐시(레이어 재사용) 체감 실습<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p><strong>참고: Docker 버전에 따라 출력이 다릅니다</strong></p>
+<p>Docker Engine v29(2025년 11월) 이후 신규 설치, Docker Desktop 4.34(2024년 8월) 이후 신규 설치는
+기본 이미지 저장소가 <strong>containerd image store</strong>로 바뀌었습니다.</p>
+<p>이전 방식(graphdriver)에서는 이미 로컬에 있는 레이어가 <code>Already exists</code>로 표시됐지만,
+새 방식(containerd)에서는 <strong>해당 레이어 라인이 출력에서 아예 사라집니다.</strong>
+레이어 재사용은 동일하게 일어나지만, 눈에 보이는 출력이 달라진 것입니다.</p>
+<p>내 환경 확인:
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>info<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;Storage Driver&quot;</span>
+</span></code></pre></div>
+- <code>overlay2</code> → graphdriver (이전 방식, <code>Already exists</code> 보임)
+- <code>overlayfs</code> → containerd image store (새 방식, 라인 자체가 사라짐)</p>
+</blockquote>
+<h3 id="6-1-pull">6-1. 같은 이미지를 다시 pull<a class="headerlink" href="#6-1-pull" title="Permanent link">&para;</a></h3>
+<p>이미 받은 이미지를 다시 pull하면 레이어를 재다운로드하지 않습니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>skilleatlab.azurecr.io/lab/nginx:latest
+</span></code></pre></div>
+<p><strong>예상 출력 (이미 로컬에 있을 때):</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>latest: Pulling from lab/nginx
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Digest: sha256:...
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Status: Image is up to date for skilleatlab.azurecr.io/lab/nginx:latest
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><code>Image is up to date</code> → 레이어를 전혀 다운로드하지 않음</li>
+<li>네트워크 트래픽 없이 즉시 완료됨</li>
+</ul>
+<h3 id="6-2">6-2. 레이어 재사용을 직접 눈으로 확인하기<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h3>
+<p>pull 출력만으로는 재사용 여부가 잘 안 보이므로, <code>docker image inspect</code>로 레이어 해시를 직접 비교합니다.</p>
+<p>같은 Debian 베이스를 쓰는 두 Python 이미지를 받습니다:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.11-slim
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>docker<span class="w"> </span>pull<span class="w"> </span>python:3.12-slim
+</span></code></pre></div>
+<p>레이어 목록 비교:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>python:3.11-slim<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].RootFS.Layers&#39;</span>
+</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>docker<span class="w"> </span>image<span class="w"> </span>inspect<span class="w"> </span>python:3.12-slim<span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span><span class="s1">&#39;.[0].RootFS.Layers&#39;</span>
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>// python:3.11-slim
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>[
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>  &quot;sha256:e6133723...&quot;,   ← Debian 베이스 레이어 (3.12와 동일)
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>  &quot;sha256:384ef01e...&quot;,   ← Python 3.11 전용
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>  &quot;sha256:2eeb7784...&quot;,   ← Python 3.11 전용
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>  &quot;sha256:1f339219...&quot;    ← Python 3.11 전용
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>]
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>// python:3.12-slim
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>[
+</span><span id="__span-23-11"><a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>  &quot;sha256:e6133723...&quot;,   ← Debian 베이스 레이어 (3.11과 동일) ← 이 부분!
+</span><span id="__span-23-12"><a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a>  &quot;sha256:c24d0821...&quot;,   ← Python 3.12 전용
+</span><span id="__span-23-13"><a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a>  &quot;sha256:8d5257b6...&quot;,   ← Python 3.12 전용
+</span><span id="__span-23-14"><a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>  &quot;sha256:e85497ba...&quot;    ← Python 3.12 전용
+</span><span id="__span-23-15"><a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a>]
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li>첫 번째 해시(<code>e6133723...</code>)가 <strong>두 이미지에서 완전히 동일</strong> → Debian OS 베이스 레이어를 공유</li>
+<li>나머지 3개는 Python 버전마다 다름 → 언어 런타임이 달라지는 부분</li>
+<li>즉, <strong>두 이미지를 받아도 공유 레이어는 디스크에 한 번만 저장됨</strong></li>
+<li>pull 출력에서는 이 공유 여부가 보이지 않지만, inspect로 실제 레이어 해시를 보면 증명됨</li>
+</ul>
+<h3 id="6-3">6-3. 같은 이미지로 새 컨테이너 추가 실행<a class="headerlink" href="#6-3" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>nginx-web-2<span class="w"> </span>-p<span class="w"> </span><span class="m">8083</span>:80<span class="w"> </span>skilleatlab.azurecr.io/lab/nginx:latest
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span>ps
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li>이미지를 다시 다운로드하지 않고 즉시 컨테이너가 생성됨</li>
+<li>같은 이미지 레이어를 두 컨테이너가 공유하기 때문</li>
+</ul>
+<h3 id="6-4">6-4. 캐시가 깨지는 경우<a class="headerlink" href="#6-4" title="Permanent link">&para;</a></h3>
+<p>아래 중 하나면 모든 레이어를 새로 다운로드합니다.</p>
+<ul>
+<li>로컬 이미지와 레이어를 모두 삭제한 경우 (<code>docker system prune</code>)</li>
+<li>원격 이미지가 업데이트되어 digest(내용)가 바뀐 경우</li>
+<li>전혀 다른 계열의 이미지 pull</li>
+</ul>
+<hr />
+<h2 id="7">7) 정리: 캐시된다는 뜻<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
+<p>"이미지가 캐시된다"는 뜻은 아래와 같습니다.</p>
+<ul>
+<li>레이어 단위로 로컬 디스크에 저장됨</li>
+<li>동일 레이어는 재다운로드하지 않음</li>
+<li>같은 이미지를 여러 컨테이너가 공유 기반으로 사용 가능</li>
+<li>결과적으로 pull/실행 속도와 네트워크 사용량이 개선됨</li>
+</ul>
+<hr />
+<h2 id="8">8) 실습 정리(삭제)<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>nginx-web<span class="w"> </span>nginx-web-2<span class="w"> </span>httpd-web<span class="w"> </span>redis-db<span class="w"> </span>alpine-test<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>exit-now<span class="w"> </span>keep-alive<span class="w"> </span>keep-forever<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
+<p>이미지까지 지우고 싶다면:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>docker<span class="w"> </span>rmi<span class="w"> </span>skilleatlab.azurecr.io/lab/nginx:latest
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>skilleatlab.azurecr.io/lab/httpd:latest
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>docker<span class="w"> </span>rmi<span class="w"> </span>skilleatlab.azurecr.io/lab/redis:latest
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>docker<span class="w"> </span>rmi<span class="w"> </span>skilleatlab.azurecr.io/lab/alpine:latest
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>docker<span class="w"> </span>rmi<span class="w"> </span>python:3.11-slim<span class="w"> </span>python:3.12-slim
+</span></code></pre></div>
+<hr />
+<h2 id="_5">스스로 해보기<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
-<li>Docker Hub에서 <code>mariadb</code> 공식 이미지를 찾아 <code>latest</code>를 pull하세요.</li>
-<li><code>docker images</code>에서 <code>mariadb</code> 이미지가 추가됐는지 확인하세요.</li>
-<li>같은 이미지를 2번 연속 pull하고, 두 번째 결과 메시지를 기록하세요.</li>
-<li><code>alpine</code> 이미지로 <code>date</code> 명령을 실행하는 일회성 컨테이너를 만들어보세요.</li>
+<li><code>docker images</code>에서 Docker Hub 이미지와 ACR 이미지의 REPOSITORY 주소 차이를 비교하세요.</li>
+<li><code>skilleatlab.azurecr.io/lab/alpine:latest</code>로 <code>date</code> 명령을 실행하는 일회성 컨테이너를 만들어보세요.</li>
 <li><code>sleep 300</code>으로 5분 유지되는 컨테이너를 만들고, <code>ps</code>에서 <code>Up</code> 상태를 확인하세요.</li>
+<li><code>python:3.11-slim</code>과 <code>python:3.12-slim</code>의 레이어 해시를 직접 비교하고, 공유 레이어가 몇 개인지 확인하세요.</li>
 <li>실습 종료 후 내가 만든 컨테이너를 정리하세요.</li>
 </ol>
 
