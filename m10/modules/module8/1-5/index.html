@@ -1503,6 +1503,13 @@
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">cd</span><span class="w"> </span>~/docker-optimize
 </span></code></pre></div>
 <h3 id="1-2-nodejs">1-2. 간단한 Node.js 앱 준비<a class="headerlink" href="#1-2-nodejs" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><strong>파일 설명</strong></p>
+<ul>
+<li><code>app.js</code> : 실제 서버 코드. "포트 3000에서 HTTP 요청을 받아 응답을 돌려준다"는 내용이 담긴 애플리케이션 파일입니다.</li>
+<li><code>package.json</code> : 이 앱이 어떤 외부 라이브러리(여기서는 <code>express</code>)에 의존하는지 명시하는 Node.js 프로젝트 설정 파일입니다. <code>npm install</code> 시 이 파일을 읽어 라이브러리를 설치합니다.</li>
+</ul>
+</blockquote>
 <p><code>app.js</code> 파일 생성:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>app.js<span class="w"> </span><span class="s">&lt;&lt;&#39;EOF&#39;</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s">const express = require(&#39;express&#39;);</span>
