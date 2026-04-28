@@ -2348,8 +2348,11 @@
 </span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="nb">exit</span>
 </span></code></pre></div>
 <h3 id="2-4">2-4. 여러 컨테이너가 같은 볼륨 공유하기<a class="headerlink" href="#2-4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 컨테이너 2는 계속 유지한 채로</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test3<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
+<blockquote>
+<p>vol-test2가 아직 실행 중인 상태에서 진행합니다.
+<strong>새 터미널을 열고 VM에 SSH 접속</strong>한 뒤 아래 명령어를 실행하세요.</p>
+</blockquote>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test3<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 다른 컨테이너가 작성한 파일도 볼 수 있음</span>
