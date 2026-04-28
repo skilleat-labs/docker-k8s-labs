@@ -2705,65 +2705,71 @@ RUN 통합의 이점은 <strong>크기 감소가 아니라 레이어 수 감소<
 </span></code></pre></div>
 <p>저장: <code>Ctrl + O</code> → <code>Enter</code> → 종료: <code>Ctrl + X</code></p>
 <h3 id="4-2">4-2. 빌드 컨텍스트 크기 비교<a class="headerlink" href="#4-2" title="Permanent link">&para;</a></h3>
+<p>실제 효과를 눈으로 보기 위해 <strong>가짜 node_modules</strong>를 만들어 비교합니다.
+(실제 프로젝트에서는 npm install 후 수백 MB의 node_modules가 호스트에 생깁니다.)</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>node_modules/dummy-pkg
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>dd<span class="w"> </span><span class="k">if</span><span class="o">=</span>/dev/zero<span class="w"> </span><span class="nv">of</span><span class="o">=</span>node_modules/dummy-pkg/big.file<span class="w"> </span><span class="nv">bs</span><span class="o">=</span>1M<span class="w"> </span><span class="nv">count</span><span class="o">=</span><span class="m">5</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span></code></pre></div>
 <p>먼저 <code>.dockerignore</code> <strong>없이</strong> 빌드합니다:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>mv<span class="w"> </span>.dockerignore<span class="w"> </span>.dockerignore.bak
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span>-t<span class="w"> </span>myapp:v5<span class="w"> </span>.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>mv<span class="w"> </span>.dockerignore<span class="w"> </span>.dockerignore.bak
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span>-t<span class="w"> </span>myapp:v5<span class="w"> </span>.
 </span></code></pre></div>
 <div class="admonition danger">
-<p class="admonition-title">관찰 — 빌드 로그에서 이 줄을 찾으세요</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>=&gt; =&gt; transferring context: 390B    ← .dockerignore 없음
+<p class="admonition-title">관찰 — <code>[internal] load build context</code> 줄을 찾으세요</p>
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>=&gt; =&gt; transferring context: 5.24MB    ← node_modules까지 전부 전송
 </span></code></pre></div>
-이 숫자가 Docker 데몬에 전달되는 파일 묶음(빌드 컨텍스트)의 크기입니다.</p>
+node_modules 파일이 통째로 Docker 데몬에 전달됩니다.</p>
 </div>
 <p><code>.dockerignore</code> <strong>적용 후</strong> 빌드합니다:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>mv<span class="w"> </span>.dockerignore.bak<span class="w"> </span>.dockerignore
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span>-t<span class="w"> </span>myapp:v6<span class="w"> </span>.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>mv<span class="w"> </span>.dockerignore.bak<span class="w"> </span>.dockerignore
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>docker<span class="w"> </span>build<span class="w"> </span>--no-cache<span class="w"> </span>-t<span class="w"> </span>myapp:v6<span class="w"> </span>.
 </span></code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">관찰 — 컨텍스트 크기가 줄어드는지 확인</p>
-<p><div class="language-text highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>=&gt; =&gt; transferring context: 196B    ← .dockerignore 적용
+<p><div class="language-text highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>=&gt; =&gt; transferring context: 390B    ← node_modules 제외됨
 </span></code></pre></div>
-<code>.dockerignore</code>에 명시한 파일들이 빌드 컨텍스트에서 제외되어 크기가 줄어듭니다.</p>
+<code>.dockerignore</code>의 <code>node_modules</code> 항목 덕분에 수 MB → 수백 B로 줄어듭니다.</p>
 </div>
-<blockquote>
-<p>지금 프로젝트가 작아서 차이가 미미하지만, 실제 프로젝트에서 <code>node_modules</code>(수백 MB)를 제외하면 빌드 시작 속도가 극적으로 빨라집니다.</p>
-</blockquote>
+<p>정리:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>rm<span class="w"> </span>-rf<span class="w"> </span>node_modules
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>mv<span class="w"> </span>.dockerignore.bak<span class="w"> </span>.dockerignore<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span></code></pre></div>
 <hr />
 <h2 id="5">5) 멀티 스테이지 빌드 실습<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <h3 id="5-1">5-1. 빌드와 실행 환경 분리<a class="headerlink" href="#5-1" title="Permanent link">&para;</a></h3>
 <p><code>Dockerfile.multi</code> 생성:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>nano<span class="w"> </span>Dockerfile.multi
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>nano<span class="w"> </span>Dockerfile.multi
 </span></code></pre></div>
 <p>아래 내용을 직접 입력하세요:</p>
-<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c"># 빌드 스테이지</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
-</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
-</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci<span class="w"> </span>--only<span class="o">=</span>production
-</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>
-</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="c"># 실행 스테이지 (경량화)</span>
-</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span>
-</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>
-</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-S<span class="w"> </span>nodejs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-30-13"><a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a><span class="w">    </span>adduser<span class="w"> </span>-S<span class="w"> </span>nextjs<span class="w"> </span>-u<span class="w"> </span><span class="m">1001</span>
-</span><span id="__span-30-14"><a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>
-</span><span id="__span-30-15"><a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-30-16"><a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>
-</span><span id="__span-30-17"><a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a><span class="c"># 빌드 스테이지에서 필요한 파일만 복사</span>
-</span><span id="__span-30-18"><a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/node_modules<span class="w"> </span>./node_modules
-</span><span id="__span-30-19"><a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-30-20"><a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a>
-</span><span id="__span-30-21"><a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a><span class="k">USER</span><span class="w"> </span><span class="s">nextjs</span>
-</span><span id="__span-30-22"><a id="__codelineno-30-22" name="__codelineno-30-22" href="#__codelineno-30-22"></a>
-</span><span id="__span-30-23"><a id="__codelineno-30-23" name="__codelineno-30-23" href="#__codelineno-30-23"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
-</span><span id="__span-30-24"><a id="__codelineno-30-24" name="__codelineno-30-24" href="#__codelineno-30-24"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c"># 빌드 스테이지</span>
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">builder</span>
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>ci<span class="w"> </span>--only<span class="o">=</span>production
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>
+</span><span id="__span-32-9"><a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="c"># 실행 스테이지 (경량화)</span>
+</span><span id="__span-32-10"><a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span>
+</span><span id="__span-32-11"><a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>
+</span><span id="__span-32-12"><a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a><span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-S<span class="w"> </span>nodejs<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-32-13"><a id="__codelineno-32-13" name="__codelineno-32-13" href="#__codelineno-32-13"></a><span class="w">    </span>adduser<span class="w"> </span>-S<span class="w"> </span>nextjs<span class="w"> </span>-u<span class="w"> </span><span class="m">1001</span>
+</span><span id="__span-32-14"><a id="__codelineno-32-14" name="__codelineno-32-14" href="#__codelineno-32-14"></a>
+</span><span id="__span-32-15"><a id="__codelineno-32-15" name="__codelineno-32-15" href="#__codelineno-32-15"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-32-16"><a id="__codelineno-32-16" name="__codelineno-32-16" href="#__codelineno-32-16"></a>
+</span><span id="__span-32-17"><a id="__codelineno-32-17" name="__codelineno-32-17" href="#__codelineno-32-17"></a><span class="c"># 빌드 스테이지에서 필요한 파일만 복사</span>
+</span><span id="__span-32-18"><a id="__codelineno-32-18" name="__codelineno-32-18" href="#__codelineno-32-18"></a><span class="k">COPY</span><span class="w"> </span>--from<span class="o">=</span>builder<span class="w"> </span>/app/node_modules<span class="w"> </span>./node_modules
+</span><span id="__span-32-19"><a id="__codelineno-32-19" name="__codelineno-32-19" href="#__codelineno-32-19"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-32-20"><a id="__codelineno-32-20" name="__codelineno-32-20" href="#__codelineno-32-20"></a>
+</span><span id="__span-32-21"><a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a><span class="k">USER</span><span class="w"> </span><span class="s">nextjs</span>
+</span><span id="__span-32-22"><a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a>
+</span><span id="__span-32-23"><a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+</span><span id="__span-32-24"><a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
 </span></code></pre></div>
 <p>저장: <code>Ctrl + O</code> → <code>Enter</code> → 종료: <code>Ctrl + X</code></p>
 <h3 id="5-2">5-2. 멀티 스테이지 빌드 실행<a class="headerlink" href="#5-2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.multi<span class="w"> </span>-t<span class="w"> </span>myapp:multi<span class="w"> </span>.
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.multi<span class="w"> </span>-t<span class="w"> </span>myapp:multi<span class="w"> </span>.
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
 </span></code></pre></div>
 <p>관찰 포인트:</p>
 <ul>
@@ -2774,43 +2780,43 @@ RUN 통합의 이점은 <strong>크기 감소가 아니라 레이어 수 감소<
 <h2 id="6-root">6) 비-root 보안 적용 실습<a class="headerlink" href="#6-root" title="Permanent link">&para;</a></h2>
 <h3 id="6-1-root">6-1. root 위험성 체험<a class="headerlink" href="#6-1-root" title="Permanent link">&para;</a></h3>
 <p>기존 컨테이너에서 root 권한 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>myapp:v1<span class="w"> </span>whoami<span class="w">  </span><span class="c1"># root로 실행됨</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>myapp:v1<span class="w"> </span>whoami<span class="w">  </span><span class="c1"># root로 실행됨</span>
 </span></code></pre></div>
 <h3 id="6-2-root">6-2. 비-root 사용자 적용<a class="headerlink" href="#6-2-root" title="Permanent link">&para;</a></h3>
 <p><code>Dockerfile.secure</code> 생성:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>nano<span class="w"> </span>Dockerfile.secure
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>nano<span class="w"> </span>Dockerfile.secure
 </span></code></pre></div>
 <p>아래 내용을 직접 입력하세요:</p>
-<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span>
-</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
-</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="c"># 비-root 사용자 생성</span>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-S<span class="w"> </span>appgroup<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span>adduser<span class="w"> </span>-S<span class="w"> </span>appuser<span class="w"> </span>-u<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-G<span class="w"> </span>appgroup
-</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>
-</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
-</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>
-</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a><span class="c"># 권한 설정</span>
-</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a><span class="k">RUN</span><span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>appuser:appgroup<span class="w"> </span>/app
-</span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a>
-</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a><span class="c"># 의존성 설치</span>
-</span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a><span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
-</span><span id="__span-34-14"><a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install
-</span><span id="__span-34-15"><a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a>
-</span><span id="__span-34-16"><a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a><span class="c"># 소스 복사</span>
-</span><span id="__span-34-17"><a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
-</span><span id="__span-34-18"><a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a>
-</span><span id="__span-34-19"><a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a><span class="c"># 사용자 전환</span>
-</span><span id="__span-34-20"><a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a><span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
-</span><span id="__span-34-21"><a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a>
-</span><span id="__span-34-22"><a id="__codelineno-34-22" name="__codelineno-34-22" href="#__codelineno-34-22"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
-</span><span id="__span-34-23"><a id="__codelineno-34-23" name="__codelineno-34-23" href="#__codelineno-34-23"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
+<div class="language-dockerfile highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">FROM</span><span class="w"> </span><span class="s">node:18-alpine</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="c"># 비-root 사용자 생성</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="k">RUN</span><span class="w"> </span>addgroup<span class="w"> </span>-g<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-S<span class="w"> </span>appgroup<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">    </span>adduser<span class="w"> </span>-S<span class="w"> </span>appuser<span class="w"> </span>-u<span class="w"> </span><span class="m">1001</span><span class="w"> </span>-G<span class="w"> </span>appgroup
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">/app</span>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a><span class="c"># 권한 설정</span>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a><span class="k">RUN</span><span class="w"> </span>chown<span class="w"> </span>-R<span class="w"> </span>appuser:appgroup<span class="w"> </span>/app
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a><span class="c"># 의존성 설치</span>
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a><span class="k">COPY</span><span class="w"> </span>package*.json<span class="w"> </span>./
+</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="k">RUN</span><span class="w"> </span>npm<span class="w"> </span>install
+</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>
+</span><span id="__span-36-16"><a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a><span class="c"># 소스 복사</span>
+</span><span id="__span-36-17"><a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a><span class="k">COPY</span><span class="w"> </span>.<span class="w"> </span>.
+</span><span id="__span-36-18"><a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>
+</span><span id="__span-36-19"><a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a><span class="c"># 사용자 전환</span>
+</span><span id="__span-36-20"><a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a><span class="k">USER</span><span class="w"> </span><span class="s">appuser</span>
+</span><span id="__span-36-21"><a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>
+</span><span id="__span-36-22"><a id="__codelineno-36-22" name="__codelineno-36-22" href="#__codelineno-36-22"></a><span class="k">EXPOSE</span><span class="w"> </span><span class="s">3000</span>
+</span><span id="__span-36-23"><a id="__codelineno-36-23" name="__codelineno-36-23" href="#__codelineno-36-23"></a><span class="k">CMD</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;npm&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;start&quot;</span><span class="p">]</span>
 </span></code></pre></div>
 <p>저장: <code>Ctrl + O</code> → <code>Enter</code> → 종료: <code>Ctrl + X</code></p>
 <h3 id="6-3">6-3. 보안 적용 빌드 및 실행<a class="headerlink" href="#6-3" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.secure<span class="w"> </span>-t<span class="w"> </span>myapp:secure<span class="w"> </span>.
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>myapp:secure<span class="w"> </span>whoami<span class="w">  </span><span class="c1"># appuser로 실행됨</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-secure<span class="w"> </span>-p<span class="w"> </span><span class="m">3001</span>:3000<span class="w"> </span>myapp:secure
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>curl<span class="w"> </span>http://localhost:3001
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-f<span class="w"> </span>Dockerfile.secure<span class="w"> </span>-t<span class="w"> </span>myapp:secure<span class="w"> </span>.
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>myapp:secure<span class="w"> </span>whoami<span class="w">  </span><span class="c1"># appuser로 실행됨</span>
+</span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-secure<span class="w"> </span>-p<span class="w"> </span><span class="m">3001</span>:3000<span class="w"> </span>myapp:secure
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>curl<span class="w"> </span>http://localhost:3001
 </span></code></pre></div>
 <p>관찰 포인트:</p>
 <ul>
@@ -2820,11 +2826,11 @@ RUN 통합의 이점은 <strong>크기 감소가 아니라 레이어 수 감소<
 <hr />
 <h2 id="7">7) 정리 및 비교<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <h3 id="7-1">7-1. 모든 이미지 크기 비교<a class="headerlink" href="#7-1" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
 </span></code></pre></div>
 <h3 id="7-2">7-2. 컨테이너 정리<a class="headerlink" href="#7-2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1<span class="w"> </span>myapp:v2<span class="w"> </span>myapp:v3<span class="w"> </span>myapp:v4<span class="w"> </span>myapp:v5<span class="w"> </span>myapp:v6<span class="w"> </span>myapp:multi<span class="w"> </span>myapp:secure<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1<span class="w"> </span>myapp:v2<span class="w"> </span>myapp:v3<span class="w"> </span>myapp:v4<span class="w"> </span>myapp:v5<span class="w"> </span>myapp:v6<span class="w"> </span>myapp:multi<span class="w"> </span>myapp:secure<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
 <h3 id="7-3">7-3. 최적화 효과 요약<a class="headerlink" href="#7-3" title="Permanent link">&para;</a></h3>
 <table>
