@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://skilleat-labs.github.io/docker-k8s-labs/modules/module8/1-1/">
+        <link rel="canonical" href="https://skilleat-labs.github.io/docker-k8s-labs/modules/module8/1-3-1/">
       
       
-        <link rel="prev" href="../curriculum/">
+        <link rel="prev" href="../1-3/">
       
       
-        <link rel="next" href="../1-1-2/">
+        <link rel="next" href="../1-4/">
       
       
         
@@ -27,7 +27,7 @@
     
     
       
-        <title>1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기 - Container Service Labs</title>
+        <title>1-3-1. 나만의 이미지 만들고 ACR에 올리기 - Container Service Labs</title>
       
     
     
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#1-1-vm-virtualbox-ubuntu" class="md-skip">
+        <a href="#1-3-1-acr" class="md-skip">
           콘텐츠로 이동
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기
+              1-3-1. 나만의 이미지 만들고 ACR에 올리기
             
           </span>
         </div>
@@ -532,37 +532,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../1-1/" class="md-nav__link">
         
   
   
@@ -578,247 +551,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="목차">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      목차
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        실습 목표
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        준비물
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        공식 다운로드 링크
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-virtualbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) VirtualBox 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-ubuntu-server-2404" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) Ubuntu Server 24.04 이미지 준비
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) VM 생성
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3) VM 생성">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        기본 정보 입력
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#username-password" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Username / Password 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#specify-virtual-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Specify Virtual Hardware (하드웨어 설정)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        디스크 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-vm-ubuntu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) VM 부팅 및 Ubuntu 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) VM 부팅 속도 체감 포인트
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-vm-nginx" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) VM 내부에 Nginx 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-host-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) 포트포워딩 설정 (Host -&gt; VM)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-ssh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8) 다음 실습을 위한 SSH 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-host-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9) 호스트 전용 네트워크 설정 (Host-Only)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9) 호스트 전용 네트워크 설정 (Host-Only)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#virtualbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        VirtualBox 어댑터 추가
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ip-netplan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        고정 IP 설정 (Netplan)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        접속 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -940,10 +672,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../1-3-1/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    1-3-1. 나만의 이미지 만들고 ACR에 올리기
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -959,6 +718,275 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="목차">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      목차
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        실습 목표
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        예상 소요 시간 (약 30분)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Dockerfile로 나만의 이미지 만들기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1) Dockerfile로 나만의 이미지 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-1. 작업 디렉토리 준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-2. 커스텀 HTML 파일 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-3-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-3. Dockerfile 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-4. 이미지 빌드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-5. 빌드한 이미지로 컨테이너 실행 및 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) 나만의 ACR 만들기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) 나만의 ACR 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-1. ACR 이름 정하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-2. ACR 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-3. ACR 생성 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 내 ACR에 이미지 push하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) 내 ACR에 이미지 push하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. ACR 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. 이미지에 ACR 주소 태그 붙이기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. ACR에 push
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-4-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-4. ACR에 올라간 이미지 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-acr-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 내 ACR에서 pull 해보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 실습 정리(삭제)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        핵심 정리
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        스스로 해보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1858,10 +1886,226 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#30" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        예상 소요 시간 (약 30분)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1) Dockerfile로 나만의 이미지 만들기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1) Dockerfile로 나만의 이미지 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-1. 작업 디렉토리 준비
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-2-html" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-2. 커스텀 HTML 파일 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-3-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-3. Dockerfile 작성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-4. 이미지 빌드
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#1-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1-5. 빌드한 이미지로 컨테이너 실행 및 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2) 나만의 ACR 만들기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2) 나만의 ACR 만들기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#2-1-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-1. ACR 이름 정하기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-2. ACR 생성
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-3-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2-3. ACR 생성 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 내 ACR에 이미지 push하기
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3) 내 ACR에 이미지 push하기">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#3-1-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-1. ACR 로그인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-2-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-2. 이미지에 ACR 주소 태그 붙이기
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-3-acr-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-3. ACR에 push
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-4-acr" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3-4. ACR에 올라간 이미지 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-acr-pull" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4) 내 ACR에서 pull 해보기
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5) 실습 정리(삭제)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        준비물
+        핵심 정리
       
     </span>
   </a>
@@ -1872,198 +2116,10 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        공식 다운로드 링크
+        스스로 해보기
       
     </span>
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-virtualbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1) VirtualBox 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-ubuntu-server-2404" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2) Ubuntu Server 24.04 이미지 준비
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3) VM 생성
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="3) VM 생성">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        기본 정보 입력
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#username-password" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Username / Password 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#specify-virtual-hardware" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Specify Virtual Hardware (하드웨어 설정)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        디스크 설정
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-vm-ubuntu" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4) VM 부팅 및 Ubuntu 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) VM 부팅 속도 체감 포인트
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-vm-nginx" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6) VM 내부에 Nginx 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-host-vm" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7) 포트포워딩 설정 (Host -&gt; VM)
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-ssh" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8) 다음 실습을 위한 SSH 설치
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-host-only" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9) 호스트 전용 네트워크 설정 (Host-Only)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="9) 호스트 전용 네트워크 설정 (Host-Only)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#virtualbox" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        VirtualBox 어댑터 추가
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ip-netplan" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        고정 IP 설정 (Netplan)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        접속 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -2084,289 +2140,212 @@
 
 
 
-<h1 id="1-1-vm-virtualbox-ubuntu">1-1. VM 직접 체험 — VirtualBox로 Ubuntu 서버 구축하기<a class="headerlink" href="#1-1-vm-virtualbox-ubuntu" title="Permanent link">&para;</a></h1>
+<h1 id="1-3-1-acr">1-3-1. 나만의 이미지 만들고 ACR에 올리기<a class="headerlink" href="#1-3-1-acr" title="Permanent link">&para;</a></h1>
 <h2 id="_1">실습 목표<a class="headerlink" href="#_1" title="Permanent link">&para;</a></h2>
-<p>이 가이드는 다음을 직접 경험하는 데 목적이 있습니다.</p>
 <ul>
-<li>VirtualBox에 Ubuntu 24.04 VM 설치 및 실행</li>
-<li>VM 부팅 속도가 느리다는 점 체감</li>
-<li>VM 내부에 Nginx 설치 후 포트포워딩으로 로컬 브라우저에서 확인</li>
-<li>Docker 설치 후 Nginx를 한 번에 실행하여 VM 방식과 비교</li>
+<li>Dockerfile을 직접 작성해서 나만의 이미지를 만들어보기</li>
+<li>나만의 ACR(Azure Container Registry)을 생성하기</li>
+<li>만든 이미지를 내 ACR에 push하기</li>
 </ul>
-<h2 id="_2">준비물<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="30">예상 소요 시간 (약 30분)<a class="headerlink" href="#30" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Windows/macOS/Linux PC</li>
-<li>인터넷 연결</li>
-<li>관리자 권한</li>
+<li>0~10분: Dockerfile 작성 및 이미지 빌드</li>
+<li>10~18분: 내 ACR 생성</li>
+<li>18~28분: 이미지 push 및 확인</li>
+<li>28~30분: 정리</li>
 </ul>
-<h2 id="_3">공식 다운로드 링크<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
-<ul>
-<li><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">VirtualBox 공식 다운로드</a></li>
-<li><a href="https://ubuntu.com/download/server" target="_blank">Ubuntu Server 24.04 LTS 다운로드</a></li>
-<li><a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank">Docker Engine (Ubuntu) 설치 문서</a></li>
-<li><a href="https://www.docker.com/products/docker-desktop/" target="_blank">Docker Desktop (Windows/macOS)</a></li>
-</ul>
-<h2 id="1-virtualbox">1) VirtualBox 설치<a class="headerlink" href="#1-virtualbox" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">Windows 사용자 — 설치 전 확인</p>
-<p>Windows에서 <strong>Hyper-V</strong>가 활성화되어 있으면 VirtualBox가 정상적으로 실행되지 않을 수 있습니다.
-설치 전에 PowerShell을 <strong>관리자 권한</strong>으로 열고 아래 명령어를 실행하세요.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">bcdedit</span> <span class="p">/</span><span class="nb">set </span><span class="n">hypervisorlaunchtype</span> <span class="n">off</span>
+<hr />
+<h2 id="1-dockerfile">1) Dockerfile로 나만의 이미지 만들기<a class="headerlink" href="#1-dockerfile" title="Permanent link">&para;</a></h2>
+<h3 id="1-1">1-1. 작업 디렉토리 준비<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>mkdir<span class="w"> </span>~/myapp<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/myapp
 </span></code></pre></div>
-<p>실행 후 <strong>반드시 재부팅</strong>합니다. (VirtualBox 설치는 재부팅 후 진행하세요.)</p>
-</div>
-<ol>
-<li><a href="https://www.virtualbox.org/wiki/Downloads" target="_blank">VirtualBox 공식 다운로드 페이지</a>에서 최신 버전을 다운로드합니다.</li>
-<li>기본 옵션으로 설치합니다.</li>
-<li>설치 완료 후 VirtualBox를 실행합니다.</li>
-</ol>
-<h2 id="2-ubuntu-server-2404">2) Ubuntu Server 24.04 이미지 준비<a class="headerlink" href="#2-ubuntu-server-2404" title="Permanent link">&para;</a></h2>
-<div class="admonition warning">
-<p class="admonition-title">반드시 24.04 LTS를 다운로드하세요</p>
-<p>현재 Ubuntu 공식 사이트 기본 다운로드는 <strong>26</strong>입니다.
-이 실습은 <strong>24.04 LTS</strong> 기준으로 작성되었으므로, 아래 안내에 따라 <strong>Previous releases</strong>에서 24.04를 선택해야 합니다.</p>
-</div>
-<ol>
-<li><a href="https://ubuntu.com/download/server" target="_blank">Ubuntu 공식 다운로드 페이지</a>에 접속합니다.</li>
-<li>
-<p>페이지를 아래로 스크롤하여 <strong>Previous releases</strong> 섹션에서 <code>Ubuntu Server 24.04 LTS</code>를 선택합니다.</p>
-<p><img alt="Ubuntu Previous Releases 화면" src="../../../assets/images/module8/1-1.png" /></p>
-</li>
-<li>
-<p>ISO 파일을 다운로드합니다.</p>
-</li>
-<li>파일명을 확인합니다. 예: <code>ubuntu-24.04.2-live-server-amd64.iso</code></li>
-</ol>
-<h2 id="3-vm">3) VM 생성<a class="headerlink" href="#3-vm" title="Permanent link">&para;</a></h2>
-<h3 id="_4">기본 정보 입력<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<ol>
-<li>VirtualBox에서 <code>새로 만들기</code>를 클릭합니다.</li>
-<li>
-<p>아래와 같이 입력합니다.</p>
+<h3 id="1-2-html">1-2. 커스텀 HTML 파일 작성<a class="headerlink" href="#1-2-html" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>index.html<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="s">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="s">&lt;html&gt;</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="s">  &lt;head&gt;&lt;meta charset=&quot;UTF-8&quot;&gt;&lt;title&gt;My Docker App&lt;/title&gt;&lt;/head&gt;</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="s">  &lt;body&gt;</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="s">    &lt;h1&gt;안녕하세요!&lt;/h1&gt;</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="s">    &lt;p&gt;내가 직접 만든 Docker 이미지입니다.&lt;/p&gt;</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="s">  &lt;/body&gt;</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="s">&lt;/html&gt;</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="s">EOF</span>
+</span></code></pre></div>
+<h3 id="1-3-dockerfile">1-3. Dockerfile 작성<a class="headerlink" href="#1-3-dockerfile" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>cat<span class="w"> </span>&gt;<span class="w"> </span>Dockerfile<span class="w"> </span><span class="s">&lt;&lt; &#39;EOF&#39;</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="s">FROM nginx:alpine</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="s">COPY index.html /usr/share/nginx/html/index.html</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s">EOF</span>
+</span></code></pre></div>
+<p>구조 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>ls<span class="w"> </span>-la<span class="w"> </span>~/myapp/
+</span></code></pre></div>
+<p><strong>파일 구조:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>myapp/
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── Dockerfile
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>└── index.html
+</span></code></pre></div>
+<h3 id="1-4">1-4. 이미지 빌드<a class="headerlink" href="#1-4" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>myapp:v1.0<span class="w"> </span>.
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>[+] Building ...
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a> =&gt; [internal] load build definition from Dockerfile
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a> =&gt; [1/2] FROM nginx:alpine
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a> =&gt; [2/2] COPY index.html /usr/share/nginx/html/index.html
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a> =&gt; exporting to image
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>Successfully built ...
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>Successfully tagged myapp:v1.0
+</span></code></pre></div>
+<p>이미지 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
+</span></code></pre></div>
+<h3 id="1-5">1-5. 빌드한 이미지로 컨테이너 실행 및 확인<a class="headerlink" href="#1-5" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-test<span class="w"> </span>-p<span class="w"> </span><span class="m">9090</span>:80<span class="w"> </span>myapp:v1.0
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>curl<span class="w"> </span>http://localhost:9090
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-html highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="p">&lt;</span><span class="nt">html</span><span class="p">&gt;</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>  <span class="p">&lt;</span><span class="nt">head</span><span class="p">&gt;&lt;</span><span class="nt">meta</span> <span class="na">charset</span><span class="o">=</span><span class="s">&quot;UTF-8&quot;</span><span class="p">&gt;&lt;</span><span class="nt">title</span><span class="p">&gt;</span>My Docker App<span class="p">&lt;/</span><span class="nt">title</span><span class="p">&gt;&lt;/</span><span class="nt">head</span><span class="p">&gt;</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>  ...
+</span></code></pre></div>
+<p>내가 작성한 HTML이 그대로 나오면 성공입니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 확인 후 컨테이너 정리</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>myapp-test
+</span></code></pre></div>
+<hr />
+<h2 id="2-acr">2) 나만의 ACR 만들기<a class="headerlink" href="#2-acr" title="Permanent link">&para;</a></h2>
+<h3 id="2-1-acr">2-1. ACR 이름 정하기<a class="headerlink" href="#2-1-acr" title="Permanent link">&para;</a></h3>
+<p>ACR 이름은 <strong>전 세계에서 유일</strong>해야 하고, 영문 소문자와 숫자만 사용할 수 있습니다.</p>
+<p>예시: <code>skilleat</code> + 팀번호 + 이니셜</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>skilleatteam01kim
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>skilleatteam02lee
+</span></code></pre></div>
+<blockquote>
+<p>ACR 이름에 하이픈(<code>-</code>)은 사용 불가입니다.</p>
+</blockquote>
+<h3 id="2-2-acr">2-2. ACR 생성<a class="headerlink" href="#2-2-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># ACR_NAME에 본인 이름으로 변경</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">ACR_NAME</span><span class="o">=</span><span class="s2">&quot;skilleat본인이름&quot;</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>az<span class="w"> </span>acr<span class="w"> </span>create<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">  </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">  </span>--sku<span class="w"> </span>Basic<span class="w"> </span><span class="se">\</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">  </span>--location<span class="w"> </span>koreacentral
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-json highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;skilleat본인이름&quot;</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">  </span><span class="nt">&quot;loginServer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;skilleat본인이름.azurecr.io&quot;</span><span class="p">,</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">  </span><span class="nt">&quot;location&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;koreacentral&quot;</span><span class="p">,</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">  </span><span class="nt">&quot;sku&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Basic&quot;</span><span class="w"> </span><span class="p">},</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="w">  </span><span class="err">...</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="p">}</span>
+</span></code></pre></div>
+<h3 id="2-3-acr">2-3. ACR 생성 확인<a class="headerlink" href="#2-3-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>az<span class="w"> </span>acr<span class="w"> </span>list<span class="w"> </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span>--output<span class="w"> </span>table
+</span></code></pre></div>
+<hr />
+<h2 id="3-acr-push">3) 내 ACR에 이미지 push하기<a class="headerlink" href="#3-acr-push" title="Permanent link">&para;</a></h2>
+<h3 id="3-1-acr">3-1. ACR 로그인<a class="headerlink" href="#3-1-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span>
+</span></code></pre></div>
+<h3 id="3-2-acr">3-2. 이미지에 ACR 주소 태그 붙이기<a class="headerlink" href="#3-2-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span></code></pre></div>
+<p>태그 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="nv">$ACR_NAME</span>
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>skilleat본인이름.azurecr.io/myapp   v1.0   ...
+</span></code></pre></div>
+<h3 id="3-3-acr-push">3-3. ACR에 push<a class="headerlink" href="#3-3-acr-push" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>push<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>The push refers to repository [skilleat본인이름.azurecr.io/myapp]
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>...
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>v1.0: digest: sha256:... size: ...
+</span></code></pre></div>
+<h3 id="3-4-acr">3-4. ACR에 올라간 이미지 확인<a class="headerlink" href="#3-4-acr" title="Permanent link">&para;</a></h3>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--output<span class="w"> </span>table
+</span></code></pre></div>
+<p>특정 이미지 태그 확인:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--repository<span class="w"> </span>myapp
+</span></code></pre></div>
+<hr />
+<h2 id="4-acr-pull">4) 내 ACR에서 pull 해보기<a class="headerlink" href="#4-acr-pull" title="Permanent link">&para;</a></h2>
+<p>이미지를 삭제하고 내 ACR에서 다시 받아봅니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 로컬 이미지 삭제</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>
+</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="c1"># 내 ACR에서 pull</span>
+</span><span id="__span-23-6"><a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-23-7"><a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+</span><span id="__span-23-8"><a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="c1"># 실행 확인</span>
+</span><span id="__span-23-9"><a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-from-acr<span class="w"> </span>-p<span class="w"> </span><span class="m">9090</span>:80<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-23-10"><a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>curl<span class="w"> </span>http://localhost:9090
+</span></code></pre></div>
+<hr />
+<h2 id="5">5) 실습 정리(삭제)<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># 컨테이너 삭제</span>
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>myapp-from-acr<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="c1"># 로컬 이미지 삭제</span>
+</span><span id="__span-24-5"><a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-24-6"><a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-24-7"><a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+</span><span id="__span-24-8"><a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="c1"># ACR 삭제 (실습 종료 후 비용 절감)</span>
+</span><span id="__span-24-9"><a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a>az<span class="w"> </span>acr<span class="w"> </span>delete<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span>--yes
+</span></code></pre></div>
+<hr />
+<h2 id="_2">핵심 정리<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>항목</th>
-<th>값</th>
+<th>단계</th>
+<th>명령어</th>
+<th>의미</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>이름</td>
-<td><code>docker-lab</code></td>
+<td>이미지 빌드</td>
+<td><code>docker build -t 이름:태그 .</code></td>
+<td>Dockerfile로 이미지 생성</td>
 </tr>
 <tr>
-<td>ISO Image</td>
-<td>다운로드한 <code>ubuntu-24.04.x-live-server-amd64.iso</code> 선택</td>
+<td>ACR 생성</td>
+<td><code>az acr create ...</code></td>
+<td>나만의 프라이빗 레지스트리 생성</td>
 </tr>
 <tr>
-<td>유형</td>
-<td>Linux</td>
+<td>태그 붙이기</td>
+<td><code>docker tag 원본 ACR주소/이름:태그</code></td>
+<td>ACR 주소를 이미지에 연결</td>
 </tr>
 <tr>
-<td>버전</td>
-<td>Ubuntu (64-bit)</td>
+<td>push</td>
+<td><code>docker push ACR주소/이름:태그</code></td>
+<td>내 ACR에 이미지 업로드</td>
+</tr>
+<tr>
+<td>pull</td>
+<td><code>docker pull ACR주소/이름:태그</code></td>
+<td>내 ACR에서 이미지 다운로드</td>
 </tr>
 </tbody>
 </table>
-</li>
-<li>
-<p><strong>Skip Unattended Installation</strong> 체크박스를 <strong>체크</strong>합니다.</p>
-</li>
-</ol>
-<h3 id="username-password">Username / Password 설정<a class="headerlink" href="#username-password" title="Permanent link">&para;</a></h3>
-<div class="admonition info">
-<p class="admonition-title">계정 정보</p>
-<ul>
-<li><strong>Username</strong>: <code>vboxuser</code> (기본값 그대로 사용)</li>
-<li><strong>Password</strong>: 원하는 비밀번호로 변경 가능합니다. 단, 잊지 않도록 메모해 두세요.</li>
-</ul>
-</div>
-<h3 id="specify-virtual-hardware">Specify Virtual Hardware (하드웨어 설정)<a class="headerlink" href="#specify-virtual-hardware" title="Permanent link">&para;</a></h3>
+<hr />
+<h2 id="_3">스스로 해보기<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
-<li><code>Next</code>를 눌러 <strong>Specify Virtual Hardware</strong> 단계로 이동합니다.</li>
-<li>
-<p>아래와 같이 설정합니다.</p>
-<table>
-<thead>
-<tr>
-<th>항목</th>
-<th>값</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Base Memory</td>
-<td><strong>4096 MB</strong></td>
-</tr>
-<tr>
-<td>Processors</td>
-<td><strong>2</strong></td>
-</tr>
-</tbody>
-</table>
-<div class="admonition warning">
-<p class="admonition-title">메모리·CPU가 부족하면 설치 중 멈춤 현상이 발생할 수 있습니다.</p>
-</div>
-</li>
+<li><code>index.html</code> 내용을 수정하고 <code>myapp:v2.0</code>으로 새로 빌드해보세요.</li>
+<li><code>v2.0</code>을 ACR에 push하고, ACR에 <code>v1.0</code>과 <code>v2.0</code> 두 태그가 모두 있는지 확인하세요.</li>
+<li><code>v1.0</code>과 <code>v2.0</code> 컨테이너를 동시에 실행하고 (<code>-p 9090:80</code>, <code>-p 9091:80</code>) 내용 차이를 확인하세요.</li>
 </ol>
-<h3 id="_5">디스크 설정<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
-<ol>
-<li><code>Next</code>를 눌러 <strong>Virtual Hard Disk</strong> 단계로 이동합니다.</li>
-<li><strong>Create a Virtual Hard Disk Now</strong> 선택 후 디스크 크기를 기본값 <strong>25GB</strong> 그대로 사용합니다.</li>
-<li><code>Next</code> → <code>Finish</code>를 클릭해 VM 생성을 완료합니다.</li>
-</ol>
-<h2 id="4-vm-ubuntu">4) VM 부팅 및 Ubuntu 설치<a class="headerlink" href="#4-vm-ubuntu" title="Permanent link">&para;</a></h2>
-<ol>
-<li>VM을 시작합니다.</li>
-<li>Ubuntu 설치 마법사를 따라 설치합니다.</li>
-<li>설치가 완료되면 VM이 재시작되고 로그인 화면이 나타납니다. 로그인 후 다음 단계를 이어서 진행합니다.</li>
-</ol>
-<h2 id="5-vm">5) VM 부팅 속도 체감 포인트<a class="headerlink" href="#5-vm" title="Permanent link">&para;</a></h2>
-<p>아래를 체크해보세요.</p>
-<ul>
-<li>전원 ON 후 로그인 화면까지 걸리는 시간</li>
-<li>로그인 후 데스크톱이 완전히 준비되는 시간</li>
-<li>브라우저/터미널 첫 실행 반응 속도</li>
-</ul>
-<p>이 단계에서 "운영체제 전체를 부팅하는 비용"이 있다는 점을 기억합니다.</p>
-<h2 id="6-vm-nginx">6) VM 내부에 Nginx 설치<a class="headerlink" href="#6-vm-nginx" title="Permanent link">&para;</a></h2>
-<p>VM 터미널에서 실행합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>update
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nginx
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>nginx
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>nginx
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>status<span class="w"> </span>nginx<span class="w"> </span>--no-pager
-</span></code></pre></div>
-<p>정상 동작 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-I<span class="w"> </span>http://localhost
-</span></code></pre></div>
-<p><code>HTTP/1.1 200 OK</code>가 보이면 정상입니다.</p>
-<h2 id="7-host-vm">7) 포트포워딩 설정 (Host -&gt; VM)<a class="headerlink" href="#7-host-vm" title="Permanent link">&para;</a></h2>
-<p>목표: 내 PC 브라우저에서 <code>http://localhost:8080</code> 접속 시 VM의 Nginx 페이지 표시</p>
-<ol>
-<li>VirtualBox에서 <code>docker-lab</code> VM을 클릭합니다.</li>
-<li>상단 메뉴 <code>설정</code> → <code>네트워크</code> → <code>포트 포워딩</code>을 클릭합니다.</li>
-<li>
-<p>아래 규칙을 추가합니다.</p>
-<table>
-<thead>
-<tr>
-<th>이름</th>
-<th>프로토콜</th>
-<th>호스트 포트</th>
-<th>게스트 포트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>nginx</td>
-<td>TCP</td>
-<td>8080</td>
-<td>80</td>
-</tr>
-</tbody>
-</table>
-<div class="admonition info">
-<p class="admonition-title">호스트 포트 vs 게스트 포트</p>
-<ul>
-<li><strong>호스트 포트 (8080)</strong>: 내 PC에서 접속할 포트입니다. 브라우저에서 <code>http://localhost:8080</code>으로 접속하면 이 포트로 요청이 들어옵니다.</li>
-<li><strong>게스트 포트 (80)</strong>: VM 내부에서 Nginx가 실제로 열고 있는 포트입니다.</li>
-<li>즉, <code>내 PC:8080</code> → <code>VM:80</code> 으로 연결되는 구조입니다.</li>
-</ul>
-</div>
-</li>
-<li>
-<p>호스트(내 PC) 브라우저에서 <code>http://localhost:8080</code> 접속</p>
-</li>
-</ol>
-<p>Nginx Welcome 페이지가 보이면 성공입니다.</p>
-<h2 id="8-ssh">8) 다음 실습을 위한 SSH 설치<a class="headerlink" href="#8-ssh" title="Permanent link">&para;</a></h2>
-<p>이후 실습에서 호스트 터미널에서 VM에 직접 접속해 명령어를 복붙할 수 있도록 SSH를 미리 설치합니다.</p>
-<p>VM 터미널에서 실행합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>openssh-server
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>ssh
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>ssh
-</span></code></pre></div>
-<p>포트포워딩에 SSH 규칙을 추가합니다.</p>
-<table>
-<thead>
-<tr>
-<th>이름</th>
-<th>프로토콜</th>
-<th>호스트 포트</th>
-<th>게스트 포트</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>ssh</td>
-<td>TCP</td>
-<td>2222</td>
-<td>22</td>
-</tr>
-</tbody>
-</table>
-<p>이후 호스트(내 PC) 터미널(macOS: Terminal, Windows: PowerShell)에서 아래 명령어로 VM에 접속할 수 있습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>ssh<span class="w"> </span>-p<span class="w"> </span><span class="m">2222</span><span class="w"> </span>vboxuser@localhost
-</span></code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>SSH 접속 후에는 터미널에서 복사·붙여넣기가 자유롭게 됩니다. 이후 실습부터는 SSH로 접속해서 진행하세요.</p>
-</div>
-<h2 id="9-host-only">9) 호스트 전용 네트워크 설정 (Host-Only)<a class="headerlink" href="#9-host-only" title="Permanent link">&para;</a></h2>
-<p>포트포워딩 없이 Mac에서 VM으로 직접 접근하기 위해 <strong>호스트 전용 어댑터</strong>를 추가하고 고정 IP를 할당합니다.</p>
-<h3 id="virtualbox">VirtualBox 어댑터 추가<a class="headerlink" href="#virtualbox" title="Permanent link">&para;</a></h3>
-<ol>
-<li><code>docker-lab</code> VM 설정 → <code>네트워크</code> → <strong>어댑터 2</strong> 탭 클릭</li>
-<li><strong>사용하기</strong> 체크</li>
-<li>다음에 연결됨: <strong>호스트 전용 어댑터</strong> 선택</li>
-<li>확인 후 VM 재시작</li>
-</ol>
-<h3 id="ip-netplan">고정 IP 설정 (Netplan)<a class="headerlink" href="#ip-netplan" title="Permanent link">&para;</a></h3>
-<p>SSH로 접속 후 관리자 권한으로 전환합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>su
-</span></code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">sudo su 란?</p>
-<p><code>sudo su</code> 는 일반 사용자에서 <strong>root(관리자)</strong> 로 전환하는 명령어입니다.
-<code>/etc/netplan/</code> 같은 시스템 파일은 관리자 권한이 없으면 읽거나 수정할 수 없습니다.
-프롬프트가 <code>vboxuser@docker-lab:~$</code> 에서 <code>root@docker-lab:~#</code> 으로 바뀌면 전환된 것입니다.</p>
-</div>
-<p>Netplan 설정 파일을 열어 <code>enp0s9</code> 인터페이스를 추가합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
-</span></code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">nano 사용법</p>
-<ul>
-<li>편집이 끝나면 <code>Ctrl + X</code> → 저장 여부 묻는 메시지가 나오면 <code>Y</code> → <code>Enter</code> 로 저장하고 나옵니다.</li>
-</ul>
-</div>
-<p>아래와 같이 작성합니다.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">enp0s3</span><span class="p">:</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">enp0s9</span><span class="p">:</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.56.10/24</span>
-</span></code></pre></div>
-<p>저장 후 적용합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s9
-</span></code></pre></div>
-<p><code>192.168.56.10</code>이 보이면 성공입니다.</p>
-<h3 id="_6">접속 확인<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
-<p>이제 포트포워딩 없이 VM IP로 직접 접근할 수 있습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Mac 터미널에서</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ssh<span class="w"> </span>vboxuser@192.168.56.10
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>curl<span class="w"> </span>http://192.168.56.10:8081
-</span></code></pre></div>
-<div class="admonition info">
-<p class="admonition-title">이후 실습에서는 <code>192.168.56.10</code> 을 VM 주소로 사용합니다.</p>
-</div>
 
 
 
