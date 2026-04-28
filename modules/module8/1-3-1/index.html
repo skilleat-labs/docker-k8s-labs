@@ -2249,61 +2249,76 @@
 </span><span id="__span-15-7"><a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="p">}</span>
 </span></code></pre></div>
 <h3 id="2-3-acr">2-3. ACR 생성 확인<a class="headerlink" href="#2-3-acr" title="Permanent link">&para;</a></h3>
+<p>CLI로 확인:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>az<span class="w"> </span>acr<span class="w"> </span>list<span class="w"> </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span>--output<span class="w"> </span>table
 </span></code></pre></div>
+<p>Azure Portal에서도 확인:</p>
+<ol>
+<li><a href="https://portal.azure.com">portal.azure.com</a> 접속</li>
+<li>상단 검색창에 본인 ACR 이름 입력</li>
+<li><strong>Container Registry</strong> 항목으로 이동 → 상태가 <code>Ready</code>인지 확인</li>
+</ol>
 <hr />
 <h2 id="3-acr-push">3) 내 ACR에 이미지 push하기<a class="headerlink" href="#3-acr-push" title="Permanent link">&para;</a></h2>
 <h3 id="3-1-acr">3-1. ACR 로그인<a class="headerlink" href="#3-1-acr" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span>
 </span></code></pre></div>
+<p><strong>예상 출력:</strong></p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>Login Succeeded
+</span></code></pre></div>
 <h3 id="3-2-acr">3-2. 이미지에 ACR 주소 태그 붙이기<a class="headerlink" href="#3-2-acr" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+<blockquote>
+<p>Docker는 이미지 이름의 앞부분을 레지스트리 주소로 인식합니다.
+<code>myapp:v1.0</code>만으로는 어느 레지스트리에 올릴지 알 수 없으므로,
+<code>내ACR주소/myapp:v1.0</code> 형태로 태그를 붙여 목적지를 지정합니다.</p>
+</blockquote>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>tag<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
 </span></code></pre></div>
 <p>태그 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="nv">$ACR_NAME</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="nv">$ACR_NAME</span>
 </span></code></pre></div>
 <p><strong>예상 출력:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>skilleat본인이름.azurecr.io/myapp   v1.0   ...
+<div class="language-text highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>skilleat본인이름.azurecr.io/myapp   v1.0   ...
 </span></code></pre></div>
 <h3 id="3-3-acr-push">3-3. ACR에 push<a class="headerlink" href="#3-3-acr-push" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>push<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>docker<span class="w"> </span>push<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
 </span></code></pre></div>
 <p><strong>예상 출력:</strong></p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>The push refers to repository [skilleat본인이름.azurecr.io/myapp]
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>...
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>v1.0: digest: sha256:... size: ...
+<div class="language-text highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>The push refers to repository [skilleat본인이름.azurecr.io/myapp]
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>...
+</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>v1.0: digest: sha256:... size: ...
 </span></code></pre></div>
 <h3 id="3-4-acr">3-4. ACR에 올라간 이미지 확인<a class="headerlink" href="#3-4-acr" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--output<span class="w"> </span>table
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>list<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--output<span class="w"> </span>table
 </span></code></pre></div>
 <p>특정 이미지 태그 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--repository<span class="w"> </span>myapp
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--repository<span class="w"> </span>myapp
 </span></code></pre></div>
 <hr />
 <h2 id="4-acr-pull">4) 내 ACR에서 pull 해보기<a class="headerlink" href="#4-acr-pull" title="Permanent link">&para;</a></h2>
 <p>이미지를 삭제하고 내 ACR에서 다시 받아봅니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1"># 로컬 이미지 삭제</span>
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>
-</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="c1"># 내 ACR에서 pull</span>
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
-</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>
-</span><span id="__span-25-8"><a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="c1"># 실행 확인</span>
-</span><span id="__span-25-9"><a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-from-acr<span class="w"> </span>-p<span class="w"> </span><span class="m">9090</span>:80<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
-</span><span id="__span-25-10"><a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>curl<span class="w"> </span>http://localhost:9090
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 로컬 이미지 삭제</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># 내 ACR에서 pull</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>docker<span class="w"> </span>pull<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="c1"># 실행 확인</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>myapp-from-acr<span class="w"> </span>-p<span class="w"> </span><span class="m">9090</span>:80<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>curl<span class="w"> </span>http://localhost:9090
 </span></code></pre></div>
 <hr />
 <h2 id="5">5) 실습 정리(삭제)<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 컨테이너 삭제</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>myapp-from-acr<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># 로컬 이미지 삭제</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="c1"># ACR 삭제 (실습 종료 후 비용 절감)</span>
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>az<span class="w"> </span>acr<span class="w"> </span>delete<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span>--yes
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># 컨테이너 삭제</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>myapp-from-acr<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1"># 로컬 이미지 삭제</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>docker<span class="w"> </span>rmi<span class="w"> </span><span class="nv">$ACR_NAME</span>.azurecr.io/myapp:v1.0<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="c1"># ACR 삭제 (실습 종료 후 비용 절감)</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>az<span class="w"> </span>acr<span class="w"> </span>delete<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--resource-group<span class="w"> </span>skilleat-container-lab<span class="w"> </span>--yes
 </span></code></pre></div>
 <hr />
 <h2 id="_2">핵심 정리<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
