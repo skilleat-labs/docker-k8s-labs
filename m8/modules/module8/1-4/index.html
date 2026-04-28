@@ -888,65 +888,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-tmpfs" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4) tmpfs 볼륨 실습
+        4) 정리 및 상황별 선택 기준
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4) tmpfs 볼륨 실습">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#4-1-tmpfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-1. tmpfs 마운트로 컨테이너 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-2. 컨테이너 재시작 후 데이터 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-3-tmpfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-3. 일반 볼륨과 tmpfs 함께 사용
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) 정리 및 상황별 선택 기준
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5) 정리 및 상황별 선택 기준">
+    <nav class="md-nav" aria-label="4) 정리 및 상황별 선택 기준">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1308,65 +1258,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-tmpfs" class="md-nav__link">
+  <a href="#4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4) tmpfs 볼륨 실습
+        4) 정리 및 상황별 선택 기준
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4) tmpfs 볼륨 실습">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#4-1-tmpfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-1. tmpfs 마운트로 컨테이너 실행
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-2. 컨테이너 재시작 후 데이터 확인
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-3-tmpfs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4-3. 일반 볼륨과 tmpfs 함께 사용
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5) 정리 및 상황별 선택 기준
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="5) 정리 및 상황별 선택 기준">
+    <nav class="md-nav" aria-label="4) 정리 및 상황별 선택 기준">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1435,7 +1335,7 @@
 <ul>
 <li>0~5분: 데이터 유실 문제 확인</li>
 <li>5~15분: Docker Volume 생성 및 실습</li>
-<li>15~23분: Bind Mount와 tmpfs 실습</li>
+<li>15~23분: Bind Mount 실습</li>
 <li>23~30분: 정리 및 볼륨 제거</li>
 </ul>
 <h2 id="_2">사전 조건<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
@@ -1629,97 +1529,20 @@
 <li>개발 환경에서 코드 수정 시 유용 (핫 리로드)</li>
 </ul>
 <hr />
-<h2 id="4-tmpfs">4) tmpfs 볼륨 실습<a class="headerlink" href="#4-tmpfs" title="Permanent link">&para;</a></h2>
-<h3 id="4-1-tmpfs">4-1. tmpfs 마운트로 컨테이너 실행<a class="headerlink" href="#4-1-tmpfs" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>tmpfs-test<span class="w"> </span>--tmpfs<span class="w"> </span>/app:rw,size<span class="o">=</span>64m<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
-</span></code></pre></div>
-<p>컨테이너 내부에서:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 메모리 기반 저장소에 파일 생성</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>mkdir<span class="w"> </span>/app/temp
-</span><span id="__span-22-3"><a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Temporary cache data&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/app/temp/cache.dat
-</span><span id="__span-22-4"><a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Session info&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/app/temp/session.txt
-</span><span id="__span-22-5"><a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>
-</span><span id="__span-22-6"><a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="c1"># 파일 확인</span>
-</span><span id="__span-22-7"><a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>ls<span class="w"> </span>-la<span class="w"> </span>/app/temp
-</span><span id="__span-22-8"><a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>cat<span class="w"> </span>/app/temp/cache.dat
-</span><span id="__span-22-9"><a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>
-</span><span id="__span-22-10"><a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1"># 메모리 사용량 확인</span>
-</span><span id="__span-22-11"><a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>df<span class="w"> </span>-h<span class="w"> </span>/app
-</span><span id="__span-22-12"><a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>
-</span><span id="__span-22-13"><a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a><span class="nb">exit</span>
-</span></code></pre></div>
-<h3 id="4-2">4-2. 컨테이너 재시작 후 데이터 확인<a class="headerlink" href="#4-2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="c1"># 컨테이너 재시작</span>
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>docker<span class="w"> </span>restart<span class="w"> </span>tmpfs-test
-</span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>
-</span><span id="__span-23-4"><a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="c1"># 재시작된 컨테이너에 접속</span>
-</span><span id="__span-23-5"><a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>tmpfs-test<span class="w"> </span>sh
-</span></code></pre></div>
-<p>컨테이너 내부에서:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1"># tmpfs의 데이터가 모두 사라짐 (메모리 기반이므로)</span>
-</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>ls<span class="w"> </span>-la<span class="w"> </span>/app<span class="w">  </span><span class="c1"># 디렉토리 존재하지만 비어있음</span>
-</span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
-</span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nb">exit</span>
-</span></code></pre></div>
-<h3 id="4-3-tmpfs">4-3. 일반 볼륨과 tmpfs 함께 사용<a class="headerlink" href="#4-3-tmpfs" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>create<span class="w"> </span>persistent-data
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
-</span><span id="__span-25-3"><a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span>--name<span class="w"> </span>multi-test<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span>-v<span class="w"> </span>persistent-data:/persistent<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span>--tmpfs<span class="w"> </span>/temp:rw,size<span class="o">=</span>64m<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span>skilleatlab.azurecr.io/lab/busybox:latest
-</span></code></pre></div>
-<p>컨테이너 내부에서:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 일반 볼륨에 저장 (재시작 후 유지)</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Persistent data&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/persistent/data.txt
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="c1"># tmpfs에 저장 (재시작 후 삭제)</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;Temporary data&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>/temp/cache.txt
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>ls<span class="w"> </span>-la<span class="w"> </span>/persistent
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>ls<span class="w"> </span>-la<span class="w"> </span>/temp
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>
-</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="nb">exit</span>
-</span></code></pre></div>
-<p>재시작 후 확인:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>docker<span class="w"> </span>restart<span class="w"> </span>multi-test
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>multi-test<span class="w"> </span>sh
-</span></code></pre></div>
-<p>컨테이너 내부에서:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># Persistent 데이터는 유지</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>cat<span class="w"> </span>/persistent/data.txt
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
-</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1"># Temp 데이터는 사라짐</span>
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>ls<span class="w"> </span>/temp<span class="w">  </span><span class="c1"># 비어있음</span>
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
-</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="nb">exit</span>
-</span></code></pre></div>
-<p>정리:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>tmpfs-test<span class="w"> </span>multi-test
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>persistent-data
-</span></code></pre></div>
-<p><strong>핵심 학습:</strong></p>
-<ul>
-<li>tmpfs: 메모리 기반, 재시작 시 삭제</li>
-<li>임시 캐시나 세션 정보에 유용</li>
-<li>일반 볼륨과 함께 사용 가능</li>
-</ul>
-<hr />
-<h2 id="5">5) 정리 및 상황별 선택 기준<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
+<h2 id="4">4) 정리 및 상황별 선택 기준<a class="headerlink" href="#4" title="Permanent link">&para;</a></h2>
 <h3 id="5-1">5-1. 모든 컨테이너 및 볼륨 정리<a class="headerlink" href="#5-1" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># 실행 중인 모든 컨테이너 중지</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>docker<span class="w"> </span>stop<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-q<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
-</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="c1"># 모든 컨테이너 삭제</span>
-</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>docker<span class="w"> </span>rm<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
-</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>
-</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="c1"># 사용 중이지 않은 볼륨 삭제</span>
-</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>docker<span class="w"> </span>volume<span class="w"> </span>prune<span class="w"> </span>-f
-</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>
-</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="c1"># 정리 확인</span>
-</span><span id="__span-30-11"><a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
-</span><span id="__span-30-12"><a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>docker<span class="w"> </span>volume<span class="w"> </span>ls
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 실행 중인 모든 컨테이너 중지</span>
+</span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>docker<span class="w"> </span>stop<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-q<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+</span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="c1"># 모든 컨테이너 삭제</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>docker<span class="w"> </span>rm<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
+</span><span id="__span-21-7"><a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="c1"># 사용 중이지 않은 볼륨 삭제</span>
+</span><span id="__span-21-8"><a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>docker<span class="w"> </span>volume<span class="w"> </span>prune<span class="w"> </span>-f
+</span><span id="__span-21-9"><a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>
+</span><span id="__span-21-10"><a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="c1"># 정리 확인</span>
+</span><span id="__span-21-11"><a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
+</span><span id="__span-21-12"><a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>docker<span class="w"> </span>volume<span class="w"> </span>ls
 </span></code></pre></div>
 <h3 id="5-2">5-2. 상황별 선택 기준<a class="headerlink" href="#5-2" title="Permanent link">&para;</a></h3>
 <table>
@@ -1742,11 +1565,6 @@
 <td>실시간 동기화, 핫 리로드</td>
 </tr>
 <tr>
-<td><strong>임시 캐시/세션</strong></td>
-<td>tmpfs</td>
-<td>빠른 성능, 메모리 활용</td>
-</tr>
-<tr>
 <td><strong>여러 컨테이너 공유</strong></td>
 <td>Volume</td>
 <td>안정적, 접근 제어</td>
@@ -1762,10 +1580,9 @@
 <h2 id="_3">📝 핵심 요약<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>Ephemeral 특성</strong>: 컨테이너 삭제 시 기본적으로 모든 데이터 손실</li>
-<li><strong>3가지 볼륨</strong>:</li>
+<li><strong>2가지 볼륨</strong>:</li>
 <li>Volume: 도커 관리, 프로덕션 권장</li>
 <li>Bind Mount: 호스트 경로, 개발 권장</li>
-<li>tmpfs: 메모리 기반, 임시 데이터용</li>
 <li><strong>선택 기준</strong>: 데이터 보존 필요성과 사용 환경에 따라 결정</li>
 </ol>
 
