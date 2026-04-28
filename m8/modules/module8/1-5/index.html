@@ -1777,9 +1777,10 @@
 </span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>docker<span class="w"> </span>images<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>myapp
 </span></code></pre></div>
 <blockquote>
-<p><strong>왜 크기가 같을까요?</strong></p>
-<p><code>myapp:bad</code>와 <code>myapp:v2</code>는 설치하는 패키지(git, curl, vim)가 동일하기 때문에 최종 이미지 크기는 같습니다.
-RUN 통합의 핵심 이점은 <strong>크기 감소</strong>가 아니라 <strong>레이어 수 감소</strong>입니다.</p>
+<p><strong>v1이 더 작은 이유</strong></p>
+<p><code>docker images</code>에 v1도 함께 보이는데, v1은 git/curl/vim을 설치하지 않았기 때문에 더 작습니다.
+이 섹션의 비교 대상은 <strong>bad vs v2</strong>입니다. 두 이미지는 동일한 패키지를 설치하므로 크기가 같고,
+RUN 통합의 이점은 <strong>크기 감소가 아니라 레이어 수 감소</strong>입니다.</p>
 </blockquote>
 <p>레이어 수 확인:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># bad: RUN 명령어가 6개 → 레이어 6개</span>
