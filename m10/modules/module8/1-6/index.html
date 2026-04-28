@@ -1637,8 +1637,8 @@
 <li><strong>bridge</strong>: 컨테이너 간 격리된 네트워크 (기본)</li>
 <li><strong>host</strong>: 호스트 네트워크 공유 (성능 좋음, 보안 낮음)</li>
 <li><strong>none</strong>: 네트워크 연결 없음 (완전 격리)</li>
-<li><strong>overlay</strong>: 멀티 호스트 네트워킹 (Swarm/K8s용)</li>
-<li><strong>macvlan</strong>: 컨테이너에 MAC 주소 할당</li>
+<li><strong>overlay</strong>: 여러 호스트에 걸친 컨테이너 통신을 위한 네트워크 (Swarm/K8s 환경에서만 사용 가능)</li>
+<li><strong>macvlan</strong>: 컨테이너에 실제 MAC 주소를 부여해 물리 네트워크 장비처럼 동작하게 하는 네트워크 (Linux 서버 환경 필요)</li>
 </ul>
 <hr />
 <h2 id="2-bridge">2) bridge 네트워크 한계 체험<a class="headerlink" href="#2-bridge" title="Permanent link">&para;</a></h2>
