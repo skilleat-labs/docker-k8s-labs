@@ -2808,9 +2808,49 @@ node_modules 파일이 통째로 Docker 데몬에 전달됩니다.</p>
 </span></code></pre></div>
 <p>관찰 포인트:</p>
 <ul>
-<li>이미지 크기 대폭 감소 (빌드 도구 제외)</li>
-<li><code>COPY --from=builder</code> 구문 이해</li>
+<li><code>COPY --from=builder</code> 구문 — 빌드 스테이지의 결과물만 골라서 복사하는 방식 이해</li>
 </ul>
+<blockquote>
+<p><strong>왜 크기 차이가 작을까요?</strong></p>
+<p>이 예제는 순수 JavaScript라 컴파일 과정이 없고, devDependencies도 없어서 버릴 것이 별로 없습니다.
+멀티 스테이지 빌드의 진가는 <strong>컴파일이 필요한 언어</strong>에서 나타납니다.</p>
+<table>
+<thead>
+<tr>
+<th>언어</th>
+<th>빌드 스테이지</th>
+<th>실행 스테이지</th>
+<th>감소 효과</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Go</td>
+<td>컴파일러 + 소스 (~800MB)</td>
+<td>바이너리 하나 (~10MB)</td>
+<td>80배↓</td>
+</tr>
+<tr>
+<td>TypeScript</td>
+<td>tsc + 전체 node_modules</td>
+<td>컴파일된 JS + 프로덕션 deps</td>
+<td>3~5배↓</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>JDK + Maven</td>
+<td>JAR 파일</td>
+<td>10배↓</td>
+</tr>
+<tr>
+<td>React</td>
+<td>빌드 도구 + 소스</td>
+<td>nginx + dist/</td>
+<td>5배↓</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
 <hr />
 <h2 id="6-root">6) 비-root 보안 적용 실습<a class="headerlink" href="#6-root" title="Permanent link">&para;</a></h2>
 <h3 id="6-1-root">6-1. root 위험성 체험<a class="headerlink" href="#6-1-root" title="Permanent link">&para;</a></h3>
