@@ -1990,9 +1990,10 @@
 </span></code></pre></div>
 <p>관찰 포인트:</p>
 <ul>
+<li><code>ip addr</code> 결과에 <code>lo</code>(127.0.0.1)만 존재 — <code>eth0</code> 없음 (외부 연결 인터페이스 자체가 없음)</li>
 <li>완전 격리된 환경</li>
 <li>보안이 중요한 컨테이너에 유용</li>
-<li>외부 통신 전혀 불가</li>
+<li>외부 통신 전혀 불가 (<code>ping: sendto: Network unreachable</code>)</li>
 </ul>
 <h3 id="3-3">3-3. 정리<a class="headerlink" href="#3-3" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>host-test<span class="w"> </span>none-test
