@@ -1254,6 +1254,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows PowerShell 사용 시 참고 사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1990,6 +2001,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#windows-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Windows PowerShell 사용 시 참고 사항
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2128,6 +2150,51 @@
 </span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>config<span class="w"> </span>get-contexts<span class="w">        </span><span class="c1"># 등록된 클러스터 목록 확인</span>
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span class="w"> </span>&lt;이름&gt;<span class="w">  </span><span class="c1"># 클러스터 전환</span>
 </span></code></pre></div>
+<hr />
+<h2 id="windows-powershell">Windows PowerShell 사용 시 참고 사항<a class="headerlink" href="#windows-powershell" title="Permanent link">&para;</a></h2>
+<blockquote>
+<p>이 모듈의 kubectl 명령어는 모두 PowerShell에서 동일하게 동작합니다.
+단, 일부 셸 스크립트 문법은 차이가 있으므로 아래를 참고하세요.</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>상황</th>
+<th>macOS / Linux</th>
+<th>Windows PowerShell</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HTTP 요청 테스트</td>
+<td><code>curl http://...</code></td>
+<td><code>curl.exe http://...</code></td>
+</tr>
+<tr>
+<td>텍스트 필터</td>
+<td><code>kubectl ... \| grep "패턴"</code></td>
+<td><code>kubectl ... \| Select-String "패턴"</code></td>
+</tr>
+<tr>
+<td>base64 인코딩</td>
+<td><code>echo -n "값" \| base64</code></td>
+<td><code>[Convert]::ToBase64String([Text.Encoding]::UTF8.GetBytes("값"))</code></td>
+</tr>
+<tr>
+<td>base64 디코딩</td>
+<td><code>echo -n "값" \| base64 -d</code></td>
+<td><code>[Text.Encoding]::UTF8.GetString([Convert]::FromBase64String("값"))</code></td>
+</tr>
+<tr>
+<td>반복 요청 루프</td>
+<td><code>while true; do curl ...; done</code></td>
+<td><code>while ($true) { curl.exe ...; Start-Sleep 1 }</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>curl vs curl.exe</strong>: PowerShell에서 <code>curl</code>은 <code>Invoke-WebRequest</code>의 별칭입니다. 일반 curl처럼 사용하려면 <code>curl.exe</code>를 사용하세요.</p>
+</blockquote>
 <hr />
 <h2 id="_6">트러블슈팅<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h2>
 <table>

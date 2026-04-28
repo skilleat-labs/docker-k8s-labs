@@ -1765,18 +1765,28 @@
 <h2 id="6-pod-service">6) Pod 삭제 후 Service 연속성 확인<a class="headerlink" href="#6-pod-service" title="Permanent link">&para;</a></h2>
 <p>Pod가 재시작돼도 Service를 통한 접근이 끊기지 않는지 확인합니다.</p>
 <p>터미널 1 — 반복 요청:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">macOS / Linux</label><label for="__tabbed_1_2">Windows (PowerShell)</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">while</span><span class="w"> </span>true<span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>curl<span class="w"> </span>-s<span class="w"> </span>-o<span class="w"> </span>/dev/null<span class="w"> </span>-w<span class="w"> </span><span class="s2">&quot;%{http_code}\n&quot;</span><span class="w"> </span>http://localhost:30080<span class="p">;</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
 </span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">while</span> <span class="p">(</span><span class="nv">$true</span><span class="p">)</span> <span class="p">{</span> <span class="p">(</span><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="n">-s</span> <span class="n">-o</span> <span class="n">NUL</span> <span class="n">-w</span> <span class="s2">&quot;%{http_code}&quot;</span> <span class="n">http</span><span class="p">://</span><span class="n">localhost</span><span class="p">:</span><span class="n">30080</span><span class="p">);</span> <span class="nb">Start-Sleep</span> <span class="n">1</span> <span class="p">}</span>
+</span></code></pre></div>
+</div>
+</div>
+</div>
 <p>터미널 2 — Pod 강제 삭제:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>rollout<span class="w"> </span>--wait<span class="o">=</span><span class="nb">false</span>
-</span><span id="__span-22-2"><a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-w<span class="w">    </span><span class="c1"># 새 Pod 생성 확인</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span><span class="nv">app</span><span class="o">=</span>rollout<span class="w"> </span>--wait<span class="o">=</span><span class="nb">false</span>
+</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-w<span class="w">    </span><span class="c1"># 새 Pod 생성 확인</span>
 </span></code></pre></div>
 <p>터미널 1의 응답 코드가 계속 <code>200</code>으로 유지되면 Service가 새 Pod로 트래픽을 자동 전환한 것입니다.</p>
 <p><code>Ctrl+C</code>로 종료.</p>
 <hr />
 <h2 id="_4">정리 (리소스 삭제)<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>svc-clusterip.yaml
-</span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>svc-nodeport.yaml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-24-1"><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>svc-clusterip.yaml
+</span><span id="__span-24-2"><a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>svc-nodeport.yaml
 </span></code></pre></div>
 <hr />
 <h2 id="service_1">Service 타입 비교<a class="headerlink" href="#service_1" title="Permanent link">&para;</a></h2>
