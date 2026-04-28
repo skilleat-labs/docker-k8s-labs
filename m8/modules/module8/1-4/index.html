@@ -1450,7 +1450,7 @@
 <hr />
 <h2 id="1">1) 컨테이너 데이터 유실 문제 체험<a class="headerlink" href="#1" title="Permanent link">&para;</a></h2>
 <h3 id="1-1">1-1. 컨테이너 내 파일 생성 및 확인<a class="headerlink" href="#1-1" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>temp-test<span class="w"> </span>busybox
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>temp-test<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># 파일 생성</span>
@@ -1472,7 +1472,7 @@
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>temp-test
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="c1"># 같은 이름으로 새 컨테이너 생성</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>temp-test<span class="w"> </span>busybox
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>temp-test<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 이전에 만든 파일이 있는지 확인</span>
@@ -1507,7 +1507,7 @@
 <li>도커가 자동으로 관리하는 저장소</li>
 </ul>
 <h3 id="2-2">2-2. 볼륨을 마운트한 컨테이너 실행<a class="headerlink" href="#2-2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>busybox
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># /data 디렉토리에 여러 파일 생성</span>
@@ -1527,7 +1527,7 @@
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>vol-test
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 같은 볼륨으로 새 컨테이너 실행</span>
-</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test2<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>busybox
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test2<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># 이전에 만든 파일이 여전히 존재!</span>
@@ -1543,7 +1543,7 @@
 </span></code></pre></div>
 <h3 id="2-4">2-4. 여러 컨테이너가 같은 볼륨 공유하기<a class="headerlink" href="#2-4" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># 컨테이너 2는 계속 유지한 채로</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test3<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>busybox
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>vol-test3<span class="w"> </span>-v<span class="w"> </span>mydata:/data<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1"># 다른 컨테이너가 작성한 파일도 볼 수 있음</span>
@@ -1580,7 +1580,7 @@
 </span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>cat<span class="w"> </span>~/bind-test/config/app.conf
 </span></code></pre></div>
 <h3 id="3-2-bind-mount">3-2. Bind Mount로 컨테이너 실행<a class="headerlink" href="#3-2-bind-mount" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>bind-test<span class="w"> </span>-v<span class="w"> </span>~/bind-test:/app<span class="w"> </span>busybox
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>bind-test<span class="w"> </span>-v<span class="w"> </span>~/bind-test:/app<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 호스트의 파일이 보임</span>
@@ -1607,7 +1607,7 @@
 </span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;host_added_data=yes&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>~/bind-test/new_from_host.txt
 </span></code></pre></div>
 <h3 id="3-4-bind-mount">3-4. 같은 Bind Mount로 새 컨테이너 실행<a class="headerlink" href="#3-4-bind-mount" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>bind-test2<span class="w"> </span>-v<span class="w"> </span>~/bind-test:/app<span class="w"> </span>busybox
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>bind-test2<span class="w"> </span>-v<span class="w"> </span>~/bind-test:/app<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># 호스트에서 추가한 파일도 보임 (실시간 동기화)</span>
@@ -1628,7 +1628,7 @@
 <hr />
 <h2 id="4-tmpfs">4) tmpfs 볼륨 실습<a class="headerlink" href="#4-tmpfs" title="Permanent link">&para;</a></h2>
 <h3 id="4-1-tmpfs">4-1. tmpfs 마운트로 컨테이너 실행<a class="headerlink" href="#4-1-tmpfs" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>tmpfs-test<span class="w"> </span>--tmpfs<span class="w"> </span>/app:rw,size<span class="o">=</span>64m<span class="w"> </span>busybox
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--name<span class="w"> </span>tmpfs-test<span class="w"> </span>--tmpfs<span class="w"> </span>/app:rw,size<span class="o">=</span>64m<span class="w"> </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># 메모리 기반 저장소에 파일 생성</span>
@@ -1665,7 +1665,7 @@
 </span><span id="__span-25-4"><a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">  </span>--name<span class="w"> </span>multi-test<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-5"><a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">  </span>-v<span class="w"> </span>persistent-data:/persistent<span class="w"> </span><span class="se">\</span>
 </span><span id="__span-25-6"><a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">  </span>--tmpfs<span class="w"> </span>/temp:rw,size<span class="o">=</span>64m<span class="w"> </span><span class="se">\</span>
-</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span>busybox
+</span><span id="__span-25-7"><a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">  </span>skilleatlab.azurecr.io/lab/busybox:latest
 </span></code></pre></div>
 <p>컨테이너 내부에서:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># 일반 볼륨에 저장 (재시작 후 유지)</span>
