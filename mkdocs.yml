@@ -47,6 +47,7 @@ nav:
           - 1-4. 컨테이너 볼륨 (Volume) 실습: modules/module8/1-4.md
           - 1-5. Dockerfile 최적화 실습: modules/module8/1-5.md
           - 1-6. 도커 네트워크 (Docker Network) 실습: modules/module8/1-6.md
+          - 1-6-2. 도전 과제 - 미니 블로그: modules/module8/1-6-2.md
           - 1-7. Docker Compose 실습: modules/module8/1-7.md
   - 모듈 10:
       - 소개: modules/module10/index.md
