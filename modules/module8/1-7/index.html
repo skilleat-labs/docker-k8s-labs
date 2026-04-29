@@ -2182,26 +2182,54 @@
 <hr />
 <p><a href="../1-6-2/">1-6-2 도전 과제</a>에서 <code>docker run</code>으로 직접 실행했던 미니 블로그를 이번에는 <code>docker-compose.yml</code> 하나로 구성해보세요.</p>
 <p><strong>조건</strong></p>
-<ul>
-<li>새 디렉토리를 만들고 시작합니다</li>
-<li>이미지는 동일하게 사용합니다<ul>
-<li>frontend: <code>skilleatlab.azurecr.io/frontend:v4-kb5</code></li>
-<li>backend: <code>skilleatlab.azurecr.io/backend:v4-kb5</code></li>
-</ul>
-</li>
-<li>
-<p><code>backend</code> 서비스 이름은 반드시 <code>backend-service</code>로 지정합니다 (<code>container_name</code> 사용)</p>
-<p><div class="language-yaml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">services</span><span class="p">:</span>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>디렉토리</td>
+<td>새 디렉토리를 만들고 시작</td>
+</tr>
+<tr>
+<td>frontend 이미지</td>
+<td><code>skilleatlab.azurecr.io/frontend:v4-kb5</code></td>
+</tr>
+<tr>
+<td>backend 이미지</td>
+<td><code>skilleatlab.azurecr.io/backend:v4-kb5</code></td>
+</tr>
+<tr>
+<td>컨테이너 이름</td>
+<td>backend 서비스는 반드시 <code>backend-service</code> (<code>container_name</code> 사용)</td>
+</tr>
+<tr>
+<td>네트워크</td>
+<td>frontend, backend 동일 네트워크</td>
+</tr>
+<tr>
+<td>포트</td>
+<td>frontend <code>8080:80</code></td>
+</tr>
+<tr>
+<td>실행 순서</td>
+<td><code>depends_on</code>으로 backend 먼저 실행</td>
+</tr>
+<tr>
+<td>데이터 유지</td>
+<td>볼륨으로 <code>/app/data.json</code> 마운트</td>
+</tr>
+</tbody>
+</table>
+<p><strong>힌트: container_name 사용법</strong></p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nt">services</span><span class="p">:</span>
 </span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">  </span><span class="nt">backend</span><span class="p">:</span>
 </span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">backend-service</span>
 </span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">...</span>
 </span></code></pre></div>
-- frontend와 backend가 같은 네트워크에서 통신할 수 있어야 합니다
-- frontend는 호스트 포트 <code>8080</code> → 컨테이너 포트 <code>80</code>으로 바인딩합니다
-- backend가 먼저 실행되도록 <code>depends_on</code>을 사용합니다
-- 작성한 글이 컨테이너를 재시작해도 유지되도록 볼륨을 마운트합니다 (<code>/app/data.json</code>)</p>
-</li>
-</ul>
 <p><strong>검증</strong></p>
 <ol>
 <li><code>http://192.168.56.10:8080</code> 접속 후 글 작성</li>
