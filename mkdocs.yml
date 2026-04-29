@@ -50,6 +50,7 @@ nav:
           - 1-6-2. 도전 과제 - 미니 블로그: modules/module8/1-6-2.md
           - 1-7. Docker Compose 실습: modules/module8/1-7.md
           - 1-7-2. 환경변수와 설정 분리 실습: modules/module8/1-7-2.md
+          - 1-7-3. 모놀리식 아키텍처 체험: modules/module8/1-7-3.md
   - 모듈 10:
       - 소개: modules/module10/index.md
       - 개요: modules/module10/overview.md
