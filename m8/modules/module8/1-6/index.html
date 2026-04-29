@@ -2163,12 +2163,17 @@
 </span><span id="__span-20-15"><a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>api<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">2</span><span class="w"> </span>db
 </span></code></pre></div>
 <h3 id="6-2">6-2. 네트워크 격리 확인<a class="headerlink" href="#6-2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 다른 네트워크의 컨테이너 생성</span>
+<p>현재 상태:</p>
+<ul>
+<li><code>web</code> → <code>my-network</code> 소속 (6-1에서 실행)</li>
+<li><code>isolated</code> → <code>isolated-network</code> 소속 (아래에서 새로 생성)</li>
+</ul>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-21-1"><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1"># 새 네트워크와 컨테이너 생성</span>
 </span><span id="__span-21-2"><a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>docker<span class="w"> </span>network<span class="w"> </span>create<span class="w"> </span>isolated-network
 </span><span id="__span-21-3"><a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>isolated<span class="w"> </span>--network<span class="w"> </span>isolated-network<span class="w"> </span>nginx:alpine
 </span><span id="__span-21-4"><a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
-</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1"># 격리된 네트워크 간 통신 불가</span>
-</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>curl<span class="w"> </span>http://isolated<span class="w">  </span><span class="c1"># 실패</span>
+</span><span id="__span-21-5"><a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1"># my-network의 web에서 isolated-network의 isolated로 통신 시도 → 실패</span>
+</span><span id="__span-21-6"><a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>curl<span class="w"> </span>http://isolated<span class="w">  </span><span class="c1"># 실패 (서로 다른 네트워크)</span>
 </span></code></pre></div>
 <h3 id="6-3-link-deprecated">6-3. --link 옵션 (deprecated) 비교<a class="headerlink" href="#6-3-link-deprecated" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1"># link 옵션으로 컨테이너 연결 (권장하지 않음)</span>
