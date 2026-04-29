@@ -1246,28 +1246,30 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>--tail<span class="o">=</span><span class="m">20</span>
 </span></code></pre></div>
-<p>웹 브라우저에서 <code>http://localhost:8888</code>으로 접속하면 Nginx 기본 페이지가 보입니다.</p>
+<p>웹 브라우저에서 VM IP로 접속하면 Nginx 기본 페이지가 보입니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>http://192.168.56.10:8888
+</span></code></pre></div>
 <hr />
 <h2 id="5">5) 서비스 연결 확인<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
 <p>Compose는 같은 네트워크에 있는 서비스 이름을 DNS 이름으로 사용합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>db
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>web<span class="w"> </span>ping<span class="w"> </span>-c<span class="w"> </span><span class="m">3</span><span class="w"> </span>db
 </span></code></pre></div>
 <p>이 명령어가 성공하면 <code>web</code> 컨테이너에서 <code>db</code> 컨테이너에 올바르게 연결된 것입니다.</p>
 <hr />
 <h2 id="6">6) 네트워크와 볼륨 확인<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>network<span class="w"> </span>ls
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>docker<span class="w"> </span>volume<span class="w"> </span>ls
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>network<span class="w"> </span>ls
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>volume<span class="w"> </span>ls
 </span></code></pre></div>
 <p>Compose로 만든 네트워크와 볼륨 이름은 일반적으로 현재 디렉터리 이름을 접두사로 사용합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>network<span class="w"> </span>ls<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>frontend<span class="w"> </span>-q<span class="k">)</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>network<span class="w"> </span>inspect<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>network<span class="w"> </span>ls<span class="w"> </span>--filter<span class="w"> </span><span class="nv">name</span><span class="o">=</span>frontend<span class="w"> </span>-q<span class="k">)</span>
 </span></code></pre></div>
 <hr />
 <h2 id="7">7) 정리<a class="headerlink" href="#7" title="Permanent link">&para;</a></h2>
 <p>Compose 실행을 멈추고 리소스를 정리합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
 </span></code></pre></div>
 <p>데이터 볼륨까지 제거하려면:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
 </span></code></pre></div>
 <hr />
 <h2 id="8">8) 추가 실습 아이디어<a class="headerlink" href="#8" title="Permanent link">&para;</a></h2>
