@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MSA Cafe</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --primary:#6366f1;--primary-dark:#4f46e5;
+  --bg:#f1f5f9;--card:#fff;--text:#1e293b;--muted:#94a3b8;
+  --border:#e2e8f0;--green:#10b981;--navy:#1e1b4b;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* Navbar */
+.navbar{background:var(--navy);color:#fff;padding:0 2rem;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.brand{font-size:1.25rem;font-weight:800;display:flex;align-items:center;gap:.6rem}
+.brand-badge{background:#10b981;color:#fff;font-size:.6rem;padding:3px 9px;border-radius:999px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.server-chips{display:flex;align-items:center;gap:.5rem}
+.chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:4px 12px;font-size:.75rem;color:#a5b4fc;display:flex;align-items:center;gap:.4rem}
+.chip-label{font-size:.6rem;color:#6ee7b7;font-weight:700;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;animation:pulse 2s infinite}
+.dot-fe{background:#34d399}
+.dot-be{background:#60a5fa}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* Layout */
+.page{max-width:1240px;margin:0 auto;padding:1.75rem 2rem}
+.layout{display:grid;grid-template-columns:1fr 320px;gap:1.5rem;align-items:start}
+.label{font-size:.7rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:.875rem}
+
+/* Product grid */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.card{background:var(--card);border-radius:14px;padding:1.25rem;border:1.5px solid var(--border);cursor:pointer;transition:transform .15s,box-shadow .15s,border-color .15s}
+.card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(99,102,241,.13);border-color:#a5b4fc}
+.card:active{transform:translateY(0)}
+.emoji{font-size:2.75rem;display:block;margin-bottom:.75rem}
+.cat{font-size:.65rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.2rem}
+.name{font-size:.975rem;font-weight:700;margin-bottom:.375rem}
+.price{font-size:1.05rem;font-weight:800;color:var(--primary);margin-bottom:.875rem}
+.btn{width:100%;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:.5rem;font-size:.85rem;font-weight:700;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--primary-dark)}
+
+/* Orders panel */
+.panel{background:var(--card);border-radius:14px;border:1.5px solid var(--border);overflow:hidden;position:sticky;top:80px}
+.panel-head{padding:1rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.panel-head h3{font-size:.9rem;font-weight:700}
+.count{background:var(--primary);color:#fff;border-radius:999px;padding:2px 9px;font-size:.72rem;font-weight:700}
+.orders{max-height:420px;overflow-y:auto}
+.order{padding:.875rem 1.25rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;animation:in .25s ease}
+@keyframes in{from{opacity:0;transform:translateX(8px)}to{opacity:1;transform:none}}
+.order:last-child{border-bottom:none}
+.oname{font-size:.85rem;font-weight:600}
+.otime{font-size:.72rem;color:var(--muted);margin-top:2px}
+.oprice{font-size:.9rem;font-weight:800;color:var(--primary)}
+.empty{padding:2.5rem;text-align:center;color:var(--muted);font-size:.85rem}
+
+/* Architecture Panel — green theme */
+.arch{background:#f0fdf4;border:1.5px solid #86efac;border-radius:14px;padding:1.5rem;margin-top:1.5rem}
+.arch-title{font-weight:800;font-size:.95rem;color:#166534;display:flex;align-items:center;gap:.5rem;margin-bottom:1.1rem}
+.arch-services{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-bottom:1rem}
+.svc{background:#fff;border:1.5px solid #bbf7d0;border-radius:10px;padding:1rem}
+.svc-header{display:flex;align-items:center;gap:.5rem;margin-bottom:.75rem}
+.svc-dot{width:8px;height:8px;border-radius:50%}
+.svc-dot-fe{background:#34d399}
+.svc-dot-be{background:#60a5fa}
+.svc-dot-db{background:#f472b6}
+.svc-name{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#166534}
+.svc-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:.3rem}
+.svc-key{font-size:.68rem;color:#6b7280;font-weight:500}
+.svc-val{font-size:.78rem;font-weight:700;font-family:monospace;color:#1e293b}
+.arch-good{font-size:.8rem;color:#166534;display:flex;align-items:flex-start;gap:.4rem;line-height:1.5;margin-top:.25rem}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:var(--navy);color:#fff;padding:.75rem 1.25rem;border-radius:10px;font-size:.85rem;font-weight:500;opacity:0;transform:translateY(8px);transition:all .25s;z-index:999;pointer-events:none}
+.toast.on{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="brand">
+    ☕ MSA Cafe
+    <span class="brand-badge">Microservices</span>
+  </div>
+  <div class="server-chips">
+    <div class="chip">
+      <span class="dot dot-fe"></span>
+      <span class="chip-label">FE</span>
+      <span id="nav-fe">–</span>
+    </div>
+    <div class="chip">
+      <span class="dot dot-be"></span>
+      <span class="chip-label">BE</span>
+      <span id="nav-be">–</span>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+  <div class="layout">
+    <div>
+      <div class="label">☕ 메뉴판</div>
+      <div class="grid" id="products">
+        <div style="grid-column:1/-1;padding:2rem;text-align:center;color:var(--muted)">로딩 중…</div>
+      </div>
+    </div>
+    <div>
+      <div class="label">📋 주문 내역</div>
+      <div class="panel">
+        <div class="panel-head">
+          <h3>오늘의 주문</h3>
+          <span class="count" id="ocount">0</span>
+        </div>
+        <div class="orders" id="olist">
+          <div class="empty">아직 주문이 없습니다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Architecture Panel -->
+  <div class="arch">
+    <div class="arch-title">✅ 마이크로서비스 아키텍처 정보</div>
+    <div class="arch-services">
+
+      <div class="svc">
+        <div class="svc-header">
+          <span class="svc-dot svc-dot-fe"></span>
+          <span class="svc-name">Frontend 서비스</span>
+        </div>
+        <div class="svc-row"><span class="svc-key">이미지</span><span class="svc-val">nginx:alpine</span></div>
+        <div class="svc-row"><span class="svc-key">역할</span><span class="svc-val">정적 파일 서빙</span></div>
+        <div class="svc-row"><span class="svc-key">포트</span><span class="svc-val">80</span></div>
+        <div class="svc-row"><span class="svc-key">hostname</span><span class="svc-val" id="a-fe">–</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-header">
+          <span class="svc-dot svc-dot-be"></span>
+          <span class="svc-name">Backend 서비스</span>
+        </div>
+        <div class="svc-row"><span class="svc-key">이미지</span><span class="svc-val">msa-cafe-backend</span></div>
+        <div class="svc-row"><span class="svc-key">역할</span><span class="svc-val">상품 · 주문 API</span></div>
+        <div class="svc-row"><span class="svc-key">포트</span><span class="svc-val">5000</span></div>
+        <div class="svc-row"><span class="svc-key">hostname</span><span class="svc-val" id="a-be">–</span></div>
+      </div>
+
+      <div class="svc">
+        <div class="svc-header">
+          <span class="svc-dot svc-dot-db"></span>
+          <span class="svc-name">Database 서비스</span>
+        </div>
+        <div class="svc-row"><span class="svc-key">이미지</span><span class="svc-val">mysql:8.0</span></div>
+        <div class="svc-row"><span class="svc-key">역할</span><span class="svc-val">데이터 영속성</span></div>
+        <div class="svc-row"><span class="svc-key">포트</span><span class="svc-val">3306</span></div>
+        <div class="svc-row"><span class="svc-key">hostname</span><span class="svc-val">cafe-db</span></div>
+      </div>
+
+    </div>
+    <div class="arch-good">
+      🟢 각 서비스가 독립된 컨테이너에서 실행됩니다.
+      backend를 스케일하면 <strong id="a-be2">–</strong> 의 hostname이 요청마다 바뀌는 것을 확인할 수 있습니다.
+      주문 데이터는 MySQL에 저장되어 모든 backend가 공유합니다.
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $=id=>document.getElementById(id);
+const toast=msg=>{const t=$('toast');t.textContent=msg;t.classList.add('on');setTimeout(()=>t.classList.remove('on'),2500)};
+
+async function loadFEStatus(){
+  try{
+    const d=await fetch('/info').then(r=>r.json());
+    $('nav-fe').textContent=d.hostname;
+    $('a-fe').textContent=d.hostname;
+  }catch(e){$('nav-fe').textContent='error';}
+}
+
+async function loadBEStatus(){
+  try{
+    const d=await fetch('/api/status').then(r=>r.json());
+    $('nav-be').textContent=d.hostname;
+    $('a-be').textContent=d.hostname;
+    $('a-be2').textContent=d.hostname;
+  }catch(e){$('nav-be').textContent='error';}
+}
+
+async function loadProducts(){
+  try{
+    const ps=await fetch('/api/products').then(r=>r.json());
+    $('products').innerHTML=ps.map(p=>`
+      <div class="card" onclick="placeOrder(${p.id},'${p.name}',${p.price})">
+        <span class="emoji">${p.emoji}</span>
+        <div class="cat">${p.category}</div>
+        <div class="name">${p.name}</div>
+        <div class="price">${p.price.toLocaleString()}원</div>
+        <button class="btn">주문하기</button>
+      </div>`).join('');
+  }catch(e){$('products').innerHTML='<div style="grid-column:1/-1;padding:2rem;text-align:center;color:#ef4444">백엔드 연결 실패</div>';}
+}
+
+async function loadOrders(){
+  try{
+    const os=await fetch('/api/orders').then(r=>r.json());
+    $('ocount').textContent=os.length;
+    if(!os.length){$('olist').innerHTML='<div class="empty">아직 주문이 없습니다</div>';return;}
+    $('olist').innerHTML=os.map(o=>`
+      <div class="order">
+        <div>
+          <div class="oname">${o.product_name} × ${o.quantity}</div>
+          <div class="otime">${o.created_at}</div>
+        </div>
+        <div class="oprice">${o.total.toLocaleString()}원</div>
+      </div>`).join('');
+  }catch(e){}
+}
+
+async function placeOrder(id,name,price){
+  try{
+    await fetch('/api/orders',{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({product_id:id,product_name:name,quantity:1,total:price})});
+    toast('✅ '+name+' 주문 완료!');
+    loadOrders();
+    loadBEStatus(); // 스케일링 시 hostname 변화 확인용
+  }catch(e){toast('❌ 주문 실패');}
+}
+
+loadFEStatus();
+loadBEStatus();
+loadProducts();
+loadOrders();
+setInterval(()=>{loadOrders();loadBEStatus();},5000);
+</script>
+</body>
+</html>

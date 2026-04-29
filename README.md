@@ -31,6 +31,8 @@
 | `skilleatlab.azurecr.io/env-lab` | `v1` | 환경변수 실습 - ENV 기반 개선 버전 |
 | `skilleatlab.azurecr.io/env-lab` | `arg-demo` | 환경변수 실습 - ARG vs ENV 시연 |
 | `skilleatlab.azurecr.io/monolith` | `v1` | 모놀리식 아키텍처 실습 - 카페 주문 앱 (Flask + SQLite 내장) |
+| `skilleatlab.azurecr.io/msa-cafe-frontend` | `v1` | MSA 카페 - nginx 프론트엔드 |
+| `skilleatlab.azurecr.io/msa-cafe-backend` | `v1` | MSA 카페 - Flask API 백엔드 (MySQL 연결) |
 
 ### 이미지 빌드 및 푸시
 
