@@ -853,10 +853,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#5" class="md-nav__link">
+  <a href="#5-backend" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5단계: 추가 검증
+        5단계: backend 데이터 저장 확인
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6단계: 네트워크 소속 확인
       
     </span>
   </a>
@@ -964,8 +975,8 @@ backend가 먼저 실행되어 있어야 frontend가 정상적으로 작동합�
 </ul>
 <hr />
 <h3 id="4">4단계: 웹 접속 및 동작 확인<a class="headerlink" href="#4" title="Permanent link">&para;</a></h3>
-<p>브라우저 또는 curl로 아래 주소에 접속합니다.</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://localhost:8080
+<p>VM IP로 브라우저에서 접속합니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>http://192.168.56.10:8080
 </span></code></pre></div>
 <ul>
 <li>블로그 페이지가 정상 표시되는지 확인합니다.</li>
@@ -973,11 +984,17 @@ backend가 먼저 실행되어 있어야 frontend가 정상적으로 작동합�
 <li>등록한 글이 화면에 출력되는지 확인합니다.</li>
 </ul>
 <hr />
-<h3 id="5">5단계: 추가 검증<a class="headerlink" href="#5" title="Permanent link">&para;</a></h3>
-<p><strong>backend 내부 JSON 파일 확인</strong></p>
-<p>작성한 글이 backend 컨테이너 내부의 <code>data.json</code>에 실제로 저장되었는지 확인합니다.
-컨테이너 내부로 직접 접속해서 파일 내용을 출력해보세요.</p>
-<p><strong>네트워크 소속 확인</strong></p>
+<h3 id="5-backend">5단계: backend 데이터 저장 확인<a class="headerlink" href="#5-backend" title="Permanent link">&para;</a></h3>
+<p>글을 작성한 뒤, backend 컨테이너 내부로 직접 접속해서 <code>data.json</code>에 실제로 저장되었는지 확인합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>backend-service<span class="w"> </span>sh
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>cat<span class="w"> </span>/app/data.json
+</span></code></pre></div>
+<p>브라우저에서 작성한 글 내용이 JSON 형태로 출력되면 성공입니다.</p>
+<p>확인 후 컨테이너에서 나옵니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">exit</span>
+</span></code></pre></div>
+<hr />
+<h3 id="6">6단계: 네트워크 소속 확인<a class="headerlink" href="#6" title="Permanent link">&para;</a></h3>
 <p>frontend와 backend가 동일한 네트워크에 속해 있는지 네트워크 상세 정보로 확인합니다.</p>
 <hr />
 <h2 id="_5">완료 기준<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
@@ -1002,7 +1019,7 @@ backend가 먼저 실행되어 있어야 frontend가 정상적으로 작동합�
 <td></td>
 </tr>
 <tr>
-<td>브라우저에서 http://localhost:8080 접속 성공</td>
+<td>브라우저에서 http://192.168.56.10:8080 접속 성공</td>
 <td></td>
 </tr>
 <tr>
@@ -1010,7 +1027,7 @@ backend가 먼저 실행되어 있어야 frontend가 정상적으로 작동합�
 <td></td>
 </tr>
 <tr>
-<td>backend 내부 data.json에 데이터 저장 확인</td>
+<td>backend exec 접속 후 data.json 저장 확인</td>
 <td></td>
 </tr>
 <tr>
