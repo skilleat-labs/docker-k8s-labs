@@ -2662,10 +2662,11 @@
 <h2 id="45">예상 소요 시간 (약 45분)<a class="headerlink" href="#45" title="Permanent link">&para;</a></h2>
 <ul>
 <li>0~8분: 네트워크 개요와 기본 네트워크 확인</li>
-<li>8~18분: bridge 네트워크 한계 체험과 사용자 정의 네트워크 생성</li>
-<li>18~28분: 포트 바인딩 실습과 컨테이너 간 통신</li>
-<li>28~38분: overlay 네트워크와 고급 기능</li>
-<li>38~45분: 트러블슈팅 실습 및 정리</li>
+<li>8~16분: bridge 네트워크 한계 체험</li>
+<li>16~22분: host / none 네트워크 실습</li>
+<li>22~32분: 포트 바인딩 완전 실습</li>
+<li>32~40분: 사용자 정의 네트워크 및 컨테이너 간 통신</li>
+<li>40~45분: 트러블슈팅 실습 및 정리</li>
 </ul>
 <h2 id="_2">사전 조건<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
 <ul>
@@ -2705,8 +2706,8 @@
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>web2<span class="w"> </span>-p<span class="w"> </span><span class="m">8082</span>:80<span class="w"> </span>nginx:alpine
 </span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
 </span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1"># 컨테이너 IP 확인</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>docker<span class="w"> </span>inspect<span class="w"> </span>web1<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;Networks&quot;</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>docker<span class="w"> </span>inspect<span class="w"> </span>web2<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-A<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="s2">&quot;Networks&quot;</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>docker<span class="w"> </span>inspect<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}&#39;</span><span class="w"> </span>web1
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>docker<span class="w"> </span>inspect<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}&#39;</span><span class="w"> </span>web2
 </span></code></pre></div>
 <h3 id="2-2-bridge">2-2. 컨테이너 간 통신 시도 (기본 bridge 한계)<a class="headerlink" href="#2-2-bridge" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># web1에서 web2로 ping 시도 (이름으로)</span>
