@@ -2797,6 +2797,10 @@
 <h3 id="4-2-environment-1">4-2. environment: 직접 작성 (1단계)<a class="headerlink" href="#4-2-environment-1" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-22-1"><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nano<span class="w"> </span>docker-compose.yml
 </span></code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">nano 저장 방법</p>
+<p>내용 입력 후: <strong>Ctrl+O</strong> → <strong>Enter</strong> (파일명 확인) → <strong>Ctrl+X</strong> (종료)</p>
+</div>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-23-1"><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nt">services</span><span class="p">:</span>
 </span><span id="__span-23-2"><a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 </span><span id="__span-23-3"><a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skilleatlab.azurecr.io/env-lab:v1</span>
@@ -2817,6 +2821,7 @@
 <p><code>docker-compose.yml</code>에 비밀번호가 그대로 있는 것이 불편합니다. <code>.env</code> 파일로 분리합니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nano<span class="w"> </span>.env
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>APP_ENV=development
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>DB_HOST=localhost
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>DB_PORT=5432
@@ -2825,6 +2830,7 @@
 <p><code>docker-compose.yml</code>을 수정합니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>nano<span class="w"> </span>docker-compose.yml
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="nt">services</span><span class="p">:</span>
 </span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 </span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skilleatlab.azurecr.io/env-lab:v1</span>
@@ -2843,6 +2849,7 @@
 <p>파일 하나만 바꾸면 컨테이너에 즉시 반영되는 것을 확인합니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nano<span class="w"> </span>.env
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <p><code>DB_HOST</code>를 수정합니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>APP_ENV=development
 </span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>DB_HOST=new-db-server      # ← 변경
@@ -2876,6 +2883,7 @@ git에 한 번 올라가면 삭제해도 히스토리에 남기 때문에
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="c1"># 개발 환경</span>
 </span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>nano<span class="w"> </span>.env.dev
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>APP_ENV=development
 </span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>DB_HOST=localhost
 </span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>DB_PORT=5432
@@ -2884,6 +2892,7 @@ git에 한 번 올라가면 삭제해도 히스토리에 남기 때문에
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="c1"># 운영 환경</span>
 </span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>nano<span class="w"> </span>.env.prod
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>APP_ENV=production
 </span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>DB_HOST=prod-db.internal
 </span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>DB_PORT=5432
@@ -2901,6 +2910,7 @@ git에 한 번 올라가면 삭제해도 히스토리에 남기 때문에
 </div>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-42-1"><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nano<span class="w"> </span>docker-compose.yml
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-43-1"><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="nt">services</span><span class="p">:</span>
 </span><span id="__span-43-2"><a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 </span><span id="__span-43-3"><a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skilleatlab.azurecr.io/env-lab:v1</span>
@@ -2940,6 +2950,7 @@ git에 한 번 올라가면 삭제해도 히스토리에 남기 때문에
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-49-1"><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="c1"># 일반 설정 (.env.prod 덮어쓰기 — DB_PASSWORD 제거)</span>
 </span><span id="__span-49-2"><a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>nano<span class="w"> </span>.env.prod
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-50-1"><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>APP_ENV=production
 </span><span id="__span-50-2"><a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a>DB_HOST=prod-db.internal
 </span><span id="__span-50-3"><a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>DB_PORT=5432
@@ -2947,11 +2958,13 @@ git에 한 번 올라가면 삭제해도 히스토리에 남기 때문에
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-51-1"><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="c1"># 민감정보만 별도 파일</span>
 </span><span id="__span-51-2"><a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>nano<span class="w"> </span>.env.secret
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-52-1"><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>DB_PASSWORD=strongProdPassword!
 </span></code></pre></div>
 <p>이번에는 <code>env_file:</code>을 사용합니다. <code>env_file:</code>은 파일 내용을 <strong>컨테이너에 직접 주입</strong>하므로 <code>${}</code> 치환 없이도 동작하고, 여러 파일을 동시에 지정할 수 있습니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-53-1"><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>nano<span class="w"> </span>docker-compose.yml
 </span></code></pre></div>
+<p><em>저장: Ctrl+O → Enter → 종료: Ctrl+X</em></p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-54-1"><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nt">services</span><span class="p">:</span>
 </span><span id="__span-54-2"><a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="w">  </span><span class="nt">app</span><span class="p">:</span>
 </span><span id="__span-54-3"><a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">skilleatlab.azurecr.io/env-lab:v1</span>
