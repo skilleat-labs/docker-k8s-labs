@@ -1029,6 +1029,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) 도전 과제 : 미니 블로그를 Compose로
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -1963,6 +1974,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#9-compose" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9) 도전 과제 : 미니 블로그를 Compose로
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2178,6 +2200,29 @@
 <li><code>environment</code>에 추가 설정을 넣어 MySQL DB를 초기화해 보기</li>
 <li><code>restart: unless-stopped</code>를 추가해 컨테이너 자동 재시작 설정해 보기</li>
 </ul>
+<hr />
+<h2 id="9-compose">9) 도전 과제 : 미니 블로그를 Compose로<a class="headerlink" href="#9-compose" title="Permanent link">&para;</a></h2>
+<p><a href="../1-6-2/">1-6-2 도전 과제</a>에서 <code>docker run</code>으로 직접 실행했던 미니 블로그를 이번에는 <code>docker-compose.yml</code> 하나로 구성해보세요.</p>
+<p><strong>조건</strong></p>
+<ul>
+<li>새 디렉토리를 만들고 시작합니다</li>
+<li>이미지는 동일하게 사용합니다<ul>
+<li>frontend: <code>skilleatlab.azurecr.io/frontend:v4-kb5</code></li>
+<li>backend: <code>skilleatlab.azurecr.io/backend:v4-kb5</code></li>
+</ul>
+</li>
+<li><code>backend</code> 서비스 이름은 반드시 <code>backend-service</code>로 지정합니다 (<code>container_name</code> 사용)</li>
+<li>frontend와 backend가 같은 네트워크에서 통신할 수 있어야 합니다</li>
+<li>frontend는 호스트 포트 <code>8080</code> → 컨테이너 포트 <code>80</code>으로 바인딩합니다</li>
+<li>backend가 먼저 실행되도록 <code>depends_on</code>을 사용합니다</li>
+<li>작성한 글이 컨테이너를 재시작해도 유지되도록 볼륨을 마운트합니다 (<code>/app/data.json</code>)</li>
+</ul>
+<p><strong>검증</strong></p>
+<ol>
+<li><code>http://192.168.56.10:8080</code> 접속 후 글 작성</li>
+<li><code>docker compose exec</code>로 backend 컨테이너에 접속해 <code>data.json</code> 확인</li>
+<li><code>docker compose down &amp;&amp; docker compose up -d</code> 후 글이 그대로 남아있는지 확인</li>
+</ol>
 
 
 
