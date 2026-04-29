@@ -2669,8 +2669,23 @@ MSA에서는 backend가 몇 개든 <strong>MySQL을 공유하므로 데이터가
 </span></code></pre></div>
 <p>frontend는 여전히 1개입니다.
 트래픽이 많은 backend만 선택적으로 늘릴 수 있습니다.</p>
+<p>브라우저에서 주문을 계속 넣으면서 화면 상단 아키텍처 패널을 확인합니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>http://192.168.56.10:5010
+</span></code></pre></div>
+<p>관찰 포인트:</p>
+<ul>
+<li><strong>Frontend hostname</strong> → 요청마다 <strong>동일</strong> (frontend는 1개이므로)</li>
+<li><strong>Backend hostname</strong> → 요청마다 <strong>계속 바뀜</strong> (3개 backend로 round-robin)</li>
+<li>주문 내역은 어느 backend로 라우팅되든 <strong>동일하게 표시됨</strong></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">선택적 스케일의 핵심</p>
+<p>Frontend hostname은 고정, Backend hostname만 바뀌는 것을 통해
+<strong>필요한 서비스만 골라서 늘릴 수 있음</strong>을 직접 확인할 수 있습니다.
+모놀리식에서는 전체를 복제해야 했지만, MSA에서는 부하가 집중된 backend만 늘리면 됩니다.</p>
+</div>
 <h3 id="4-4">4-4. 정리<a class="headerlink" href="#4-4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-v
 </span></code></pre></div>
 <hr />
 <h2 id="5-vs">5) 모놀리식 vs 마이크로서비스 최종 비교<a class="headerlink" href="#5-vs" title="Permanent link">&para;</a></h2>
