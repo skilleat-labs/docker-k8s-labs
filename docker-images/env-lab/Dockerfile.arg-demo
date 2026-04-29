@@ -1,0 +1,22 @@
+# ARG vs ENV 차이 시연용
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+
+# ARG: 빌드 시에만 존재 — 이미지에 남지 않음
+ARG BUILD_VERSION=unknown
+ARG BUILD_DATE=unknown
+
+# ENV: ARG 값을 ENV로 옮기면 이미지에 남아 런타임에도 사용 가능
+ENV APP_VERSION=$BUILD_VERSION
+ENV BUILD_DATE=$BUILD_DATE
+
+ENV APP_ENV=development
+ENV DB_HOST=localhost
+ENV DB_PORT=5432
+ENV DB_PASSWORD=
+
+EXPOSE 5000
+CMD ["python", "app.py"]

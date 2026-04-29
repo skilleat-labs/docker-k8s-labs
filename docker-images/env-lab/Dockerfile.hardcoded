@@ -1,0 +1,15 @@
+# ❌ 문제 버전: 민감 정보가 이미지에 하드코딩됨
+FROM python:3.11-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY app.py .
+
+# 비밀번호가 이미지 레이어에 그대로 박힘
+ENV APP_ENV=production
+ENV DB_HOST=prod-db.internal
+ENV DB_PORT=5432
+ENV DB_PASSWORD=super_secret_1234
+
+EXPOSE 5000
+CMD ["python", "app.py"]
