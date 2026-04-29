@@ -1088,7 +1088,7 @@
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        사용 이미지
+        실습 전에 — 이 실습에 대해
       
     </span>
   </a>
@@ -1097,6 +1097,17 @@
       
         <li class="md-nav__item">
   <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        사용 이미지
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         사전 정리
@@ -1318,7 +1329,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         📝 핵심 요약
@@ -1361,7 +1372,19 @@
 <li>20~30분: 배포 중단 체험</li>
 <li>30~40분: 스케일링 한계 + 비교</li>
 </ul>
-<h2 id="_2">사용 이미지<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<h2 id="_2">실습 전에 — 이 실습에 대해<a class="headerlink" href="#_2" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">단순화된 모놀리식입니다</p>
+<p>실제 모놀리식 애플리케이션은 대부분 <strong>3-tier 구조</strong>를 사용합니다.
+nginx(프론트) + 하나의 큰 백엔드 앱 + MySQL(DB) 형태이고,
+DB는 별도 서버로 분리되어 있는 게 일반적입니다.</p>
+<p>이 실습의 <code>monolith:v1</code>은 차이를 <strong>극명하게 체험시키기 위한 단순화 버전</strong>입니다.
+SQLite까지 컨테이너 안에 내장해서 문제점을 더 직접적으로 느낄 수 있도록 만들었습니다.</p>
+<p>핵심은 인프라 구조(컨테이너 개수)가 아니라 <strong>"상품·주문·결제 등 모든 기능이
+하나의 배포 단위에 묶여 있다"</strong> 는 점입니다.
+어느 기능 하나를 수정해도 전체를 재배포해야 한다는 것이 모놀리식의 본질적인 한계입니다.</p>
+</div>
+<h2 id="_3">사용 이미지<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>skilleatlab.azurecr.io/monolith:v1
 </span></code></pre></div>
 <p>이 이미지 하나에 <strong>웹 서버 · 상품 모듈 · 주문 모듈 · SQLite DB</strong> 가 모두 들어 있습니다.
@@ -1380,7 +1403,7 @@
 </span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>└─────────────────────────────────────────┘
 </span></code></pre></div>
 <hr />
-<h2 id="_3">사전 정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
+<h2 id="_4">사전 정리<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
 </span></code></pre></div>
@@ -1547,7 +1570,7 @@
 이것이 Kubernetes가 등장한 이유입니다.</p>
 </div>
 <hr />
-<h2 id="_4">📝 핵심 요약<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
+<h2 id="_5">📝 핵심 요약<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
 <ol>
 <li><strong>모놀리식</strong> — 모든 기능이 하나의 프로세스에서 실행, 단순하지만 규모가 커지면 한계</li>
 <li><strong>장애 격리 불가</strong> — 한 기능의 문제가 전체 서비스 중단으로 이어짐</li>
