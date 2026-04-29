@@ -1426,6 +1426,14 @@
 </span></code></pre></div>
 <hr />
 <h2 id="8-compose">8) 도전 과제 : 미니 블로그를 Compose로<a class="headerlink" href="#8-compose" title="Permanent link">&para;</a></h2>
+<p>시작 전에 현재 실행 중인 컨테이너를 모두 정리합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># 실행 중인 컨테이너 전체 중지 및 삭제</span>
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-16-3"><a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+</span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="c1"># 확인</span>
+</span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>docker<span class="w"> </span>ps<span class="w"> </span>-a
+</span></code></pre></div>
+<hr />
 <p><a href="../1-6-2/">1-6-2 도전 과제</a>에서 <code>docker run</code>으로 직접 실행했던 미니 블로그를 이번에는 <code>docker-compose.yml</code> 하나로 구성해보세요.</p>
 <p><strong>조건</strong></p>
 <ul>
