@@ -30,6 +30,7 @@
 | `skilleatlab.azurecr.io/env-lab` | `hardcoded` | 환경변수 실습 - 하드코딩 문제 시연 |
 | `skilleatlab.azurecr.io/env-lab` | `v1` | 환경변수 실습 - ENV 기반 개선 버전 |
 | `skilleatlab.azurecr.io/env-lab` | `arg-demo` | 환경변수 실습 - ARG vs ENV 시연 |
+| `skilleatlab.azurecr.io/monolith` | `v1` | 모놀리식 아키텍처 실습 - 카페 주문 앱 (Flask + SQLite 내장) |
 
 ### 이미지 빌드 및 푸시
 
