@@ -2430,6 +2430,13 @@
 <h2 id="9-host-only">9) 호스트 전용 네트워크 설정 (Host-Only)<a class="headerlink" href="#9-host-only" title="Permanent link">&para;</a></h2>
 <p>포트포워딩 없이 Mac에서 VM으로 직접 접근하기 위해 <strong>호스트 전용 어댑터</strong>를 추가하고 고정 IP를 할당합니다.</p>
 <h3 id="virtualbox">VirtualBox 어댑터 추가<a class="headerlink" href="#virtualbox" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">VM을 먼저 종료하세요</p>
+<p>네트워크 어댑터 설정은 VM이 실행 중일 때는 변경할 수 없습니다.
+VM 터미널에서 아래 명령어로 종료한 후 진행하세요.
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>poweroff
+</span></code></pre></div></p>
+</div>
 <ol>
 <li><code>docker-lab</code> VM 설정 → <code>네트워크</code> → <strong>어댑터 2</strong> 탭 클릭</li>
 <li><strong>사용하기</strong> 체크</li>
@@ -2438,7 +2445,7 @@
 </ol>
 <h3 id="ip-netplan">고정 IP 설정 (Netplan)<a class="headerlink" href="#ip-netplan" title="Permanent link">&para;</a></h3>
 <p>SSH로 접속 후 관리자 권한으로 전환합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>sudo<span class="w"> </span>su
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>sudo<span class="w"> </span>su
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">sudo su 란?</p>
@@ -2447,7 +2454,7 @@
 프롬프트가 <code>vboxuser@docker-lab:~$</code> 에서 <code>root@docker-lab:~#</code> 으로 바뀌면 전환된 것입니다.</p>
 </div>
 <p>Netplan 설정 파일을 열어 <code>enp0s9</code> 인터페이스를 추가합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nano<span class="w"> </span>/etc/netplan/50-cloud-init.yaml
 </span></code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">nano 사용법</p>
@@ -2456,26 +2463,26 @@
 </ul>
 </div>
 <p>아래와 같이 작성합니다.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">network</span><span class="p">:</span>
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
-</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
-</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="nt">enp0s3</span><span class="p">:</span>
-</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="nt">enp0s9</span><span class="p">:</span>
-</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
-</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
-</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.56.10/24</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">network</span><span class="p">:</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">ethernets</span><span class="p">:</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="nt">enp0s3</span><span class="p">:</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="nt">enp0s9</span><span class="p">:</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">      </span><span class="nt">dhcp4</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">no</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="w">      </span><span class="nt">addresses</span><span class="p">:</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">192.168.56.10/24</span>
 </span></code></pre></div>
 <p>저장 후 적용합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s9
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>sudo<span class="w"> </span>netplan<span class="w"> </span>apply
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ip<span class="w"> </span>addr<span class="w"> </span>show<span class="w"> </span>enp0s9
 </span></code></pre></div>
 <p><code>192.168.56.10</code>이 보이면 성공입니다.</p>
 <h3 id="_6">접속 확인<a class="headerlink" href="#_6" title="Permanent link">&para;</a></h3>
 <p>이제 포트포워딩 없이 VM IP로 직접 접근할 수 있습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># Mac 터미널에서</span>
-</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>ssh<span class="w"> </span>vboxuser@192.168.56.10
-</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>curl<span class="w"> </span>http://192.168.56.10:8081
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Mac 터미널에서</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>ssh<span class="w"> </span>vboxuser@192.168.56.10
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>curl<span class="w"> </span>http://192.168.56.10:8081
 </span></code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">이후 실습에서는 <code>192.168.56.10</code> 을 VM 주소로 사용합니다.</p>
