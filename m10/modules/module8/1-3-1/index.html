@@ -1345,6 +1345,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#5-5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5-5. ⭐ 도전과제
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1666,6 +1677,22 @@
 <p>특정 이미지 태그 확인:</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>az<span class="w"> </span>acr<span class="w"> </span>repository<span class="w"> </span>show-tags<span class="w"> </span>--name<span class="w"> </span><span class="nv">$ACR_NAME</span><span class="w"> </span>--repository<span class="w"> </span>myapp
 </span></code></pre></div>
+<p>Azure Portal에서도 확인하세요.</p>
+<ol>
+<li><a href="https://portal.azure.com">portal.azure.com</a> 접속</li>
+<li>상단 검색창에 본인 ACR 이름 입력 → <strong>Container Registry</strong> 클릭</li>
+<li>왼쪽 메뉴 <strong>Repositories</strong> 클릭</li>
+<li><code>myapp</code> 레포지토리 클릭 → <code>v1.0</code> 태그가 보이면 성공</li>
+</ol>
+<hr />
+<h3 id="5-5">5-5. ⭐ 도전과제<a class="headerlink" href="#5-5" title="Permanent link">&para;</a></h3>
+<p>앞서 만든 <code>order-service:v2</code> 이미지를 본인의 ACR에 push해보세요.</p>
+<ul>
+<li>이미지 이름: <code>order-service</code></li>
+<li>태그: <code>v2</code></li>
+<li>push 후 Portal의 <strong>Repositories</strong>에서 <code>order-service</code> 레포지토리와 <code>v2</code> 태그가 보이는지 확인하세요.</li>
+<li>완료되면 강사를 불러서 확인을 받으세요.</li>
+</ul>
 <hr />
 <h2 id="6-acr-pull">6) 내 ACR에서 pull 해보기<a class="headerlink" href="#6-acr-pull" title="Permanent link">&para;</a></h2>
 <p>이미지를 삭제하고 내 ACR에서 다시 받아봅니다.</p>
