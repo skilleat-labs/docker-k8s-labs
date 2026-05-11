@@ -1445,17 +1445,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        스스로 해보기
-      
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1999,14 +1988,6 @@ node_modules 파일이 통째로 Docker 데몬에 전달됩니다.</p>
 <li><strong>경량·재현 가능 이미지</strong>: RUN 통합, .dockerignore, 멀티 스테이지로 이미지 크기 최소화</li>
 <li><strong>캐시·멀티스테이지 최적화</strong>: 의존성 우선 복사로 빌드 캐시 활용, 빌드/실행 환경 분리로 효율성 극대화</li>
 <li><strong>보안은 Dockerfile부터</strong>: root 대신 비-root 사용자 적용으로 최소 권한 원칙 준수</li>
-</ol>
-<hr />
-<h2 id="_4">스스로 해보기<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<ol>
-<li>현재 <code>Dockerfile</code>에 .dockerignore를 적용하고 빌드 컨텍스트 크기를 비교해보세요.</li>
-<li>멀티 스테이지 빌드를 사용하여 Go 애플리케이션의 빌드/실행 환경을 분리해보세요.</li>
-<li>비-root 사용자를 적용한 Python Flask 앱의 Dockerfile을 작성해보세요.</li>
-<li>캐시 전략을 위반하는 Dockerfile을 만들고 빌드 시간을 측정해보세요.</li>
 </ol>
 
 
