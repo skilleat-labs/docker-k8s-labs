@@ -2477,15 +2477,21 @@
 <hr />
 <h2 id="2-python-dockerfile">2) Python 앱 Dockerfile 패턴<a class="headerlink" href="#2-python-dockerfile" title="Permanent link">&para;</a></h2>
 <h3 id="2-1-python-fastapi">2-1. Python FastAPI 앱 구조 이해<a class="headerlink" href="#2-1-python-fastapi" title="Permanent link">&para;</a></h3>
-<p>평가에서 제공되는 스켈레톤 코드는 아래와 같은 구조입니다.</p>
+<p>실제 평가에서는 아래와 같은 구조로 코드가 주어집니다.</p>
+<ul>
+<li><code>app/main.py</code> : FastAPI 앱 코드 (이미 작성되어 있음)</li>
+<li><code>requirements.txt</code> : 앱이 필요로 하는 Python 패키지 목록 (이미 작성되어 있음)</li>
+<li><code>Dockerfile</code> : <strong>비어 있음 → 여러분이 직접 작성해야 하는 파일</strong></li>
+</ul>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>order/
 </span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>├── app/
-</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>│   └── main.py        ← FastAPI 앱 (수정 금지)
-</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>├── requirements.txt   ← 의존성 목록 (수정 금지)
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>│   └── main.py        ← FastAPI 앱 (이미 제공)
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>├── requirements.txt   ← 의존성 목록 (이미 제공)
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>└── Dockerfile         ← 직접 작성
 </span></code></pre></div>
-<p><code>order/</code> 디렉토리 안에서 <code>docker build</code> 를 실행하므로,
-<code>app/main.py</code> 는 빌드 컨텍스트 기준으로 <code>app/main.py</code> 경로입니다.</p>
+<p><code>order/</code> 디렉토리 안에서 <code>docker build</code>를 실행하므로,
+<code>app/main.py</code>는 빌드 컨텍스트 기준으로 <code>app/main.py</code> 경로입니다.</p>
+<p>지금은 연습이므로 위 구조를 직접 만들어보면서 각 파일이 어떤 역할인지 파악합니다.</p>
 <h3 id="2-2">2-2. 연습용 앱 준비<a class="headerlink" href="#2-2" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>mkdir<span class="w"> </span>~/fastapi-practice<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>~/fastapi-practice
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mkdir<span class="w"> </span>app
