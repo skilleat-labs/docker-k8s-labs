@@ -1439,10 +1439,20 @@ Dockerfile과 배포 가이드는 없고, 기술 정보만 인수인계된 상�
 </div>
 <ol>
 <li><strong>데이터 영속성</strong> — 컨테이너 또는 호스트가 재시작되어도 기존 단축 URL이 동작해야 합니다.</li>
-<li><strong>네트워크 보안</strong> — DB는 외부에서 직접 접근할 수 없어야 합니다. (보안팀 요구사항)</li>
+<li>
+<p><strong>네트워크 보안</strong> — DB는 외부에서 직접 접근할 수 없어야 합니다. (보안팀 요구사항)</p>
+<div class="admonition info">
+<p class="admonition-title">네트워크 격리 힌트</p>
+<p><code>docker network create</code> 옵션 없이 생성하면 인터넷 통신이 가능한 네트워크가 만들어집니다.
+특정 옵션을 추가하면 인터넷 게이트웨이가 없는 내부 전용 네트워크를 만들 수 있습니다.
+<code>docker network create --help</code>에서 관련 옵션을 찾아보세요.</p>
+</div>
+<ol>
 <li><strong>자동 복구</strong> — 컨테이너가 비정상 종료되면 자동으로 재시작되어야 합니다.</li>
 <li><strong>상태 확인</strong> — 서비스가 정상인지 외부에서 확인할 수 있어야 합니다.</li>
 <li><strong>이미지 보관</strong> — 빌드한 이미지는 반드시 본인의 ACR에 push해서 보관해야 합니다.</li>
+</ol>
+</li>
 </ol>
 <hr />
 <h2 id="_9">참고 자료<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
