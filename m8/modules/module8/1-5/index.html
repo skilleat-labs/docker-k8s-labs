@@ -2245,7 +2245,7 @@ node_modules 파일이 통째로 Docker 데몬에 전달됩니다.</p>
 </span></code></pre></div>
 <h3 id="7-2">7-2. 컨테이너 정리<a class="headerlink" href="#7-2" title="Permanent link">&para;</a></h3>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span><span class="k">$(</span>docker<span class="w"> </span>ps<span class="w"> </span>-aq<span class="k">)</span><span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
-</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1<span class="w"> </span>myapp:v2<span class="w"> </span>myapp:v3<span class="w"> </span>myapp:v4<span class="w"> </span>myapp:v5<span class="w"> </span>myapp:v6<span class="w"> </span>myapp:multi<span class="w"> </span>myapp:secure<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>docker<span class="w"> </span>rmi<span class="w"> </span>myapp:v1<span class="w"> </span>myapp:v2<span class="w"> </span>myapp:bad<span class="w"> </span>myapp:v4<span class="w"> </span>myapp:v5<span class="w"> </span>myapp:v6<span class="w"> </span>myapp:cache-bad<span class="w"> </span>myapp:multi<span class="w"> </span>myapp:secure<span class="w"> </span><span class="m">2</span>&gt;/dev/null<span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nb">true</span>
 </span></code></pre></div>
 <h3 id="7-3">7-3. 최적화 효과 요약<a class="headerlink" href="#7-3" title="Permanent link">&para;</a></h3>
 <table>
@@ -2271,7 +2271,7 @@ node_modules 파일이 통째로 Docker 데몬에 전달됩니다.</p>
 <td>비슷</td>
 </tr>
 <tr>
-<td>v3</td>
+<td>v4</td>
 <td>캐시 최적화</td>
 <td>비슷</td>
 <td>단축</td>
