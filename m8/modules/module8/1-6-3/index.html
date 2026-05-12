@@ -974,10 +974,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#database_url" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DATABASE_URL 구성 방법
+        운영 요구사항
       
     </span>
   </a>
@@ -985,10 +985,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#database_url" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 요구사항
+        DATABASE_URL 구성 방법
       
     </span>
   </a>
@@ -1317,10 +1317,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#database_url" class="md-nav__link">
+  <a href="#_8" class="md-nav__link">
     <span class="md-ellipsis">
       
-        DATABASE_URL 구성 방법
+        운영 요구사항
       
     </span>
   </a>
@@ -1328,10 +1328,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_8" class="md-nav__link">
+  <a href="#database_url" class="md-nav__link">
     <span class="md-ellipsis">
       
-        운영 요구사항
+        DATABASE_URL 구성 방법
       
     </span>
   </a>
@@ -1539,6 +1539,27 @@ Dockerfile과 배포 가이드는 없고, 기술 정보만 인수인계된 상�
 </tr>
 </tbody>
 </table>
+<h3 id="_8">운영 요구사항<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">구현 방법은 스스로 결정하세요. 아래는 <strong>무엇을</strong> 해야 하는지만 기술합니다.</p>
+</div>
+<ol>
+<li><strong>데이터 영속성</strong> — 컨테이너 또는 호스트가 재시작되어도 기존 단축 URL이 동작해야 합니다.</li>
+<li>
+<p><strong>네트워크 보안</strong> — DB는 외부에서 직접 접근할 수 없어야 합니다. (보안팀 요구사항)</p>
+<div class="admonition info">
+<p class="admonition-title">네트워크 격리 힌트</p>
+<p><code>docker network create</code> 옵션 없이 생성하면 인터넷 통신이 가능한 네트워크가 만들어집니다.
+특정 옵션을 추가하면 인터넷 게이트웨이가 없는 내부 전용 네트워크를 만들 수 있습니다.
+<code>docker network create --help</code>에서 관련 옵션을 찾아보세요.</p>
+</div>
+</li>
+<li>
+<p><strong>자동 복구</strong> — 컨테이너가 비정상 종료되면 자동으로 재시작되어야 합니다.</p>
+</li>
+<li><strong>상태 확인</strong> — 서비스가 정상인지 외부에서 확인할 수 있어야 합니다.</li>
+<li><strong>이미지 보관</strong> — 빌드한 이미지는 반드시 본인의 ACR에 push해서 보관해야 합니다.</li>
+</ol>
 <h3 id="database_url">DATABASE_URL 구성 방법<a class="headerlink" href="#database_url" title="Permanent link">&para;</a></h3>
 <p>앱은 DB에 접속하기 위해 <code>DATABASE_URL</code> 환경변수를 읽습니다. 형식은 아래와 같습니다.</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>postgresql://USER:PASSWORD@HOST:5432/shortener
@@ -1575,27 +1596,6 @@ Dockerfile과 배포 가이드는 없고, 기술 정보만 인수인계된 상�
 <p>같은 Docker 네트워크에 속한 컨테이너끼리는 <strong>컨테이너 이름</strong>으로 서로를 찾을 수 있습니다.
 예를 들어 DB 컨테이너 이름을 <code>postgres</code>로 지정했다면, HOST 자리에 <code>postgres</code>를 넣으면 됩니다.</p>
 </div>
-<h3 id="_8">운영 요구사항<a class="headerlink" href="#_8" title="Permanent link">&para;</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">구현 방법은 스스로 결정하세요. 아래는 <strong>무엇을</strong> 해야 하는지만 기술합니다.</p>
-</div>
-<ol>
-<li><strong>데이터 영속성</strong> — 컨테이너 또는 호스트가 재시작되어도 기존 단축 URL이 동작해야 합니다.</li>
-<li>
-<p><strong>네트워크 보안</strong> — DB는 외부에서 직접 접근할 수 없어야 합니다. (보안팀 요구사항)</p>
-<div class="admonition info">
-<p class="admonition-title">네트워크 격리 힌트</p>
-<p><code>docker network create</code> 옵션 없이 생성하면 인터넷 통신이 가능한 네트워크가 만들어집니다.
-특정 옵션을 추가하면 인터넷 게이트웨이가 없는 내부 전용 네트워크를 만들 수 있습니다.
-<code>docker network create --help</code>에서 관련 옵션을 찾아보세요.</p>
-</div>
-<ol>
-<li><strong>자동 복구</strong> — 컨테이너가 비정상 종료되면 자동으로 재시작되어야 합니다.</li>
-<li><strong>상태 확인</strong> — 서비스가 정상인지 외부에서 확인할 수 있어야 합니다.</li>
-<li><strong>이미지 보관</strong> — 빌드한 이미지는 반드시 본인의 ACR에 push해서 보관해야 합니다.</li>
-</ol>
-</li>
-</ol>
 <hr />
 <h2 id="_9">참고 자료<a class="headerlink" href="#_9" title="Permanent link">&para;</a></h2>
 <div class="admonition tip">
