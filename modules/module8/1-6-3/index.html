@@ -2283,7 +2283,7 @@
 → <a href="https://hub.docker.com/_/postgres">https://hub.docker.com/_/postgres</a></p>
 <p>Docker Hub 페이지에서 다음 섹션을 찾아보세요:</p>
 <ul>
-<li><strong>Environment Variables</strong> — DB 이름, 사용자, 비밀번호를 어떻게 설정하는지</li>
+<li><strong>Environment Variables</strong> — PostgreSQL 컨테이너는 <code>POSTGRES_DB</code>, <code>POSTGRES_USER</code>, <code>POSTGRES_PASSWORD</code> 환경변수로 DB를 초기 설정합니다.</li>
 <li><strong>Initialization scripts</strong> — <code>init.sql</code>을 컨테이너의 <code>/docker-entrypoint-initdb.d/</code> 경로에 마운트하면 최초 실행 시 자동으로 실행됩니다.</li>
 <li><strong>Where to Store Data</strong> — 데이터가 어디에 저장되는지, 유실을 막으려면 어떻게 해야 하는지</li>
 </ul>
