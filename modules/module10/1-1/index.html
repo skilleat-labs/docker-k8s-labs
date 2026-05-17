@@ -670,10 +670,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-kubeconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2) 연결 확인
+        2) kubeconfig 자동 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 연결 확인
       
     </span>
   </a>
@@ -1417,10 +1428,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2" class="md-nav__link">
+  <a href="#2-kubeconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2) 연결 확인
+        2) kubeconfig 자동 설정
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3) 연결 확인
       
     </span>
   </a>
@@ -1580,31 +1602,67 @@
 <li><strong>Container Runtime</strong>: <code>dockerd (moby)</code> — Docker 명령어 호환</li>
 <li><strong>Kubernetes Version</strong>: 최신 안정 버전 (예: v1.29.x)</li>
 </ol>
-<h3 id="2">2) 연결 확인<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>config<span class="w"> </span>current-context
+<h3 id="2-kubeconfig">2) kubeconfig 자동 설정<a class="headerlink" href="#2-kubeconfig" title="Permanent link">&para;</a></h3>
+<p>Rancher Desktop을 설치하고 실행하면 클러스터 접속 정보가 <strong>자동으로</strong> kubeconfig 파일에 추가됩니다. 별도 설정 없이 바로 <code>kubectl</code>을 사용할 수 있습니다.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio" /><input id="__tabbed_1_2" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="__tabbed_1_1">PowerShell</label><label for="__tabbed_1_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>kubeconfig 파일 위치를 확인합니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$env:USERPROFILE</span> <span class="p">+</span> <span class="s2">&quot;\.kube\config&quot;</span>
+</span></code></pre></div>
+<p>파일 내용을 확인합니다.</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;$env:USERPROFILE\.kube\config&quot;</span>
+</span></code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>kubeconfig 파일 위치를 확인합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nb">echo</span><span class="w"> </span>~/.kube/config
+</span></code></pre></div>
+<p>파일 내용을 확인합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>cat<span class="w"> </span>~/.kube/config
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<p><code>rancher-desktop</code> 클러스터 항목이 포함되어 있으면 정상입니다.</p>
+<h3 id="3_1">3) 연결 확인<a class="headerlink" href="#3_1" title="Permanent link">&para;</a></h3>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio" /><input id="__tabbed_2_2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="__tabbed_2_1">PowerShell</label><label for="__tabbed_2_2">Bash</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">kubectl</span> <span class="n">config</span> <span class="n">current-context</span>
 </span></code></pre></div>
 <p><code>rancher-desktop</code>이 출력되면 정상입니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">kubectl</span> <span class="n">get</span> <span class="n">nodes</span>
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>NAME                   STATUS   ROLES                  AGE   VERSION
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>lima-rancher-desktop   Ready    control-plane,master   2m    v1.29.x
+</div>
+<div class="tabbed-block">
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>config<span class="w"> </span>current-context
+</span></code></pre></div>
+<p><code>rancher-desktop</code>이 출력되면 정상입니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
+</span></code></pre></div>
+</div>
+</div>
+</div>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>NAME                   STATUS   ROLES                  AGE   VERSION
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>lima-rancher-desktop   Ready    control-plane,master   2m    v1.29.x
 </span></code></pre></div>
 <hr />
 <h2 id="_3">공통 확인 사항<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
 <h3 id="kubectl">kubectl 버전 확인<a class="headerlink" href="#kubectl" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>version<span class="w"> </span>--client
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>kubectl<span class="w"> </span>version<span class="w"> </span>--client
 </span></code></pre></div>
 <h3 id="_4">클러스터 전체 상태 확인<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h3>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>cluster-info
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>kubectl<span class="w"> </span>cluster-info
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Kubernetes control plane is running at https://127.0.0.1:6443
+<div class="language-text highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>Kubernetes control plane is running at https://127.0.0.1:6443
 </span></code></pre></div>
 <h3 id="_5">노드 상세 정보 확인<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h3>
 <p><code>-o wide</code> 옵션을 붙이면 기본 출력보다 더 많은 정보를 한눈에 볼 수 있습니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide
 </span></code></pre></div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>NAME             STATUS   ROLES           AGE   VERSION   INTERNAL-IP    OS-IMAGE         KERNEL-VERSION   CONTAINER-RUNTIME
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker-desktop   Ready    control-plane   5m    v1.29.x   192.168.65.3   Docker Desktop   6.6.x            docker://26.x.x
+<div class="language-text highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>NAME             STATUS   ROLES           AGE   VERSION   INTERNAL-IP    OS-IMAGE         KERNEL-VERSION   CONTAINER-RUNTIME
+</span><span id="__span-16-2"><a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>docker-desktop   Ready    control-plane   5m    v1.29.x   192.168.65.3   Docker Desktop   6.6.x            docker://26.x.x
 </span></code></pre></div>
 <p>기본 <code>kubectl get nodes</code>와 비교해보세요. <code>-o wide</code>에서 추가로 보이는 항목은 다음과 같습니다.</p>
 <table>
@@ -1639,9 +1697,9 @@
 <hr />
 <h2 id="aks">(선택) AKS 연결 — 추후 사용<a class="headerlink" href="#aks" title="Permanent link">&para;</a></h2>
 <p>로컬 환경에 익숙해진 후 Azure AKS로 전환할 때는 아래 명령어로 컨텍스트를 추가합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>az<span class="w"> </span>aks<span class="w"> </span>get-credentials<span class="w"> </span>--resource-group<span class="w"> </span>&lt;rg이름&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;aks이름&gt;
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>kubectl<span class="w"> </span>config<span class="w"> </span>get-contexts<span class="w">        </span><span class="c1"># 등록된 클러스터 목록 확인</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span class="w"> </span>&lt;이름&gt;<span class="w">  </span><span class="c1"># 클러스터 전환</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>az<span class="w"> </span>aks<span class="w"> </span>get-credentials<span class="w"> </span>--resource-group<span class="w"> </span>&lt;rg이름&gt;<span class="w"> </span>--name<span class="w"> </span>&lt;aks이름&gt;
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>kubectl<span class="w"> </span>config<span class="w"> </span>get-contexts<span class="w">        </span><span class="c1"># 등록된 클러스터 목록 확인</span>
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>kubectl<span class="w"> </span>config<span class="w"> </span>use-context<span class="w"> </span>&lt;이름&gt;<span class="w">  </span><span class="c1"># 클러스터 전환</span>
 </span></code></pre></div>
 <hr />
 <h2 id="windows-powershell">Windows PowerShell 사용 시 참고 사항<a class="headerlink" href="#windows-powershell" title="Permanent link">&para;</a></h2>
