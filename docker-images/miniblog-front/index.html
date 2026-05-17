@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미니 블로그</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; color: #333; }
+
+    header {
+      background: #2563eb;
+      color: white;
+      padding: 16px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    header h1 { font-size: 1.4rem; font-weight: 700; }
+    #api-version { font-size: 0.75rem; opacity: 0.8; }
+
+    .container { max-width: 720px; margin: 32px auto; padding: 0 16px; }
+
+    .card {
+      background: white;
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+    }
+    .card h2 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; color: #111; }
+
+    .form-row { display: flex; flex-direction: column; gap: 10px; }
+    .form-row input, .form-row textarea {
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+    .form-row input:focus, .form-row textarea:focus { border-color: #2563eb; }
+    .form-row textarea { resize: vertical; min-height: 80px; }
+    .form-row button {
+      align-self: flex-end;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .form-row button:hover { background: #1d4ed8; }
+    .form-row button:disabled { background: #93c5fd; cursor: not-allowed; }
+
+    #post-list { display: flex; flex-direction: column; gap: 12px; }
+    .post-item {
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      padding: 16px;
+    }
+    .post-item .post-title { font-weight: 600; font-size: 1rem; margin-bottom: 6px; }
+    .post-item .post-content { font-size: 0.875rem; color: #555; margin-bottom: 8px; line-height: 1.5; }
+    .post-item .post-meta { font-size: 0.75rem; color: #9ca3af; }
+    .post-item .post-meta span + span::before { content: ' · '; }
+
+    #status-bar {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: #1f2937;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+      pointer-events: none;
+    }
+    #status-bar.show { opacity: 1; }
+    #status-bar.error { background: #dc2626; }
+
+    .empty { color: #9ca3af; font-size: 0.875rem; text-align: center; padding: 24px 0; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>미니 블로그</h1>
+  <span id="api-version">API 연결 중...</span>
+</header>
+
+<div class="container">
+  <div class="card">
+    <h2>새 글 작성</h2>
+    <div class="form-row">
+      <input id="inp-title" type="text" placeholder="제목" />
+      <input id="inp-author" type="text" placeholder="작성자 (선택)" />
+      <textarea id="inp-content" placeholder="내용을 입력하세요"></textarea>
+      <button id="btn-submit" onclick="submitPost()">게시하기</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>게시글 목록</h2>
+    <div id="post-list"><p class="empty">불러오는 중...</p></div>
+  </div>
+</div>
+
+<div id="status-bar"></div>
+
+<script>
+  const API = '/api';
+
+  function showStatus(msg, isError = false) {
+    const bar = document.getElementById('status-bar');
+    bar.textContent = msg;
+    bar.className = 'show' + (isError ? ' error' : '');
+    clearTimeout(bar._t);
+    bar._t = setTimeout(() => bar.className = '', 2500);
+  }
+
+  async function fetchVersion() {
+    try {
+      const res = await fetch(`${API}/health`);
+      const data = await res.json();
+      document.getElementById('api-version').textContent = `API v${data.version}`;
+    } catch {
+      document.getElementById('api-version').textContent = 'API 연결 실패';
+    }
+  }
+
+  async function loadPosts() {
+    try {
+      const res = await fetch(`${API}/posts`);
+      const posts = await res.json();
+      const list = document.getElementById('post-list');
+      if (!posts.length) {
+        list.innerHTML = '<p class="empty">아직 게시글이 없습니다.</p>';
+        return;
+      }
+      list.innerHTML = posts.slice().reverse().map(p => `
+        <div class="post-item">
+          <div class="post-title">${escHtml(p.title)}</div>
+          <div class="post-content">${escHtml(p.content)}</div>
+          <div class="post-meta">
+            ${p.author ? `<span>${escHtml(p.author)}</span>` : ''}
+            <span>#${p.id}</span>
+            ${p.created_at ? `<span>${new Date(p.created_at).toLocaleString('ko-KR')}</span>` : ''}
+          </div>
+        </div>
+      `).join('');
+    } catch (e) {
+      document.getElementById('post-list').innerHTML = '<p class="empty">게시글을 불러오지 못했습니다.</p>';
+      showStatus('게시글 로드 실패', true);
+    }
+  }
+
+  async function submitPost() {
+    const title   = document.getElementById('inp-title').value.trim();
+    const author  = document.getElementById('inp-author').value.trim();
+    const content = document.getElementById('inp-content').value.trim();
+
+    if (!title || !content) { showStatus('제목과 내용을 입력하세요', true); return; }
+
+    const btn = document.getElementById('btn-submit');
+    btn.disabled = true;
+
+    try {
+      const body = { title, content };
+      if (author) body.author = author;
+
+      const res = await fetch(`${API}/posts`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+      });
+
+      if (!res.ok) throw new Error(res.statusText);
+
+      document.getElementById('inp-title').value = '';
+      document.getElementById('inp-author').value = '';
+      document.getElementById('inp-content').value = '';
+      showStatus('게시글이 등록되었습니다.');
+      await loadPosts();
+    } catch (e) {
+      showStatus('게시글 등록 실패', true);
+    } finally {
+      btn.disabled = false;
+    }
+  }
+
+  function escHtml(str) {
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  fetchVersion();
+  loadPosts();
+</script>
+
+</body>
+</html>
