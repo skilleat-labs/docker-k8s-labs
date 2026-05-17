@@ -19,7 +19,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install dependencies
-        run: pip install mkdocs-material
+        run: pip install -r requirements.txt
 
       # 전체 사이트 빌드 → /
       - name: Build main site
