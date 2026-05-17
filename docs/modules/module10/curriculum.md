@@ -1,19 +1,19 @@
-# Kubernetes 기반 서비스 운영 커리큘럼 — 15시간 (2일)
+# Kubernetes 기반 서비스 운영 커리큘럼 — 18시간 (2일)
 
 ## 전체 타임테이블
 
-### Day 1 (6시간) — 11:00 시작
+### Day 1 (9시간) — 09:00 시작
 
 | 시간 | 단원 | 내용 | 형태 |
 |------|------|------|------|
-| 11:00~12:00 | 1-1 | Docker Desktop / Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인 | 실습 |
+| 09:00~10:30 | 1-1 | Docker Desktop / Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인 | 실습 |
+| 10:30~10:45 | — | 휴식 | — |
+| 10:45~12:00 | 1-2 | kubectl 기본 명령어 · Node/Pod/Namespace 탐색 · 클러스터 구조 이해 | 실습+강의 |
 | 12:00~13:00 | — | 점심 | — |
-| 13:00~14:00 | 1-2 | kubectl 기본 명령어 · Node/Pod/Namespace 탐색 · 클러스터 구조 이해 | 실습+강의 |
-| 14:00~14:15 | — | 휴식 | — |
-| 14:15~15:30 | 2-1 | Pod 직접 생성 · Deployment 선언 · ReplicaSet 동작 확인 | 실습 |
-| 15:30~15:45 | — | 휴식 | — |
-| 15:45~16:45 | 2-2 | ClusterIP · NodePort · port-forward 비교 실습 · 서비스 디스커버리 | 실습 |
-| 16:45~18:00 | 2-3 | ConfigMap 환경변수 주입 · Secret base64 인코딩 · 볼륨 마운트 방식 | 실습 |
+| 13:00~14:30 | 2-1 | Pod 직접 생성 · Deployment 선언 · ReplicaSet 동작 확인 | 실습 |
+| 14:30~14:45 | — | 휴식 | — |
+| 14:45~16:00 | 2-2 | ClusterIP · NodePort · port-forward 비교 실습 · 서비스 디스커버리 | 실습 |
+| 16:00~18:00 | 2-3 | ConfigMap 환경변수 주입 · Secret base64 인코딩 · 볼륨 마운트 방식 | 실습 |
 
 ### Day 2 (9시간) — 09:00 시작
 
