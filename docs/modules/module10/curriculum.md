@@ -6,14 +6,17 @@
 
 | 시간 | 단원 | 내용 | 형태 |
 |------|------|------|------|
-| 09:00~10:30 | 1-1 | Docker Desktop / Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인 | 실습 |
+| 09:00~10:30 | 1-1 | VS Code · Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인 | 실습 |
 | 10:30~10:45 | — | 휴식 | — |
 | 10:45~12:00 | 1-2 | kubectl 기본 명령어 · Node/Pod/Namespace 탐색 · 클러스터 구조 이해 | 실습+강의 |
 | 12:00~13:00 | — | 점심 | — |
-| 13:00~14:30 | 2-1 | Pod 직접 생성 · Deployment 선언 · ReplicaSet 동작 확인 | 실습 |
+| 13:00~13:45 | 2-1-1 | Pod 직접 생성 · dry-run · 멀티 컨테이너 · Label | 실습 |
+| 13:45~14:30 | 2-1-2 | ReplicaSet 자동 복구 · Deployment · 롤링 업데이트 · 롤백 | 실습 |
 | 14:30~14:45 | — | 휴식 | — |
-| 14:45~16:00 | 2-2 | ClusterIP · NodePort · port-forward 비교 실습 · 서비스 디스커버리 | 실습 |
-| 16:00~18:00 | 2-3 | ConfigMap 환경변수 주입 · Secret base64 인코딩 · 볼륨 마운트 방식 | 실습 |
+| 14:45~15:30 | 2-2 | ClusterIP · NodePort · port-forward · 서비스 디스커버리 | 실습 |
+| 15:30~16:00 | 도전 과제 1 | Docker Guide를 쿠버네티스에 직접 배포 | 개인 실습 |
+| 16:00~16:15 | — | 휴식 | — |
+| 16:15~18:00 | 2-3 | ConfigMap 환경변수 주입 · Secret base64 인코딩 · 볼륨 마운트 방식 | 실습 |
 
 ### Day 2 (9시간) — 09:00 시작
 
