@@ -31,9 +31,7 @@ YAML 작성부터 접속 확인까지 스스로 완성해보세요.
 
 ## 완료 기준
 
-브라우저에서 아래 화면이 보이면 성공입니다.
-
-![Docker Getting Started](https://docs.docker.com/assets/images/getting-started-docker.webp)
+브라우저에서 Docker Guide 페이지가 열리면 성공입니다.
 
 ---
 
