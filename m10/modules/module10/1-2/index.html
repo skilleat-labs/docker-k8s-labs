@@ -1411,7 +1411,7 @@
 <h2 id="2">2) 노드 탐색<a class="headerlink" href="#2" title="Permanent link">&para;</a></h2>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>nodes<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">   </span><span class="c1"># IP, OS, Container Runtime 포함</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>docker-desktop
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>node<span class="w"> </span>rancher-desktop
 </span></code></pre></div>
 <p><code>describe</code> 출력에서 확인할 항목:</p>
 <ul>
@@ -1422,13 +1422,22 @@
 </ul>
 <hr />
 <h2 id="3-kube-system">3) kube-system 네임스페이스 탐색<a class="headerlink" href="#3-kube-system" title="Permanent link">&para;</a></h2>
-<p>Control Plane 컴포넌트는 <code>kube-system</code> 네임스페이스에서 Pod로 실행됩니다.</p>
+<p>K8s 내부 시스템 Pod들은 <code>kube-system</code> 네임스페이스에서 실행됩니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-n<span class="w"> </span>kube-system
 </span></code></pre></div>
 <blockquote>
 <p><code>-n kube-system</code>은 <strong>네임스페이스를 지정</strong>하는 옵션입니다. 네임스페이스는 뒤에서 자세히 배우지만, 지금은 "K8s 내부 시스템 Pod들이 모여있는 별도 공간" 정도로 이해하면 됩니다.</p>
 </blockquote>
-<p>주요 Pod 목록:</p>
+<p>Rancher Desktop(K3s) 환경에서는 아래와 같은 Pod 목록이 출력됩니다.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>NAME                                      READY   STATUS      RESTARTS        AGE
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>coredns-695cbbfcb9-jgvg8                  1/1     Running     13 (21h ago)    62d
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>helm-install-traefik-crd-zs848            0/1     Completed   0               62d
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>helm-install-traefik-rzzpd                0/1     Completed   1               62d
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>local-path-provisioner-546dfc6456-79c6c   1/1     Running     8 (21h ago)     62d
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>metrics-server-c8774f4f4-b8r9n            1/1     Running     11 (21h ago)    62d
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>svclb-traefik-846cd0f5-shqnb              2/2     Running     16 (21h ago)    62d
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>traefik-788bc4688c-jwc4j                  1/1     Running     11 (21h ago)    62d
+</span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -1438,74 +1447,81 @@
 </thead>
 <tbody>
 <tr>
-<td><code>kube-apiserver-*</code></td>
-<td>API Server — 모든 요청의 진입점</td>
-</tr>
-<tr>
-<td><code>etcd-*</code></td>
-<td>etcd — 클러스터 상태 저장소</td>
-</tr>
-<tr>
-<td><code>kube-scheduler-*</code></td>
-<td>Scheduler — Pod 배치 결정</td>
-</tr>
-<tr>
-<td><code>kube-controller-manager-*</code></td>
-<td>Controller Manager — 상태 유지</td>
-</tr>
-<tr>
-<td><code>kube-proxy-*</code></td>
-<td>kube-proxy — 네트워크 규칙</td>
-</tr>
-<tr>
 <td><code>coredns-*</code></td>
 <td>CoreDNS — 클러스터 내부 DNS</td>
 </tr>
+<tr>
+<td><code>helm-install-traefik-*</code></td>
+<td>Traefik Ingress Controller 설치 Job (완료 후 Completed 상태)</td>
+</tr>
+<tr>
+<td><code>local-path-provisioner-*</code></td>
+<td>로컬 디스크 PVC 자동 프로비저닝</td>
+</tr>
+<tr>
+<td><code>metrics-server-*</code></td>
+<td>CPU·메모리 메트릭 수집 (HPA에 사용)</td>
+</tr>
+<tr>
+<td><code>svclb-traefik-*</code></td>
+<td>Traefik 서비스용 로드밸런서</td>
+</tr>
+<tr>
+<td><code>traefik-*</code></td>
+<td>Ingress Controller — 외부 트래픽 라우팅</td>
+</tr>
 </tbody>
 </table>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>kube-apiserver-docker-desktop<span class="w"> </span>-n<span class="w"> </span>kube-system
+<div class="admonition note">
+<p class="admonition-title">K3s는 control plane이 Pod로 뜨지 않습니다</p>
+<p>일반 Kubernetes에서는 <code>kube-apiserver-*</code>, <code>etcd-*</code>, <code>kube-scheduler-*</code> 등이 Pod로 보이지만,
+Rancher Desktop이 사용하는 <strong>K3s</strong>는 이 컴포넌트들을 단일 프로세스로 실행합니다.
+따라서 <code>kube-system</code>에서 보이지 않는 것이 정상입니다.</p>
+</div>
+<p>coredns Pod의 상세 정보를 확인합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>describe<span class="w"> </span>pod<span class="w"> </span>-l<span class="w"> </span>k8s-app<span class="o">=</span>kube-dns<span class="w"> </span>-n<span class="w"> </span>kube-system
 </span></code></pre></div>
 <hr />
 <h2 id="4-alias">4) 리소스 단축 이름(alias)<a class="headerlink" href="#4-alias" title="Permanent link">&para;</a></h2>
 <p>자주 쓰이는 단축 이름을 익혀둡니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>po<span class="w">          </span><span class="c1"># pods</span>
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy<span class="w">      </span><span class="c1"># deployments</span>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w">         </span><span class="c1"># services</span>
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w">          </span><span class="c1"># configmaps</span>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ns<span class="w">          </span><span class="c1"># namespaces</span>
-</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pv<span class="w">          </span><span class="c1"># persistentvolumes</span>
-</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w">         </span><span class="c1"># persistentvolumeclaims</span>
-</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w">         </span><span class="c1"># horizontalpodautoscalers</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>po<span class="w">          </span><span class="c1"># pods</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>deploy<span class="w">      </span><span class="c1"># deployments</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>svc<span class="w">         </span><span class="c1"># services</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>cm<span class="w">          </span><span class="c1"># configmaps</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>ns<span class="w">          </span><span class="c1"># namespaces</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pv<span class="w">          </span><span class="c1"># persistentvolumes</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pvc<span class="w">         </span><span class="c1"># persistentvolumeclaims</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>kubectl<span class="w"> </span>get<span class="w"> </span>hpa<span class="w">         </span><span class="c1"># horizontalpodautoscalers</span>
 </span></code></pre></div>
 <hr />
 <h2 id="5">5) 출력 형식 옵션<a class="headerlink" href="#5" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w">                   </span><span class="c1"># 기본 테이블</span>
-</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">           </span><span class="c1"># 확장 정보 (IP, Node)</span>
-</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w">           </span><span class="c1"># YAML 전체 출력</span>
-</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>json<span class="w">           </span><span class="c1"># JSON 출력</span>
-</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels<span class="w">     </span><span class="c1"># 라벨 포함</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w">                   </span><span class="c1"># 기본 테이블</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">           </span><span class="c1"># 확장 정보 (IP, Node)</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w">           </span><span class="c1"># YAML 전체 출력</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>json<span class="w">           </span><span class="c1"># JSON 출력</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels<span class="w">     </span><span class="c1"># 라벨 포함</span>
 </span></code></pre></div>
 <hr />
 <h2 id="6">6) 네임스페이스 전체 조회<a class="headerlink" href="#6" title="Permanent link">&para;</a></h2>
 <blockquote>
 <p><code>-n</code>, <code>-A</code> 옵션은 모두 네임스페이스와 관련된 옵션입니다. 네임스페이스는 뒤에서 자세히 배웁니다. 지금은 아래 명령어를 실행해서 출력이 어떻게 다른지만 확인합니다.</p>
 </blockquote>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w">                </span><span class="c1"># 모든 네임스페이스의 Pod를 한 번에 조회</span>
-</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--all-namespaces<span class="w">  </span><span class="c1"># 위와 동일</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-A<span class="w">                </span><span class="c1"># 모든 네임스페이스의 Pod를 한 번에 조회</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--all-namespaces<span class="w">  </span><span class="c1"># 위와 동일</span>
 </span></code></pre></div>
 <p><code>-A</code> 옵션을 붙이면 <code>NAMESPACE</code> 컬럼이 추가되어 어느 공간의 Pod인지 함께 표시됩니다.</p>
 <hr />
 <h2 id="7-api-server">7) 실습 — API Server에 직접 요청<a class="headerlink" href="#7-api-server" title="Permanent link">&para;</a></h2>
 <p>kubectl은 내부적으로 K8s REST API를 호출합니다. 프록시를 띄워 직접 확인합니다.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>kubectl<span class="w"> </span>proxy<span class="w"> </span><span class="p">&amp;</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>kubectl<span class="w"> </span>proxy<span class="w"> </span><span class="p">&amp;</span>
 </span></code></pre></div>
 <p>새 터미널에서:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>curl<span class="w"> </span>http://localhost:8001/api/v1/pods
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>curl<span class="w"> </span>http://localhost:8001/api/v1/pods
 </span></code></pre></div>
 <p>Pod 목록이 JSON으로 반환됩니다. (아직 아무것도 없으면 빈 <code>items</code> 배열)</p>
 <p>프록시 종료:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nb">fg</span>
-</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="c1"># Ctrl+C</span>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nb">fg</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1"># Ctrl+C</span>
 </span></code></pre></div>
 <hr />
 <h2 id="_3">정리<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h2>
