@@ -46,7 +46,8 @@ nav:
           - 2-2. Service 실습 (ClusterIP · NodePort · port-forward): modules/module10/2-2.md
           - 도전 과제 1. Docker Guide 배포: modules/module10/2-2-challenge.md
           - 2-3. ConfigMap & Secret 실습: modules/module10/2-3.md
-          - 2-4. 미니 블로그 3-tier 배포 실습: modules/module10/2-4.md
+          - 2-4. Namespace 실습: modules/module10/2-4.md
+          - 2-5. 미니 블로그 3-tier 배포 실습: modules/module10/2-5.md
       - 단원 3. 네트워킹과 스토리지:
           - 3-1. Ingress & Gateway API 실습: modules/module10/3-1.md
           - 3-2. PersistentVolume / PVC 실습: modules/module10/3-2.md
