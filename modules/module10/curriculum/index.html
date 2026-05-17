@@ -828,6 +828,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../2-2-challenge/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    도전 과제 1. Docker Guide 배포
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../2-3/" class="md-nav__link">
         
   
@@ -863,7 +891,35 @@
   <span class="md-ellipsis">
     
   
-    2-4. 미니 블로그 3-tier 배포 실습
+    2-4. Namespace 실습
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    2-5. 미니 블로그 3-tier 배포 실습
   
 
     
@@ -1310,7 +1366,7 @@
 <tr>
 <td>09:00~10:30</td>
 <td>1-1</td>
-<td>Docker Desktop / Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인</td>
+<td>VS Code · Rancher Desktop 설치 · Kubernetes 활성화 · 클러스터 확인</td>
 <td>실습</td>
 </tr>
 <tr>
@@ -1332,9 +1388,15 @@
 <td>—</td>
 </tr>
 <tr>
-<td>13:00~14:30</td>
-<td>2-1</td>
-<td>Pod 직접 생성 · Deployment 선언 · ReplicaSet 동작 확인</td>
+<td>13:00~13:45</td>
+<td>2-1-1</td>
+<td>Pod 직접 생성 · dry-run · 멀티 컨테이너 · Label</td>
+<td>실습</td>
+</tr>
+<tr>
+<td>13:45~14:30</td>
+<td>2-1-2</td>
+<td>ReplicaSet 자동 복구 · Deployment · 롤링 업데이트 · 롤백</td>
 <td>실습</td>
 </tr>
 <tr>
@@ -1344,13 +1406,25 @@
 <td>—</td>
 </tr>
 <tr>
-<td>14:45~16:00</td>
+<td>14:45~15:30</td>
 <td>2-2</td>
-<td>ClusterIP · NodePort · port-forward 비교 실습 · 서비스 디스커버리</td>
+<td>ClusterIP · NodePort · port-forward · 서비스 디스커버리</td>
 <td>실습</td>
 </tr>
 <tr>
-<td>16:00~18:00</td>
+<td>15:30~16:00</td>
+<td>도전 과제 1</td>
+<td>Docker Guide를 쿠버네티스에 직접 배포</td>
+<td>개인 실습</td>
+</tr>
+<tr>
+<td>16:00~16:15</td>
+<td>—</td>
+<td>휴식</td>
+<td>—</td>
+</tr>
+<tr>
+<td>16:15~18:00</td>
 <td>2-3</td>
 <td>ConfigMap 환경변수 주입 · Secret base64 인코딩 · 볼륨 마운트 방식</td>
 <td>실습</td>
@@ -1381,8 +1455,14 @@
 <td>—</td>
 </tr>
 <tr>
-<td>10:15~12:00</td>
+<td>10:15~11:00</td>
 <td>2-4</td>
+<td>Namespace 생성 · 리소스 격리 · 컨텍스트 전환 · 삭제 연쇄 확인</td>
+<td>실습</td>
+</tr>
+<tr>
+<td>11:00~12:00</td>
+<td>2-5</td>
 <td>미니 블로그 3-tier 배포 — web + api + db 전체 구성</td>
 <td>실습</td>
 </tr>
@@ -1457,7 +1537,7 @@ Probe로 비정상 Pod를 자동 감지·재시작하고, HPA로 부하에 따�
 <tbody>
 <tr>
 <td>기본</td>
-<td>2-4 미니 블로그를 처음부터 혼자 재배포</td>
+<td>2-5 미니 블로그를 처음부터 혼자 재배포</td>
 <td>⭐⭐</td>
 </tr>
 <tr>
