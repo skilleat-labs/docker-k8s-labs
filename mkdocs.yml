@@ -41,7 +41,8 @@ nav:
           - 1-1. 실습 환경 설정 (Docker Desktop / Rancher Desktop): modules/module10/1-1.md
           - 1-2. kubectl 기본 명령어 & 클러스터 구조 탐색: modules/module10/1-2.md
       - 단원 2. 핵심 리소스와 설정 관리:
-          - 2-1. Pod & Deployment 실습: modules/module10/2-1.md
+          - 2-1-1. Pod 실습: modules/module10/2-1-1.md
+          - 2-1-2. Deployment 실습: modules/module10/2-1-2.md
           - 2-2. Service 실습 (ClusterIP · NodePort · port-forward): modules/module10/2-2.md
           - 2-3. ConfigMap & Secret 실습: modules/module10/2-3.md
           - 2-4. 미니 블로그 3-tier 배포 실습: modules/module10/2-4.md
