@@ -1154,6 +1154,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#label-pod" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        label을 처음부터 붙여서 Pod 만들기
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1440,10 +1451,60 @@ YAML은 들여쓰기가 곧 구조이므로, 직접 쳐보는 것이 가장 빠�
 </span><span id="__span-24-3"><a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>kubectl<span class="w"> </span>label<span class="w"> </span>pod<span class="w"> </span>nginx-pod<span class="w"> </span>version-<span class="w">            </span><span class="c1"># label 삭제 (키 뒤에 - 붙임)</span>
 </span><span id="__span-24-4"><a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels<span class="w">                  </span><span class="c1"># 변경 결과 확인</span>
 </span></code></pre></div>
+<h3 id="label-pod">label을 처음부터 붙여서 Pod 만들기<a class="headerlink" href="#label-pod" title="Permanent link">&para;</a></h3>
+<p>Pod를 생성할 때부터 label을 지정하는 두 가지 방법을 익혀둡니다.</p>
+<p><strong>방법 1 — kubectl run에 <code>--labels</code> 옵션 사용</strong></p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>labeled-pod<span class="w"> </span>--image<span class="o">=</span>nginx:1.25<span class="w"> </span>--labels<span class="o">=</span><span class="s2">&quot;app=web,env=dev&quot;</span>
+</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
+</span></code></pre></div>
+<p><strong>방법 2 — YAML의 <code>metadata.labels</code>에 직접 작성</strong></p>
+<p><code>pod-labeled.yaml</code> 파일을 직접 타이핑합니다.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nt">metadata</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← 리소스의 이름·네임스페이스·label 등 식별 정보</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeled-pod2</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← label은 metadata 바로 아래에 key: value 형태로 작성</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
+</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pod-labeled.yaml
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">label 위치 정리</p>
+<table>
+<thead>
+<tr>
+<th>위치</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>metadata.labels</code></td>
+<td>Pod 자체에 붙는 label — 다른 리소스가 이 Pod를 선택할 때 사용</td>
+</tr>
+<tr>
+<td><code>spec.template.metadata.labels</code></td>
+<td>Deployment·ReplicaSet이 관리할 Pod 템플릿에 붙는 label</td>
+</tr>
+<tr>
+<td><code>spec.selector.matchLabels</code></td>
+<td>Deployment·ReplicaSet이 어떤 label을 가진 Pod를 관리할지 지정</td>
+</tr>
+</tbody>
+</table>
+<p>지금은 Pod 단독 실습이므로 <code>metadata.labels</code>만 사용합니다. Deployment에서는 세 위치를 함께 맞춰야 하므로 2-1-2에서 다시 살펴봅니다.</p>
+</div>
 <hr />
 <h2 id="_4">정리 (리소스 삭제)<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-nginx.yaml
-</span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-multi.yaml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-nginx.yaml
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-multi.yaml
 </span></code></pre></div>
 <hr />
 <h2 id="_5">핵심 정리<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
