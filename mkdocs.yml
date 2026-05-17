@@ -44,6 +44,7 @@ nav:
           - 2-1-1. Pod 실습: modules/module10/2-1-1.md
           - 2-1-2. ReplicaSet & Deployment 실습: modules/module10/2-1-2.md
           - 2-2. Service 실습 (ClusterIP · NodePort · port-forward): modules/module10/2-2.md
+          - 도전 과제 1. Docker Guide 배포: modules/module10/2-2-challenge.md
           - 2-3. ConfigMap & Secret 실습: modules/module10/2-3.md
           - 2-4. 미니 블로그 3-tier 배포 실습: modules/module10/2-4.md
       - 단원 3. 네트워킹과 스토리지:
