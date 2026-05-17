@@ -1235,7 +1235,7 @@
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>kubeconfig 파일 위치를 확인합니다.</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$env:USERPROFILE</span> <span class="p">+</span> <span class="s2">&quot;\.kube\config&quot;</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="s2">&quot;$env:USERPROFILE\.kube\config&quot;</span>
 </span></code></pre></div>
 <p>파일 내용을 확인합니다.</p>
 <div class="language-powershell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">Get-Content</span> <span class="s2">&quot;$env:USERPROFILE\.kube\config&quot;</span>
