@@ -1897,23 +1897,26 @@ YAML은 들여쓰기가 곧 구조이므로, 직접 쳐보는 것이 가장 빠�
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-25-1"><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>labeled-pod<span class="w"> </span>--image<span class="o">=</span>nginx:1.25<span class="w"> </span>--labels<span class="o">=</span><span class="s2">&quot;app=web,env=dev&quot;</span>
 </span><span id="__span-25-2"><a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
 </span></code></pre></div>
-<p><strong>방법 2 — YAML의 <code>metadata.labels</code>에 직접 작성</strong></p>
-<p><code>pod-labeled.yaml</code> 파일을 직접 타이핑합니다.</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nt">metadata</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← 리소스의 이름·네임스페이스·label 등 식별 정보</span>
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeled-pod2</span>
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← label은 metadata 바로 아래에 key: value 형태로 작성</span>
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span>
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="nt">spec</span><span class="p">:</span>
-</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
-</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx</span>
-</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25</span>
+<p><strong>방법 2 — dry-run으로 YAML을 뽑아 label 추가</strong></p>
+<p>먼저 dry-run으로 기본 YAML을 파일로 저장합니다.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>kubectl<span class="w"> </span>run<span class="w"> </span>labeled-pod2<span class="w"> </span>--image<span class="o">=</span>nginx:1.25<span class="w"> </span>--dry-run<span class="o">=</span>client<span class="w"> </span>-o<span class="w"> </span>yaml<span class="w"> </span>&gt;<span class="w"> </span>pod-labeled.yaml
 </span></code></pre></div>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pod-labeled.yaml
-</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
+<p>저장된 <code>pod-labeled.yaml</code>을 VS Code에서 열어 <code>metadata.labels</code> 항목에 label을 추가합니다.</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nt">apiVersion</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nt">kind</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Pod</span>
+</span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nt">metadata</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← 리소스의 이름·네임스페이스·label 등 식별 정보</span>
+</span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeled-pod2</span>
+</span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">  </span><span class="nt">labels</span><span class="p">:</span><span class="w">          </span><span class="c1"># ← label은 metadata 바로 아래에 key: value 형태로 작성</span>
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">    </span><span class="nt">app</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">web</span><span class="w">       </span><span class="c1">#   dry-run이 자동 생성한 run: labeled-pod2 는 지우고 아래 3줄로 교체</span>
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">    </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+</span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">    </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">v1</span>
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="nt">spec</span><span class="p">:</span>
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="w">  </span><span class="nt">containers</span><span class="p">:</span>
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">labeled-pod2</span>
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="w">      </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nginx:1.25</span>
+</span></code></pre></div>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>apply<span class="w"> </span>-f<span class="w"> </span>pod-labeled.yaml
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>--show-labels
 </span></code></pre></div>
 <div class="admonition note">
 <p class="admonition-title">label 위치 정리</p>
@@ -1943,8 +1946,8 @@ YAML은 들여쓰기가 곧 구조이므로, 직접 쳐보는 것이 가장 빠�
 </div>
 <hr />
 <h2 id="_4">정리 (리소스 삭제)<a class="headerlink" href="#_4" title="Permanent link">&para;</a></h2>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-nginx.yaml
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-multi.yaml
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-nginx.yaml
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>pod-multi.yaml
 </span></code></pre></div>
 <hr />
 <h2 id="_5">핵심 정리<a class="headerlink" href="#_5" title="Permanent link">&para;</a></h2>
