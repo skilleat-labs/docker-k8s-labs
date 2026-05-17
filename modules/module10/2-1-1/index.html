@@ -1783,6 +1783,9 @@
 <li><code>Events</code>: 이미지 pull → 컨테이너 시작 과정</li>
 </ul>
 <h3 id="_3">로그 확인<a class="headerlink" href="#_3" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p>실무에서 장애가 발생하면 가장 먼저 하는 것이 <code>kubectl logs</code>입니다. 앱이 어느 포트로 떴는지, 에러가 무엇인지, 요청이 들어오고 있는지를 로그에서 가장 빠르게 파악할 수 있습니다.</p>
+</blockquote>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>nginx-pod
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>kubectl<span class="w"> </span>logs<span class="w"> </span>nginx-pod<span class="w"> </span>-f<span class="w">    </span><span class="c1"># 실시간 스트리밍</span>
 </span></code></pre></div>
