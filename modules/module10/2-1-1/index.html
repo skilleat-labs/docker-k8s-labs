@@ -1745,6 +1745,9 @@
 </span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nb">exit</span>
 </span></code></pre></div>
 <h3 id="curl-pod">curl 이미지로 Pod 간 통신 확인<a class="headerlink" href="#curl-pod" title="Permanent link">&para;</a></h3>
+<blockquote>
+<p><code>curlimages/curl</code> 은 <code>curl</code> 명령어만 포함된 초경량 이미지로, 클러스터 내부에서 HTTP 통신을 빠르게 테스트할 때 사용합니다.</p>
+</blockquote>
 <p><code>nginx-pod</code>의 IP를 확인한 뒤, curl 이미지를 실행해 해당 IP로 요청을 보냅니다.</p>
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>kubectl<span class="w"> </span>get<span class="w"> </span>pods<span class="w"> </span>-o<span class="w"> </span>wide<span class="w">    </span><span class="c1"># nginx-pod의 IP 확인 (예: 10.1.0.5)</span>
 </span></code></pre></div>
