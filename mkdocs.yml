@@ -33,7 +33,7 @@ theme:
 
 nav:
   - 홈: index.md
-  - 모듈 10:
+  - Kubernetes 기반 서비스 운영:
       - 소개: modules/module10/index.md
       - 개요: modules/module10/overview.md
       - 커리큘럼: modules/module10/curriculum.md

@@ -1,4 +1,4 @@
-# 모듈 10 개요 — Kubernetes 기반 서비스 운영
+# Kubernetes 기반 서비스 운영 개요
 
 ## 학습 목표
 

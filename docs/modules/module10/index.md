@@ -1,6 +1,6 @@
-# 모듈 10 — Kubernetes 기반 서비스 운영 및 확장 설계
+# Kubernetes 기반 서비스 운영
 
-모듈 10은 로컬 Kubernetes 환경(Docker Desktop / Rancher Desktop)에서 K8s 핵심 리소스를 직접 배포하고, Probe·HPA·Ingress 등 운영 기능을 실습합니다.
+Kubernetes 기반 서비스 운영은 로컬 Kubernetes 환경(Docker Desktop / Rancher Desktop)에서 K8s 핵심 리소스를 직접 배포하고, Probe·HPA·Ingress 등 운영 기능을 실습합니다.
 
 ## 실습 환경
 

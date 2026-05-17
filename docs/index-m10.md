@@ -1,4 +1,4 @@
-# 모듈 10 — Kubernetes 핵심 운영
+# Kubernetes 기반 서비스 운영
 
 Docker로 익힌 컨테이너를 클러스터 위에서 운영하는 방법을 배웁니다.
 Pod · Deployment · Service부터 Ingress, PVC, HPA까지

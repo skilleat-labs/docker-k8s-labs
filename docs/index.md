@@ -7,7 +7,7 @@
 
 ## 실습 모듈
 
-### 모듈 10 — Kubernetes 핵심 운영 (15시간 · 2일)
+### Kubernetes 기반 서비스 운영 (15시간 · 2일)
 
 Docker로 익힌 컨테이너를 클러스터 위에서 운영하는 방법을 배웁니다.
 Pod · Deployment · Service부터 Ingress, PVC, HPA까지
@@ -25,10 +25,10 @@ Pod · Deployment · Service부터 Ingress, PVC, HPA까지
 | 3-2 | PersistentVolume / PVC |
 | 4-1~4-3 | Probe · 리소스 관리 · HPA |
 
-[모듈 10 시작하기](modules/module10/overview.md){ .md-button .md-button--primary }
+[Kubernetes 기반 서비스 운영 시작하기](modules/module10/overview.md){ .md-button .md-button--primary }
 
 ---
 
 !!! tip "실습 환경 안내"
-    모듈 10 실습은 **Docker Desktop 또는 Rancher Desktop** 환경을 기준으로 작성되었습니다.
-    설정 방법은 [모듈 10 — 1-1 가이드](modules/module10/1-1.md)를 참고하세요.
+    Kubernetes 기반 서비스 운영 실습은 **Docker Desktop 또는 Rancher Desktop** 환경을 기준으로 작성되었습니다.
+    설정 방법은 [Kubernetes 기반 서비스 운영 — 1-1 가이드](modules/module10/1-1.md)를 참고하세요.
