@@ -1831,8 +1831,11 @@
 <div class="language-bash highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>ingress-path.yaml
 </span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>web-app.yaml
 </span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>api-app.yaml
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>kubectl<span class="w"> </span>delete<span class="w"> </span>-f<span class="w"> </span>https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.10.1/deploy/static/provider/cloud/deploy.yaml
 </span></code></pre></div>
-<p>Ingress Controller는 유지합니다 (Gateway API 실습에서 재사용).</p>
+<blockquote>
+<p>Nginx Ingress Controller를 삭제하지 않으면 다음 실습(Gateway API)에서 포트 80 충돌로 Gateway가 정상 기동되지 않습니다.</p>
+</blockquote>
 <p><strong><code>/etc/hosts</code> 원복</strong></p>
 <p>실습 중 추가한 도메인을 삭제합니다.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="5:2"><input checked="checked" id="__tabbed_5_1" name="__tabbed_5" type="radio" /><input id="__tabbed_5_2" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="__tabbed_5_1">macOS / Linux</label><label for="__tabbed_5_2">Windows (PowerShell — 관리자 권한)</label></div>
