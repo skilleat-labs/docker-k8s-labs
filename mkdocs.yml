@@ -51,7 +51,8 @@ nav:
       - 단원 3. 네트워킹과 스토리지:
           - 3-1. Ingress 실습: modules/module10/3-1.md
           - 3-2. Gateway API 실습: modules/module10/3-2.md
-          - 3-3. PersistentVolume / PVC 실습: modules/module10/3-3.md
+          - 3-3-1. 볼륨 실습 — emptyDir: modules/module10/3-3-1.md
+          - 3-3-2. 볼륨 실습 — PersistentVolume / PVC: modules/module10/3-3-2.md
       - 단원 4. 안정성과 확장 관리:
           - 4-1. Probe 설정 실습 (Liveness · Readiness · Startup): modules/module10/4-1.md
           - 4-2. Resource requests/limits & QoS 실습: modules/module10/4-2.md
